@@ -1,14 +1,24 @@
-from iiif_download import IIIFManifest, config, Config
+import argparse
+from iiif_download import IIIFManifest, config
 
-# Override the default configuration
-config.max_size = 2500
-config.img_dir = "ViscontiTarot"
+def run_download(url, output_folder, max_dimension):
+    # Setup global configuration from the library
+    config.max_size = max_dimension
+    config.img_dir = output_folder
+    
+    manifest = IIIFManifest(url)
+    manifest.download(save_dir=output_folder)
 
-manifest_url_yale = "https://collections.library.yale.edu/manifests/33220491"
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="IIIF Downloader using iiif_download library")
+    
+    # Mandatory Argument: The Manifest URL
+    parser.add_argument("url", nargs='?', default="default_url_here", help="The IIIF Manifest URL")
+    
+    # Optional Arguments
+    parser.add_argument("-o", "--output", default="IIIF_Downloads", help="Directory name for the images")
+    parser.add_argument("-s", "--size", type=int, default=2500, help="Maximum dimension (width/height) for images")
 
-# Use global config
-manifest = IIIFManifest(manifest_url_yale)
+    args = parser.parse_args()
 
-
-# Download images from Yale University Library inside img_dir/dir_name
-manifest.download(save_dir="ViscontiTarot")
+    run_download(args.url, args.output, args.size)

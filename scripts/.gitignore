@@ -1,0 +1,7 @@
+# Python cache
+__pycache__/
+
+# Downloaded content
+downloaded_images/
+IIIF_Downloads/
+*.jpg
