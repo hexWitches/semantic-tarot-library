@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadSearchData() {
         try {
             const [graphRes, textsRes] = await Promise.all([
-                fetch('assets/json/smtGraph.jsonld'),
-                fetch('assets/json/texts.json')
+                fetch('website/assets/json/smtGraph.jsonld'),
+                fetch('website/assets/json/texts.json')
             ]);
             smtData = await graphRes.json();
             textsData = await textsRes.json();
@@ -196,9 +196,9 @@ document.addEventListener('DOMContentLoaded', () => {
             results.decks.forEach(deck => {
                 const imgUrl = getImageUrl(deck.image);
                 html += `
-                    <a href="deck.html?id=${deck.id}" class="search-result-item deck-result">
+                    <a href="website/deck.html?id=${deck.id}" class="search-result-item deck-result">
                         <div class="search-card-img">
-                            <img src="${imgUrl}" alt="${deck.title}" loading="lazy" onerror="this.src='assets/images/placeholder_card.jpg';">
+                            <img src="${imgUrl}" alt="${deck.title}" loading="lazy" onerror="this.src='website/assets/images/placeholder_card.jpg';">
                         </div>
                         <div class="search-item-info">${deck.title}</div>
                     </a>`;
@@ -212,9 +212,9 @@ document.addEventListener('DOMContentLoaded', () => {
             results.persons.forEach(person => {
                 // Placeholder image for persons for now
                 html += `
-                    <a href="person.html?id=${person.id}" class="search-result-item person-result">
+                    <a href="website/person.html?id=${person.id}" class="search-result-item person-result">
                         <div class="person-img-wrapper">
-                            <img src="assets/images/logo/purple.png" alt="${person.title}">
+                            <img src="website/assets/images/logo/purple.png" alt="${person.title}">
                         </div>
                         <div class="search-item-info">${person.title}</div>
                     </a>`;
@@ -228,9 +228,9 @@ document.addEventListener('DOMContentLoaded', () => {
             results.cards.forEach(card => {
                 const imgUrl = getImageUrl(card.image);
                 html += `
-                    <a href="card.html?id=${card.id}" class="search-result-item card-result">
+                    <a href="website/card.html?id=${card.id}" class="search-result-item card-result">
                         <div class="search-card-img">
-                            <img src="${imgUrl}" alt="${card.title}" loading="lazy" onerror="this.src='assets/images/placeholder_card.jpg';">
+                            <img src="${imgUrl}" alt="${card.title}" loading="lazy" onerror="this.src='website/assets/images/placeholder_card.jpg';">
                         </div>
                         <div class="search-item-info">${card.title}</div>
                     </a>`;
@@ -298,7 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * Convert GitHub URLs
      */
     function getImageUrl(imgId) {
-        if (!imgId || typeof imgId !== 'string') return 'assets/images/placeholder_card.jpg';
+        if (!imgId || typeof imgId !== 'string') return 'website/assets/images/placeholder_card.jpg';
         if (imgId.includes('github.com') && imgId.includes('/blob/')) {
             return imgId
                 .replace('github.com', 'raw.githubusercontent.com')
@@ -375,7 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const query = input.value.trim();
                 if (query) {
                     e.preventDefault();
-                    window.location.href = `collection.html?search=${encodeURIComponent(query)}`;
+                    window.location.href = `website/collection.html?search=${encodeURIComponent(query)}`;
                 }
             });
         }
