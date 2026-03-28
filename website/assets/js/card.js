@@ -36,12 +36,12 @@ async function initCardPage() {
 
             console.log("Card description found:", extraTexts);
             console.log("Card data successfully found:", cardData);
-            
+
             fillCardMetadata(cardData, graph, extraTexts);
         } else {
             console.warn("Card not found in the Knowledge Graph.");
         }
-        
+
     } catch (error) {
         console.error("Error loading the card page:", error);
     }
@@ -52,15 +52,15 @@ async function initCardPage() {
  */
 function getEntityLabel(graph, entityData) {
     if (!entityData) return null;
-    
+
     // If it's an array, take the first one or handle both
     const data = Array.isArray(entityData) ? entityData[0] : entityData;
-    
+
     const idToFind = typeof data === 'string' ? data : data['@id'];
     if (!idToFind) return null;
 
     const entity = graph.find(obj => obj['@id'] === idToFind);
-    
+
     if (!entity) {
         // Safe split: only if idToFind exists and contains ':'
         return idToFind.includes(':') ? idToFind.split(':').pop().replace(/-/g, ' ') : idToFind;
@@ -74,11 +74,11 @@ function getEntityLabel(graph, entityData) {
         return `${first} ${last}`.trim();
     }
 
-    return entity.label || 
-           entity['rdfs:label'] || 
-           entity.title || 
-           entity.card_name || 
-           idToFind.split(':').pop().replace(/-/g, ' ');
+    return entity.label ||
+        entity['rdfs:label'] ||
+        entity.title ||
+        entity.card_name ||
+        idToFind.split(':').pop().replace(/-/g, ' ');
 }
 
 /**
@@ -99,7 +99,7 @@ function fillCardMetadata(card, graph, extraTexts) {
     // 1. Titles and Numbers
     const title = card.title || card.card_name || "Unknown Card";
     document.getElementById('card_name').innerText = title;
-    
+
     const cardNumberEl = document.getElementById('card_number');
     if (cardNumberEl) {
         cardNumberEl.innerText = card.card_number || "-";
@@ -136,7 +136,7 @@ function fillCardMetadata(card, graph, extraTexts) {
         const el = document.getElementById(elementId);
         if (!el) return;
 
-        el.innerHTML = ""; 
+        el.innerHTML = "";
 
         if (!entityData || (Array.isArray(entityData) && entityData.length === 0)) {
             el.innerText = "-";
@@ -144,7 +144,7 @@ function fillCardMetadata(card, graph, extraTexts) {
         }
 
         const dataArray = Array.isArray(entityData) ? entityData : [entityData];
-        
+
         dataArray.forEach((data, index) => {
             const label = getEntityLabel(graph, data);
             if (!label || label === "-") return;
@@ -173,11 +173,11 @@ function fillCardMetadata(card, graph, extraTexts) {
 
     // 5. Populate Linked Metadata
     setMetaLink('author_id', card.author_id, 'person');
-    
+
     // Check if location should be linked or just text
-    setMetaLink('current_location', card.current_location, null); 
+    setMetaLink('current_location', card.current_location, null);
     setMetaLink('contained_in_deck_id', card.contained_in_deck_id || card.isContainedIn, 'deck');
-    setMetaLink('suit_id', card.suit_id, null); 
+    setMetaLink('suit_id', card.suit_id, null);
 
     // Update Breadcrumbs
     const deckLabel = getEntityLabel(graph, card.contained_in_deck_id || card.isContainedIn);
@@ -196,9 +196,9 @@ function fillCardMetadata(card, graph, extraTexts) {
     // 6. Arcana Types Logic
     const arcanaTypeEl = document.getElementById('arcana_type');
     const minorArcanaTypeEl = document.getElementById('minor_arcana_type');
-    
+
     const types = Array.isArray(card['@type']) ? card['@type'] : [card['@type']];
-    
+
     if (arcanaTypeEl) {
         if (types.includes('smt:MajorArcana')) arcanaTypeEl.innerText = "Major Arcana";
         else if (types.includes('smt:MinorArcana')) arcanaTypeEl.innerText = "Minor Arcana";
@@ -214,21 +214,21 @@ function fillCardMetadata(card, graph, extraTexts) {
     // 7. Evolution Frame (Archetypes & Suits)
     const evolutionFrame = document.querySelector('.evolution-frame');
     if (evolutionFrame) {
-        
+
         // --- Render Helpers ---
         const renderThumbs = (relatedCardsList) => {
             const previewContainer = document.querySelector('.archetype-comparison-preview');
             if (!previewContainer) return;
-            
+
             previewContainer.innerHTML = ''; // Clear hardcoded previews
-            
+
             // Take up to 3 related cards
             const displayCards = relatedCardsList.slice(0, 3);
-            
+
             displayCards.forEach(relCard => {
                 let label = relCard.title || "Tarot Card";
                 const deckRef = relCard.contained_in_deck_id || relCard.isContainedIn;
-                
+
                 if (deckRef) {
                     const deckId = deckRef['@id'] || deckRef;
                     const deckObj = graph.find(d => d['@id'] === deckId);
@@ -238,10 +238,10 @@ function fillCardMetadata(card, graph, extraTexts) {
                         if (deckTitle) label = `${deckTitle}${year}`;
                     }
                 }
-                
+
                 const imgUrl = relCard.image_url ? (relCard.image_url['@id'] || relCard.image_url) : null;
                 const cleanRelId = relCard['@id'].replace('smtg:', '');
-                
+
                 const thumbHtml = `
                     <div class="mini-card-thumb">
                         <a href="card.html?id=${cleanRelId}" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center;">
@@ -252,7 +252,7 @@ function fillCardMetadata(card, graph, extraTexts) {
                 `;
                 previewContainer.insertAdjacentHTML('beforeend', thumbHtml);
             });
-            
+
             if (displayCards.length === 0) {
                 evolutionFrame.style.display = 'none';
             }
@@ -266,7 +266,7 @@ function fillCardMetadata(card, graph, extraTexts) {
 
         if (types.includes('smt:MajorArcana') && card.archetype_id) {
             evolutionFrame.style.display = 'flex';
-            
+
             // Reset heading text
             const heading = document.querySelector('.evolution-heading');
             if (heading) {
@@ -274,7 +274,7 @@ function fillCardMetadata(card, graph, extraTexts) {
             }
 
             const archetypeId = Array.isArray(card.archetype_id) ? (card.archetype_id[0]['@id'] || card.archetype_id[0]) : (card.archetype_id['@id'] || card.archetype_id);
-            
+
             const relatedCards = graph.filter(obj => {
                 if (obj['@id'] === card['@id']) return false;
                 const arch = obj.archetype_id;
@@ -282,13 +282,13 @@ function fillCardMetadata(card, graph, extraTexts) {
                 const archId = Array.isArray(arch) ? (arch[0]['@id'] || arch[0]) : (arch['@id'] || arch);
                 return archId === archetypeId;
             });
-            
+
             renderThumbs(relatedCards);
             updateDiscoverLink('#'); // Change later
 
         } else if (types.includes('smt:MinorArcana') && card.suit_id) {
             evolutionFrame.style.display = 'flex';
-            
+
             const suitLabel = getEntityLabel(graph, card.suit_id);
             const suitIdRaw = Array.isArray(card.suit_id) ? (card.suit_id[0]['@id'] || card.suit_id[0]) : (card.suit_id['@id'] || card.suit_id);
 

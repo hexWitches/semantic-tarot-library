@@ -18,7 +18,7 @@ context = {
         "owl" : "http://www.w3.org/2002/07/owl#",
         "rdfs" : "http://www.w3.org/2000/01/rdf-schema#",
         "schema" : "https://schema.org/",
-        "smt" : "https://github.com/hexWitches/semantic-tarot-library/ontology#",
+        "smt" : "https://w3id.org/smt-library/ontology#",
         "viaf" : "http://viaf.org/viaf/",
         "wd" : "https://www.wikidata.org/entity/"
 }
