@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>History - The SMT Library</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Tarot, Semantic Library, History">
+        <meta name="description" content="History of Tarot in the Semantic Library">
+        <meta name="author" content="Miriana Pinto, Sara Roggiani">
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="assets/images/logo/purple.png">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="assets/css/main.css">
+
+        <!-- FONTS -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-xl custom-navbar">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <a class="navbar-brand mx-auto d-xl-none" href="index.html">The SMT Library</a>
+
+                <div class="dropdown d-xl-none">
+                    <button class="btn p-0 border-0" type="button" id="mobileSearchDropdown" data-bs-toggle="dropdown"
+                        aria-expanded="false" aria-label="Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#FFF8F0" class="bi bi-search"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end p-2 shadow mobile-search-dropdown"
+                        aria-labelledby="mobileSearchDropdown">
+                        <form class="position-relative d-flex align-items-center mb-0">
+                            <div class="search-input-group">
+                                <span class="search-suggestion-ghost"></span>
+                                <input class="form-control rounded-pill border ps-3 pe-5" type="search" placeholder="Search"
+                                    aria-label="Search">
+                            </div>
+                            <button type="submit" class="btn position-absolute end-0 me-2 p-0 border-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                                    class="bi bi-search text-dark" viewBox="0 0 16 16">
+                                    <path
+                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mb-2 mb-lg-0 px-2">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="history.html">History</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Explore</a></li>
+                        <li class="nav-item"><a class="nav-link" href="collection.html">Collection</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    </ul>
+                    <a class="navbar-brand mx-auto d-none d-xl-block" href="index.html">The SMT Library</a>
+                    <form class="position-relative d-none d-xl-flex align-items-center">
+                        <div class="search-input-group">
+                            <span class="search-suggestion-ghost"></span>
+                            <input class="form-control rounded-pill border-0 ps-4 pe-5" type="search" placeholder="Search"
+                                aria-label="Search">
+                        </div>
+                        <button type="submit" class="btn position-absolute end-0 me-3 p-0 border-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                                class="bi bi-search text-dark" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <!-- breadcrumb container -->
+        <div class="breadcrumb-container">
+            <nav class="breadcrumb-pill" aria-label="Breadcrumb">
+                <ul class="breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active"><a href="history.html">History</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <main id="historyContent" class="history-content">
+            <header class="container-fluid px-4 px-md-0 pt-2 pb-3 mb-3 text-center">
+                <div class="lc-block mb-4">
+                    <div>
+                        <h1 class="display-5 fw-bold page-title">History of Tarot</h1>
+                    </div>
+                </div>
+                <div class="lc-block col-lg-8 mx-auto">
+                <div>
+                    <p class="lead collection-desc mb-0">
+                        Tarot cards have a long and complex history that spans several centuries, evolving from Renaissance playing cards into objects of artistic, cultural, and symbolic significance. Although tarot is widely associated today with divination and spiritual practices, historical research shows that its origins lie in the worlds of games and courtly culture of fifteenth-century Italy.
+                    </p>
+                </div>
+            </div>
+            </header>
+            
+            <section class="history-cards-banner mb-5">
+                <img src="assets/images/homepage/history.png" alt="History of Tarot">
+            </section>
+
+            <section class="container px-4 px-md-5 mb-5 pb-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-9 history-text-container">
+                        <h2 class="mb-4">The Origins</h2>
+                        <p class="mb-4">
+                            The development of tarot is closely linked to the earlier history of <strong>playing cards in Europe</strong>, that arrived during the fourteenth century through trade with the Islamic world, where card games using four suits were already common. These early suits – such as cups, swords, batons, and coins – became the basis of Italian card decks and remain the standard used in tarot today.
+
+                        </p>
+                        <p class="mb-5">
+                            During the early fifteenth century, card makers in <strong>northern Italy</strong> introduced an additional set of illustrated cards known as <i>trionfi</i> (triumphs). These cards depicted <strong>allegorical figures</strong> such as rulers, virtues, celestial bodies, and symbolic scenes. The combination of the traditional four suits with a sequence of triumph cards gave rise to a new deck structure that would later be known as tarot.
+                        </p>
+
+                        <h2 class="mb-4 mt-5">The First Tarot Decks</h2>
+                        <p class="mb-4">
+                            The earliest documented tarot decks date from the <strong>1440s and 1450s</strong> in northern Italian cities such as Milan, Florence and Venice. These early decks were not mass-produced objects, but luxurious <strong>hand-painted works</strong>commissioned by aristocratic families. Among the most famous examples are the <strong><a href="#">Visconti-Sforza decks</a></strong>, created for the ruling family of Milan and decorated with gold leaf and elaborate imagery.
+                        </p>
+                        <p class="mb-4">
+                            By the late fifteenth century, the tarot deck had largely stabilized into a structure recognizable today: 22 triumph cards, later called the <strong><a href="#">Major Arcana</a></strong>, and 56 suit cards, divided into four suits with numbered cards and court figures. 
+                        </p>
+                        <p class="mb-4">
+                            The imagery used on these cards drew heavily from the visual culture of the Renaissance, including religious iconography, allegorical figures, and scenes familiar from literature, theatre, and public pageants.
+                        </p>
+
+                        <h2 class="mb-4 mt-5">Spread Across Europe</h2>
+                        <p class="mb-4">
+                            From Italy, tarot decks spread gradually across Europe between the fifteenth and seventeenth centuries. As the game travelled, it developed <strong>regional variations</strong> and distinctive artistic styles. One of the most influential traditions was the <strong><a href="deck.html?id=deck-noblet">Tarot de Marseille</a></strong>, which emerged from earlier Italian designs and became the standard pattern for many later tarot decks in France and other parts of Europe.
+                        </p>
+                        <p class="mb-4">
+                            In several European countries – including France, Austria, Switzerland, and parts of central Europe – the tarot deck continued to be used primarily for card games. In these regions, tarot games are still played today, preserving an aspect of the deck’s original purpose.
+                        </p>
+
+                        <h2 class="mb-4 mt-5">Symbolic System</h2>
+                        <p class="mb-4">
+                            Tarot’s association with mysticism and symbolic interpretation developed much later. Beginning in the late eighteenth century, <strong>writers and occult thinkers</strong> began interpreting tarot imagery as a system of esoteric knowledge. They proposed connections between the cards and ancient traditions, including Egyptian symbolism and philosophical systems, transforming tarot into a symbolic language used for reflection and divination.
+                        </p>
+                        <p class="mb-4">
+                            During the nineteenth and early twentieth centuries, tarot was increasingly integrated into Western esoteric traditions. New decks were created specifically for symbolic interpretation rather than gaming.
+                        </p>
+                        <p class="mb-4">
+                            Among the most influential of these is the <strong><a href="deck.html?id=deck-rider-waite-smith">Rider–Waite–Smith deck</a></strong>, published in 1909. Designed by Arthur Edward Waite and illustrated by Pamela Colman Smith, this deck introduced detailed narrative scenes on all seventy-eight cards, including the Minor Arcana, which had previously been represented mostly by simple suit symbols. Its <strong>rich symbolism</strong> and accessible imagery made it one of the most widely used and reproduced tarot decks in the modern world.
+                        </p>
+
+                        <h2 class="mb-4 mt-5">Tarot as Cultural Heritage</h2>
+                        <p class="mb-4">
+                            Today tarot occupies a unique position at the <strong>intersection of art, history, and spirituality</strong>. Early decks are studied as important examples of Renaissance visual culture and craftsmanship, while later decks reflect the evolving symbolic interpretations developed over centuries. Museums and collections around the world preserve historic tarot cards that illustrate the artistic and cultural transformations of the deck.
+                        </p>
+                        <p class="mb-4">
+                            In contemporary culture, tarot continues to serve multiple roles: it is played as a traditional card game in some regions, studied as an art form and historical artifact, and used by many people as a tool for reflection, storytelling, or spiritual exploration. The enduring fascination with tarot lies precisely in this <strong>layered history</strong>, where play, symbolism, and visual imagination converge.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-white text-center content-to-reveal" id="footer">
+            <div class="container p-4">
+                <div class="row">
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">About the project</h5>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                    </p>
+                </div>
+
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-0">Creators</h5>
+
+                    <ul class="list-unstyled">
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+                        </svg>
+                        <a class="fw-bold" href="https://github.com/mir-pin">Miriana Pinto</a>
+                        <p>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
+                            </svg>
+                            miriana.pinto@studio.unibo.it
+                        </p>
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+                        </svg>
+                        <a class="fw-bold" href="https://github.com/sararoggi">Sara Roggiani</a>
+                        <p>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
+                            </svg>
+                            sara.roggiani2@studio.unibo.it
+                        </p>
+                    </li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center p-3 copyright-text">
+                <p>
+                    All copyrights and related rights on the content remain with their original owners. <br>All copyright on the typographic and layout choices are 2026 © The Semantic Tarot Library.
+                </p>
+            </div>
+        </footer>
+        
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/search.js"></script>
+        <script src="assets/js/main.js"></script>
+    </body>
+</html>

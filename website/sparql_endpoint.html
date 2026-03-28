@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>SPARQL Endpoint - The SMT Library</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Tarot, Semantic Library, SPARQL, RDF">
+    <meta name="description" content="Query the Semantic Tarot Library dataset using SPARQL.">
+    <meta name="author" content="Miriana Pinto, Sara Roggiani">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/logo/purple.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Yasgui CSS -->
+    <link href="https://unpkg.com/@triply/yasgui/build/yasgui.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-xl custom-navbar p-3">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="navbar-brand mx-auto d-xl-none" href="index.html">The SMT Library</a>
+
+            <div class="dropdown d-xl-none">
+                <button class="btn p-0 border-0" type="button" id="mobileSearchDropdown" data-bs-toggle="dropdown"
+                    aria-expanded="false" aria-label="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#FFF8F0" class="bi bi-search"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                    </svg>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end p-2 shadow mobile-search-dropdown"
+                    aria-labelledby="mobileSearchDropdown">
+                    <form class="position-relative d-flex align-items-center mb-0">
+                        <div class="search-input-group">
+                            <span class="search-suggestion-ghost"></span>
+                            <input class="form-control rounded-pill border ps-3 pe-5" type="search" placeholder="Search"
+                                aria-label="Search">
+                        </div>
+                        <button type="submit" class="btn position-absolute end-0 me-2 p-0 border-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                                class="bi bi-search text-dark" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mb-2 mb-lg-0 px-2">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Explore</a></li>
+                    <li class="nav-item"><a class="nav-link" href="collection.html">Collection</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                </ul>
+                <a class="navbar-brand mx-auto d-none d-lg-block" href="index.html">The SMT Library</a>
+                <form class="position-relative d-none d-lg-flex align-items-center">
+                    <div class="search-input-group">
+                        <span class="search-suggestion-ghost"></span>
+                        <input class="form-control rounded-pill border-0 ps-4 pe-5" type="search" placeholder="Search"
+                            aria-label="Search">
+                    </div>
+                    <button type="submit" class="btn position-absolute end-0 me-3 p-0 border-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                            class="bi bi-search text-dark" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="breadcrumb-container">
+        <nav class="breadcrumb-pill" aria-label="Breadcrumb">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">SPARQL Endpoint</li>
+            </ul>
+        </nav>
+    </div>
+
+    <main class="homepage-content revealed">
+        <section class="content-section text-center">
+            <div class="container px-4 px-md-5">
+                <h1 class="section-title mb-3">SPARQL ENDPOINT</h1>
+                <p class="section-desc mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel neque risus. Suspendisse potenti. Aenean elementum ex risus. Quisque quis nisi semper, luctus nisi fermentum, lobortis mauris.</p>
+
+                <div class="content-box content-box-large mt-3 pt-3" style="text-align: left;">
+                    <div id="yasgui"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-white text-center content-to-reveal" id="footer">
+        <div class="container p-4">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">About the project</h5>
+                    <p>The Semantic Tarot Library is a research project dedicated to documenting the evolution of tarot
+                        symbolism through semantic web technologies.</p>
+                </div>
+
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-0">Creators</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Miriana Pinto</a></li>
+                        <li><a href="#" class="text-white">Sara Roggiani</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2026 The SMT Library
+        </div>
+    </footer>
+
+    <!-- Yasgui JS -->
+    <script src="https://unpkg.com/@triply/yasgui/build/yasgui.min.js"></script>
+
+    <!-- Main JS -->
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        // Initialize Yasgui
+        const yasgui = new Yasgui(document.getElementById("yasgui"), {
+            requestConfig: {
+                endpoint: "https://api.triplydb.com/datasets/sararoggi/smt-dataset/sparql",
+            },
+            copyEndpointGui: true,
+            persistenceId: "smt-library-yasgui"
+        });
+    </script>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

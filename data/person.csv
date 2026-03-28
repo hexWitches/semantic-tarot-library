@@ -1,0 +1,11 @@
+person_id,given_name,family_name,nationality,birth_year,birth_year_display,death_year,death_year_display,wiki_authority,viaf_authority
+person_waite,Arthur Edward,Waite,American,1857,,1942,,Q553124,95214216
+person_smith,Pamela,Colman Smith,British,1878,,1951,,Q515745,44549388
+person_noblet,Jean,Noblet,French,16XX,17th century,16XX,17th century,Q3173729,304926488
+person_bembo,Bonifacio,Bembo,Italian,1420,,1480,,Q2486190,29417685
+person_filippo_visconti,Filippo Maria,Visconti,Italian,1392,,1447,,Q289285,89524548
+person_bianca_visconti,Bianca Maria,Visconti,Italian,1425,,1468,,Q1232642,46608333
+person_francesco_sforza,Francesco,Sforza,Italian,1401,,1466,,Q310536,89211304
+person_cicognara,Antonio,Cicognara,Italian,1480,,1500,,Q2857238,62769413
+person_zavattari,Francesco,Zavattari,Italian,14XX,15th Century (Active 1414-1453),14XX,15th Century (Active 1414-1453),Q3080890,95694984
+"person_di_maestro_antonio ","Nicola ",di maestro Antonio,Italian,1450~,Mid-15th Century,1511/..,after 1511,Q3339920,95725158 

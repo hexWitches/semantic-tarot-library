@@ -1,0 +1,118 @@
+@base <https://github.com/hexWitches/semantic-tarot-library/ontology> .  # URI base dell'ontology
+@prefix : <https://github.com/hexWitches/semantic-tarot-library/ontology#> . # empty prefix of classes
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix schema: <https://schema.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix odi: <https://purl.org/ebr/odi#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+
+<https://github.com/hexWitches/semantic-tarot-library/ontology> rdf:type owl:Ontology ;
+    dcterms:title "SMT Ontology"@en ;
+    dcterms:description "An ontology for the description of tarot decks."@en ;
+    dcterms:creator "Miriana Pinto",
+        "Sara Roggiani" ;
+    dcterms:created "2026-03-03"^^xsd:date ;
+    owl:imports <https://purl.org/ebr/odi#> ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:publisher <https://github.com/hexWitches> ;
+    schema:codeRepository <https://github.com/hexWitches/semantic-tarot-library> ;
+    vann:preferredNamespacePrefix "smt" ;
+    rdfs:comment "A longer comment about the ontology and its purposes, components and else."@en .
+
+# ===== CLASSES ================
+:MajorArcana rdf:type owl:Class ;
+    rdfs:subClassOf odi:DeckCard ;
+    rdfs:comment "The 22 cards representing universal archetypal and symbolic themes."@en ;
+    rdfs:label "Major Arcana"@en ;
+    owl:disjointWith :MinorArcana ;
+    rdfs:isDefinedBy <https://github.com/hexWitches/semantic-tarot-library> .
+
+:MinorArcana rdf:type owl:Class ;
+    rdfs:subClassOf odi:DeckCard ;
+    rdfs:comment "The 56 cards composed of four suits (pentacles, swords, wands, cups)."@en ;
+    rdfs:label "Minor Arcana"@en ;
+    owl:disjointWith :MajorArcana ;
+    rdfs:isDefinedBy <https://github.com/hexWitches/semantic-tarot-library> .
+
+:Suit rdf:type owl:Class ;
+    rdfs:comment "It's the suit of the card." ;
+    rdfs:label "Suit"@en ;
+    rdfs:isDefinedBy <https://github.com/hexWitches/semantic-tarot-library> .
+
+:CourtCard rdf:type owl:Class ;
+    rdfs:subClassOf :MinorArcana ;
+    rdfs:label "Court Card"@en ;
+    rdfs:comment "A category of minor arcana cards representing the four ranks: pages, knights, queens and kings."@en ;
+    rdfs:isDefinedBy <https://github.com/hexWitches/semantic-tarot-library> .
+
+:NumberedCard rdf:type owl:Class ;
+    rdfs:subClassOf :MinorArcana ;
+    rdfs:label "Numbered Card"@en ;
+    rdfs:comment "A category of minor arcana cards identified by a number, ranging from Ace to Ten."@en ;
+    rdfs:isDefinedBy <https://github.com/hexWitches/semantic-tarot-library> .
+
+:Archetype rdf:type owl:Class ;
+    rdfs:subClassOf skos:Concept ;
+    rdfs:label "Archetype"@en ;
+    rdfs:comment "The universal concept depicted in the Major Arcana card."@en ;
+    rdfs:isDefinedBy <https://github.com/hexWitches/semantic-tarot-library> .
+
+:SymbolicFigure rdf:type owl:Class ;
+    rdfs:subClassOf skos:Concept ;
+    rdfs:label "Symbolic Figure"@en :
+    skos:broader :Archetype ;
+    rdfs:comment "A symbolic element depicted in the Major Arcana card (animal, object, etc.)."@en ;
+    rdfs:isDefinedBy <https://github.com/hexWitches/semantic-tarot-library> .
+
+:DeckLineage rdf:type owl:Class ;
+    rdfs:label "Deck Family"@en :
+    rdfs:comment "A conceptual category representing a specific historical tradition from which individual tarot deck editions or versions derive their structure and imagery."@en ;
+    rdfs:isDefinedBy <https://github.com/hexWitches/semantic-tarot-library> .
+
+
+# ===== OBJECT PROPERTIES ================
+:hasIllustrator rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf odi:hasAuthor ;
+    rdfs:domain odi:TarotDeck ;
+    rdfs:range odi:Person ;
+    rdfs:comment "This property indicates the illustrator of the tarot deck."@en ;
+    rdfs:label "Has Illustrator"@en ;
+    rdfs:isDefinedBy <https://github.com/hexWitches/semantic-tarot-library> .
+
+:represents rdf:type owl:ObjectProperty ;
+    rdfs:domain :MajorArcana ;
+    rdfs:range :Archetype ; 
+    rdfs:comment "This property indicates the archetype represented in the major arcana card."@en ;
+    rdfs:label "represents"@en ;
+    rdfs:isDefinedBy <https://github.com/hexWitches/semantic-tarot-library> .
+
+:containsSymbol rdf:type owl:ObjectProperty ;
+    rdfs:domain :MajorArcana ;
+    rdfs:range :SymbolicFigure ;
+    rdfs:comment "This property indicates the symbolic element contained in the major arcana card."@en ;
+    rdfs:label "contains symbol"@en ;
+    rdfs:isDefinedBy <https://github.com/hexWitches/semantic-tarot-library> .
+
+:hasSuit rdf:type owl:ObjectProperty ;
+    rdfs:domain :MinorArcana ;
+    rdfs:range :Suit ;
+    rdfs:comment "This property indicates the suit of the minor arcana card."@en ;
+    rdfs:label "Has suit"@en ;
+    rdfs:isDefinedBy <https://github.com/hexWitches/semantic-tarot-library> .
+
+# ===== DATA PROPERTIES ================
+:hasNumber rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf owl:topDataProperty ;
+    rdfs:domain :Archetype ;
+    rdfs:range xsd:integer ;
+    rdfs:comment "This property indicates the number representing each Major Arcana"@en ;
+    rdfs:label "Has Number"@en ;
+    rdfs:isDefinedBy <https://github.com/hexWitches/semantic-tarot-library> .
+
+
+
+    

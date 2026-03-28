@@ -1,0 +1,28 @@
+archetype_id,label,alt_title,archetype_number,source_url,description
+concept_fool,The Fool,"Il Matto, Le Fou, Le Mat",0,,"Represents beginnings, innocence, and spontaneous action. Usually an unnumbered card, but sometimes it is numbered as 0 or more rarely XXII. "
+concept_juggler,The Juggler,"The Magician, Il Mago, Il Bagatto, Bagatino, Le Bateleur",1,,"Represents manifestation, resourcefulness, and power."
+concept_popess,The Popess,"The High Priestess, La Papessa, La Papesse",2,,"Represents intuition, sacred knowledge, and the subconscious."
+concept_empress,The Empress,"L’Imperatrice, L’Emperatrice",3,,"Represents femininity, nature, and abundance."
+concept_emperor,The Emperor,"L’Imperatore, L’Empereur",4,,"Represents authority, structure, and a father figure."
+concept_pope,The Pope,"The Hierophant, Il Papa, Le Pape",5,,"Represents spiritual wisdom, religious beliefs, and tradition."
+concept_lovers,The Lovers,"The Love, Gli Amanti, L’Amoureux",6,,"Represents love, harmony, and choices."
+concept_chariot,The Chariot,"Il Carro, Le Chariot",7,,"Represents control, willpower, and victory."
+concept_justice,Justice,"Giustizia, Justice",8,,"Represents justice, fairness, and truth."
+concept_hermit,The Hermit,"L'Eremita, Le Hermit",9,,"Represents soul-searching, introspection, and being alone."
+concept_wheel_of_fortune,Wheel of Fortune,"La Ruota della Fortuna, La Roue de Fortune",10,,"Represents good luck, karma, and life cycles."
+concept_strenght,Strenght,"Fortitude, La Forza, La Fortezza, Force",11,,"Represents courage, persuasion, and influence."
+concept_the_hanged_man,The Hanged Man,"Le Pendu, L'Appeso",12,,"Represents pause, surrender, and letting go."
+concept_death,Death,"La Mort, La Morte",13,,"Represents endings, change, and transition."
+concept_temperance,Temperance,"Tempérance, La Temperanza",14,,"Represents balance, moderation, and patience."
+concept_the_devil,The Devil,"Le Diable, Il Diavolo",15,,"Represents shadow self, attachment, and addiction."
+concept_the_tower,The Tower,"La Maison Dieu, La Torre",16,,"Represents sudden change, upheaval, and revelation."
+concept_the_star,The Star,"L'Estoille, L'Étoile, La Stella",17,,"Represents hope, inspiration, and serenity."
+concept_the_moon,The Moon,"La Lune, La Luna",18,,"Represents illusion, fear, and anxiety."
+concept_the_sun,The Sun,"Le Soleil, Il Sole",19,,"Represents positivity, warmth, and success."
+concept_judgment,Judgement,"The Last Judgment, Le Jugement, Il Giudizio",20,,"Represents rebirth, inner calling, and absolution."
+concept_the_world,The World,"Le Monde, Il Mondo",21,,"Represents completion, integration, and accomplishment."
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
