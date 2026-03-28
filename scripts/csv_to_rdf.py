@@ -5,11 +5,11 @@ from rdflib import Graph, URIRef, Literal, Namespace
 from rdflib.namespace import RDF, RDFS, OWL, XSD
 
 # Namespace configuration
-GRAPH_URI = Namespace("https://github.com/hexWitches/semantic-tarot-library/graph/")
+GRAPH_URI = Namespace("https://w3id.org/smt-library/graph")
 
 namespaces = {
-    "" : Namespace(GRAPH_URI),
-    "smt": Namespace("https://github.com/hexWitches/semantic-tarot-library/ontology#"),
+    "smtg" : Namespace("https://w3id.org/smt-library/graph/"),
+    "smt": Namespace("https://w3id.org/smt-library/ontology#"),
     "dcterms": Namespace("http://purl.org/dc/terms/"),
     "owl": Namespace("http://www.w3.org/2002/07/owl#"),
     "schema": Namespace("https://schema.org/"), 
@@ -27,7 +27,7 @@ namespaces = {
 
 # Associate CSV columns with ontology properties 
 predicate_map = {}
-with open("knowledge-graph/mapping.csv", encoding="utf-8") as f:
+with open("mapping-files/mapping.csv", encoding="utf-8") as f:
     reader = csv.DictReader(f)
     for row in reader:
         prefix = row["ontology_prefix"].strip()
@@ -38,7 +38,7 @@ with open("knowledge-graph/mapping.csv", encoding="utf-8") as f:
 
 # Authority mapping for locations (Wikidata/GeoNames)
 mapping_entities = {}
-with open("knowledge-graph/mapping_authority_entities.csv", encoding="utf-8") as f:
+with open("mapping-files/mapping_authority_entities.csv", encoding="utf-8") as f:
     reader = csv.DictReader(f)
     for row in reader:
         name = row["name"].strip()
@@ -66,7 +66,7 @@ g = Graph()
 for prefix, ns in namespaces.items():
     g.bind(prefix, ns)
 
-DATA = namespaces[""]
+DATA = namespaces["smtg"]
 SMT = namespaces["smt"]
 
 

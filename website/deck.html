@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Card - The SMT Library</title>
+        <title>Deck - The SMT Library</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="Tarot, Semantic Library">
@@ -30,7 +30,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 
-                <a class="navbar-brand mx-auto d-xl-none" href="index.html">The SMT Library</a>
+                <a class="navbar-brand mx-auto d-xl-none" href="../index.html">The SMT Library</a>
                 
                 <div class="dropdown d-xl-none">
                     <button class="btn p-0 border-0" type="button" id="mobileSearchDropdown" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Search">
@@ -55,14 +55,14 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mb-2 mb-lg-0 px-2">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Explore</a></li>
                         <li class="nav-item"><a class="nav-link active" href="collection.html">Collection</a></li>
                         <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                     </ul>
-                    <a class="navbar-brand mx-auto d-none d-xl-block" href="index.html">The SMT Library</a>
-                    <form class="position-relative d-none d-xl-flex align-items-center">
+                    <a class="navbar-brand mx-auto d-none d-lg-block" href="../index.html">The SMT Library</a>
+                    <form class="position-relative d-none d-lg-flex align-items-center">
                         <div class="search-input-group">
                             <span class="search-suggestion-ghost"></span>
                             <input class="form-control rounded-pill border-0 ps-4 pe-5" type="search" placeholder="Search" aria-label="Search">
@@ -80,119 +80,105 @@
         <div class="breadcrumb-container" >
             <nav class="breadcrumb-pill" aria-label="Breadcrumb">
                 <ul class="breadcrumb-list">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
                     <li class="breadcrumb-item"><a href="collection.html">Collection</a></li>
-                    <li class="breadcrumb-item"><a href="#" id="breadcrumb_deck">Decks</a></li>
-                    <li class="breadcrumb-item active" aria-current="page" id="breadcrumb_card">
-                        Card
+                    <li class="breadcrumb-item"><a href="#">Decks</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Rider Waite Smith
                     </li>
                 </ul>
             </nav>      
         </div>
 
-        <section class="item-section container-fluid px-5">
-            <div class="row align-items-center row-gap-4">
-                <div class="col-md-7 d-flex justify-content-center">
-                    <div class="card-image-wrapper">
-                        <img src="" class="card-main-img" alt="Tarot Card" id="image_url">
-                    </div>
-                </div>
+        <section class="deck-hero">
+            <div class="deck-title-frame inner-outline">
+                <h1 id="deck_title">LOADING <span class="sub-title">DECK</span></h1>
+            </div>
+        </section>
 
-                <div class="col-md-5 d-flex justify-content-center">
-                    <div class="metadata-card">
-                        <div class="metadata-header d-flex justify-content-between align-items-center">
-                            <h2 class="metadata-title" id="card_name"></h2>
-                            <button class="btn-metadata-toggle" id="toggleMetadata" aria-expanded="false">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-                                </svg>
-                            </button>
-                        </div>
-                        
-                        <div class="metadata-grid" id="metadataCollapse">
-                            <div class="meta-row">
-                                <span class="meta-label">Card Number</span>
-                                <span class="meta-value" id="card_number"></span>
-                            </div>
-                            <div class="meta-row">
-                                    <span class="meta-label">Author</span>
-                                    <span class="meta-value" id="author_id">Loading...</span>
-                            </div>
-                            <div class="meta-row">
-                                    <span class="meta-label">Current Location</span>
-                                    <span class="meta-value" id="current_location"></span>
-                            </div>
-                            <div class="meta-row">
-                                <span class="meta-label">Deck</span>
-                                <span class="meta-value" id="contained_in_deck_id"</a></span>
-                            </div>
-                            <div class="meta-row">
-                                <span class="meta-label">Arcana Type</span>
-                                <span class="meta-value" id="arcana_type"></span>
-                            </div>
-                            <div class="meta-row">
-                                <span class="meta-label">Suit</span>
-                                <span class="meta-value" id="suit_id"></span>
-                            </div>
-                            <div class="meta-row">
-                                <span class="meta-label">Minor Arcana Type</span>
-                                <span class="meta-value" id="minor_arcana_type"></span>
-                            </div>
-                        </div>
-                    </div>
+        <section class="discovery-section">
+            <aside class="discovery-sidebar">
+                <h2 class="discovery-title">Discover the cards</h2>
+                
+                <div class="custom-nav-controls">
+                    <button id="prevBtn" class="nav-circle-btn">
+                        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m11 17-5-5 5-5"/>
+                            <path d="m18 17-5-5 5-5"/>
+                        </svg>
+                    </button>
+                    <button id="nextBtn" class="nav-circle-btn">
+                        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 17 5-5-5-5"/>
+                            <path d="m13 17 5-5-5-5"/>
+                        </svg>
+                    </button>
+                </div>
+            </aside>
+
+            <div class="multi-carousel-container" id="multiCarousel">
+                <div class="multi-carousel-inner" id="carouselInner">
+                
                 </div>
             </div>
         </section>
 
-        <section class="description-section container-fluid px-5">
-            <div class="row align-items-center">
-                <div class="col-md-7 d-flex justify-content-center">
-                    <div class="description-box">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-                            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
-                            mollit anim id est laborum.
-                        </p>
-                    </div> 
+        <section class="info-section">
+            <div class="metadata-card">
+                <div class="metadata-header d-flex justify-content-between align-items-center">
+                    <h2 class="metadata-title" id="meta_deck_title">DECK TITLE</h2>
+                    <button class="btn-metadata-toggle" id="toggleMetadata" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
                 </div>
-                <div class="col-md-5 d-flex justify-content-center">
-                    <div class="evolution-frame">
-                        <div class="evolution-content">
-                            <h3 class="evolution-heading">
-                                One archetype, infinite interpretations. Discover the many faces of <span class="highlight">[card name]</span>.
-                            </h3>
-                            
-                            <div class="archetype-comparison-preview">
-                                <div class="mini-card-thumb">
-                                    <img src="" alt="">
-                                    <span></span>
-                                </div>
-                                <div class="mini-card-thumb">
-                                    <img src="" alt="">
-                                    <span></span>
-                                </div>
-                                <div class="mini-card-thumb">
-                                    <img src="" alt="">
-                                    <span></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <a href="" class="discover-more">
-                            <span class="discover-svg">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                                    <circle cx="4" cy="8" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="12" cy="8" r="1.5"/>
-                                </svg>
-                            </span>
-                            <span class="discover-label">Discover <br>more</span>
-                        </a>
+                
+                <div class="metadata-grid" id="metadataCollapse">
+                    <div class="meta-row">
+                        <span class="meta-label">Alternative Title</span>
+                        <span class="meta-value" id="alternative_title"></span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Publication Year</span>
+                        <span class="meta-value" id="publication_year"></span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Location Created</span>
+                        <span class="meta-value" id="location_created"></span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Author</span>
+                        <span class="meta-value"><a href="" id="author_id"></a></span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Illustrator</span>
+                        <span class="meta-value"><a href="" id="illustrator_id"></a></span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Publisher</span>
+                        <span class="meta-value" id="publisher"></span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Current Number of Cards</span>
+                        <span class="meta-value" id="current_card_count"></span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Original Number of Cards</span>
+                        <span class="meta-value" id="original_card_count"></span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Deck Lineage</span>
+                        <span class="meta-value" id="deck_lineage_id"></span>
                     </div>
                 </div>
-            </div>
-            
+            </div> 
+            <div class="description-container">
+                <p id="deck_description">
+                    Loading description...
+                </p>
+            </div> 
+
         </section>
         
 
@@ -250,7 +236,8 @@
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="assets/js/search.js"></script>
+        <script src="assets/js/deck.js"></script>
         <script src="assets/js/main.js"></script>
-        <script src="assets/js/card.js"></script>
+        
     </body>
 </html>

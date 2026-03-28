@@ -10,7 +10,7 @@ g.parse("ontology/smtGraph.ttl", format="turtle")
 # This is the most important part of JSON-LD. 
 # It tells the computer: "When I say 'label', I actually mean 'rdfs:label'".
 context = {
-        "smtg": "https://github.com/hexWitches/semantic-tarot-library/graph/",
+        "smtg": "https://w3id.org/smt-library/graph/",
         "dcterms" : "http://purl.org/dc/terms/",
         "foaf" : "http://xmlns.com/foaf/0.1/",
         "gn" : "http://www.geonames.org/ontology#",
@@ -26,7 +26,7 @@ context = {
 ## 3. Read mapping.csv to add property aliases
 # Expected columns: predicate (CSV header), ontology_prefix, ontology_predicate
 try:
-    with open("knowledge-graph/mapping.csv", encoding="utf-8") as f:
+    with open("mapping-files/mapping.csv", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
             alias = row["predicate"].strip() # e.g., "birth_year"

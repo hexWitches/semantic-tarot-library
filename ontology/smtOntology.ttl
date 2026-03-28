@@ -1,5 +1,5 @@
-@base <https://github.com/hexWitches/semantic-tarot-library/ontology> .  # URI base dell'ontology
-@prefix : <https://github.com/hexWitches/semantic-tarot-library/ontology#> . # empty prefix of classes
+@base <https://w3id.org/smt-library/ontology> .  # URI base dell'ontology
+@prefix : <https://w3id.org/smt-library/ontology#> . # empty prefix of classes
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix schema: <https://schema.org/> .
@@ -10,7 +10,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 
-<https://github.com/hexWitches/semantic-tarot-library/ontology> rdf:type owl:Ontology ;
+<https://w3id.org/smt-library/ontology> rdf:type owl:Ontology ;
     dcterms:title "SMT Ontology"@en ;
     dcterms:description "An ontology for the description of tarot decks."@en ;
     dcterms:creator "Miriana Pinto",
