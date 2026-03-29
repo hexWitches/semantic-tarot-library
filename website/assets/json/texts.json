@@ -7414,5 +7414,114 @@
                 ""
             ]
         }
+    },
+    "explore": {
+        "suits_page": {
+            "wands": "The suit of Wands is associated with the element of <strong>fire</strong>, symbolizing energy, action, creativity, and passion. These cards reflect the impulse to act, to explore new possibilities, and to pursue ambitions with enthusiasm. Fire represents inspiration and the force that motivates people to <strong>transform ideas into reality</strong>. The Wands therefore often appear in readings connected to initiative, growth, personal drive, and the challenges that arise when pursuing one’s goals.",
+            "cups": "The suit of Cups is associated with the element of <strong>water</strong>, which represents emotions, intuition, relationships, and the inner world. Just as water can appear calm or turbulent, the Cups reflect the <strong>shifting nature of feelings</strong> and personal connections. These cards often address love, friendship, empathy, and emotional development, encouraging reflection on how individuals relate to themselves and to others.",
+            "pentacles": "The suit of Pentacles is associated with the element of <strong>earth</strong>, representing material stability, practical effort, and the physical aspects of life. These cards are closely connected with work, finances, health, family, and long-term goals. Earth symbolizes grounding and persistence, reminding individuals that prosperity and security often arise from patience, discipline, and careful management of resources.",
+            "swords": "The suit of Swords is associated with the element of <strong>air</strong>, symbolizing intellect, communication, and analytical thought. These cards often address challenges and decisions that arise through <strong>the power of the mind</strong>. Air represents clarity, reason, and the ability to perceive truth, but it can also reveal the tension and anxiety that accompany difficult choices or confrontations."
+        },
+        "visconti_page": {
+
+        },
+        "rider_sola_busca_page": {
+
+        },
+        "archetypes_page": {
+
+        }
+    },
+    "card_of_the_day": {
+        "major_arcana": {
+            "the_fool": "Today invites you to step into the unknown with curiosity and trust. A new experience or opportunity may be calling you beyond the boundaries of your comfort zone. By approaching the day with openness and courage, you allow unexpected possibilities to unfold.",
+            "the_juggler": "The Juggler symbolizes rebirth and awakening after a deep transformation. It suggests that this is the right moment to take action, drawing on your creativity and inner strength. The wisdom gained from past experiences now guides you toward a new beginning filled with possibilities.",
+            "the_popess": "The High Priestess invites you to slow down and listen to your inner voice. Beneath the surface of everyday events, subtle insights are waiting to be noticed. By giving yourself space for reflection, you may discover guidance that feels both calm and certain",
+            "the_empress": "A spirit of creativity surrounds you today, encouraging you to bring life to the things you value most. Whether through art, connection, or simple acts of care, your presence can inspire growth. What you nurture with love may blossom beyond expectation.",
+            "the_emperor": "This is a moment to lead with wisdom and strength. By setting clear boundaries and focusing on long-term goals, you build a solid foundation for future success. Authority used with fairness can guide others toward harmony.",
+            "the_pope": "Today encourages you to seek wisdom from established knowledge or trusted guidance. The lessons passed down through experience may offer valuable insight. By remaining open to learning, you may discover clarity in unexpected places.",
+            "the_lovers": "This moment encourages you to listen carefully to both your heart and your mind. Choices made with awareness and integrity tend to lead toward lasting fulfillment. Trust the path that feels most aligned with who you truly are.",
+            "the_chariot": "Today offers an opportunity to move ahead with purpose. When your ambition and willpower work together, obstacles become easier to navigate. Stay committed to your direction and allow progress to unfold.",
+            "justice": "Honesty and responsibility guide the energy of this day. By weighing your choices carefully, you create outcomes that reflect your values. Fairness toward yourself and others brings lasting stability.",
+            "the_hermit": "Allow yourself space to think and observe without rushing toward answers. Reflection has the power to transform confusion into understanding. Your inner light can guide the way forward.",
+            "wheel_of_fortune": "Change may be unfolding around you, reminding you that life moves in cycles. What once seemed uncertain can shift quickly toward opportunity. Remaining flexible will help you adapt to the moment.",
+            "strenght": "True strength may reveal itself through patience and compassion today. By approaching challenges with calm understanding, you create space for harmony rather than conflict. Gentle confidence often carries more power than force.",
+            "the_hanged_man": "Today may invite you to pause and reconsider your perspective. By looking at a familiar situation from a new angle, fresh understanding may emerge. Patience can transform uncertainty into insight.",
+            "death": "A chapter of your life may be reaching its natural conclusion. By accepting the need for change, you allow yourself to move forward with greater clarity. Renewal begins where release is embraced.",
+            "temperance": "Finding the middle ground may bring clarity to your situation. Through patience and understanding, opposing forces can begin to work together. Harmony often grows from careful balance.",
+            "the_devil": "Some limitations exist only because they have been accepted for too long. By examining your habits and motivations, you may discover new ways to move forward. Choice and responsibility return power to your hands.",
+            "the_tower": "Unexpected events may challenge familiar structures today. Though unsettling at first, these moments can reveal truths that were previously hidden. From this clarity, stronger foundations can eventually emerge.",
+            "the_star": "A gentle sense of hope surrounds you today. Even after difficult moments, healing and renewal are quietly taking place. Trust that the future still holds light and possibility.",
+            "the_moon": "Today may carry a sense of mystery or uncertainty. Instead of rushing for answers, allow your intuition to guide your understanding. Insight often emerges slowly when emotions and imagination are acknowledged.",
+            "the_sun": "Warmth, joy, and clarity illuminate the day ahead. Your confidence and positivity can uplift both yourself and those around you. Allow yourself to fully experience the happiness that is present.",
+            "judgement": "Today may bring a powerful moment of reflection and realization. Lessons from the past can now guide you toward a more conscious path forward. Renewal becomes possible when understanding replaces regret.",
+            "the_world": "A sense of completion or fulfillment may be present in your life today. The efforts you have made are coming together in a meaningful way. Take time to acknowledge how far you have traveled."
+        },
+        "minor_arcana": {
+            "wands": {
+                "king_of_wands": "",
+                "queen_of_wands": "",
+                "knight_of_wands": "",
+                "page_of_wands": "",
+                "ace_of_wands": "",
+                "two_of_wands": "",
+                "three_of_wands": "",
+                "four_of_wands": "",
+                "five_of_wands": "",
+                "six_of_wands": "",
+                "seven_of_wands": "",
+                "eight_of_wands": "",
+                "nine_of_wands": "",
+                "ten_of_wands": ""
+            },
+            "cups": {
+                "king_of_cups": "",
+                "queen_of_cups": "",
+                "knight_of_cups": "",
+                "page_of_cups": "",
+                "ace_of_cups": "",
+                "two_of_cups": "",
+                "three_of_cups": "",
+                "four_of_cups": "",
+                "five_of_cups": "",
+                "six_of_cups": "",
+                "seven_of_cups": "",
+                "eight_of_cups": "",
+                "nine_of_cups": "",
+                "ten_of_cups": ""
+            },
+            "pentacles": {
+                "king_of_pentacles": "",
+                "queen_of_pentacles": "",
+                "knight_of_pentacles": "",
+                "page_of_pentacles": "",
+                "ace_of_pentacles": "",
+                "two_of_pentacles": "",
+                "three_of_pentacles": "",
+                "four_of_pentacles": "",
+                "five_of_pentacles": "",
+                "six_of_pentacles": "",
+                "seven_of_pentacles": "",
+                "eight_of_pentacles": "",
+                "nine_of_pentacles": "",
+                "ten_of_pentacles": ""
+            },
+            "swords": {
+                "king_of_swords": "",
+                "queen_of_swords": "",
+                "knight_of_swords": "",
+                "page_of_swords": "",
+                "ace_of_swords": "",
+                "two_of_swords": "",
+                "three_of_swords": "",
+                "four_of_swords": "",
+                "five_of_swords": "",
+                "six_of_swords": "",
+                "seven_of_swords": "",
+                "eight_of_swords": "",
+                "nine_of_swords": "",
+                "ten_of_swords": ""
+            }
+        }
     }
 }
