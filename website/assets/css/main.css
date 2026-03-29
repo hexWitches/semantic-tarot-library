@@ -1972,7 +1972,7 @@ ITEM PAGE: deck
 
 .discover-more {
     background-color: color-mix(in srgb, var(--brick-red), transparent 10%);
-    width: 80px;
+    width: 65px;
     display: flex;
     flex-shrink: 0;
     flex-direction: column;
@@ -1995,9 +1995,9 @@ ITEM PAGE: deck
 .discover-svg svg {
     border: 1px solid var(--floral-white) !important;
     border-radius: 50%;
-    padding: 5px;
-    width: 35px;
-    height: 35px;
+    padding: 3px;
+    width: 30px;
+    height: 30px;
 }
 
 
@@ -2021,11 +2021,20 @@ ITEM PAGE: deck
         margin-bottom: 0;
     }
 
-    .discover-label br {
-        display: none;
-        /* Keeps 'Discover more' on one line */
+    .compact-evolution {
+        flex-direction: column;
     }
 
+    .compact-evolution .discover-more {
+        width: 100% !important;
+        flex-direction: row;
+        padding: 0.75rem;
+        gap: 12px;
+    }
+
+    .discover-label br {
+        display: none;
+    }
 }
 
 .evolution-heading {
@@ -2134,6 +2143,8 @@ ITEM PAGE: deck
 .search-bar-hero {
     height: 65px;
     width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .search-bar-hero input {
@@ -2141,6 +2152,7 @@ ITEM PAGE: deck
     background-color: transparent !important;
     font-size: 1.2rem;
     color: var(--dark-amethyst);
+    padding-right: 90px !important;
 }
 
 .search-bar-hero input::placeholder {
@@ -2158,10 +2170,16 @@ ITEM PAGE: deck
 #navbarBrandMobile,
 #navbarSearchMobile {
     transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
+}
+
+/* Initially hidden only on pages that use the initial-navbar class (like the Homepage) */
+.initial-navbar #navbarBrand,
+.initial-navbar #navbarSearch,
+.initial-navbar #navbarBrandMobile,
+.initial-navbar #navbarSearchMobile {
     opacity: 0;
     visibility: hidden;
     display: none;
-    /* Hide from layout when not needed */
 }
 
 /* Initially hidden elements */
@@ -2203,7 +2221,6 @@ ITEM PAGE: deck
 
     .scrolled-navbar #navbarLinks {
         flex: 1 0 0;
-        margin: 0 !important;
         justify-content: flex-start;
     }
 
@@ -2220,6 +2237,105 @@ ITEM PAGE: deck
         justify-content: flex-end;
         margin: 0 !important;
     }
+}
+
+/* --- Mobile Search Toggler Icon Swap --- */
+.mobile-search-toggler .icon-close {
+    display: none;
+    stroke: var(--dark-amethyst);
+}
+
+.dropdown.show .mobile-search-toggler .icon-search {
+    display: none;
+}
+
+.dropdown.show .mobile-search-toggler .icon-close {
+    display: inline-block;
+}
+
+/* --- Custom Search Clear Button --- */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+  display: none;
+}
+
+input[type="search"]::-ms-clear,
+input[type="search"]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.search-input-group {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.search-clear-btn {
+    position: absolute;
+    right: 45px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    z-index: 5;
+    display: none;
+    line-height: 0;
+    transition: opacity 0.2s ease;
+    color: var(--dark-amethyst);
+}
+
+.search-clear-btn:hover {
+    opacity: 0.7;
+}
+
+#navbarSearch input {
+    padding-right: 75px !important;
+}
+
+.search-bar-hero .search-clear-btn {
+    right: 60px;
+}
+
+.mobile-search-dropdown .search-clear-btn {
+    right: 42px;
+}
+
+.mobile-search-dropdown input {
+    padding-right: 75px !important;
+}
+
+.search-input-group input:not(:placeholder-shown) ~ .search-clear-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-suggestion-ghost {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    color: var(--dusty-lavender);
+    opacity: 0.5;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Ensure all search inputs have transparent backgrounds to show the ghost suggestion underneath */
+.search-input-group input {
+    background-color: transparent !important;
 }
 
 /* CONTENT REVEAL */
@@ -2252,7 +2368,7 @@ ITEM PAGE: deck
     border: 1px solid var(--dark-amethyst);
     border-radius: 12px;
     padding: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 /* Custom Buttons */
@@ -2269,8 +2385,13 @@ ITEM PAGE: deck
     color: white !important;
 }
 
+.cotd-section {
+    padding-top: 1.5rem !important;
+    padding-bottom: 0.5rem !important;
+}
+
 .content-box-large {
-    padding: 50px 40px;
+    padding: 20px 40px;
 }
 
 @media (max-width: 767px) {
@@ -2285,6 +2406,12 @@ ITEM PAGE: deck
     font-family: var(--header-font);
     color: var(--dark-amethyst);
     letter-spacing: 2px;
+}
+
+#dailyCardDesc {
+    font-size: 1.15rem;
+    line-height: 1.5;
+    color: var(--dark-amethyst);
 }
 
 .section-desc {
@@ -2303,27 +2430,27 @@ ITEM PAGE: deck
 }
 
 .compact-evolution {
-    max-width: 100% !important;
+    max-width: 320px !important;
     border: 1px solid var(--brick-red);
     box-shadow: none;
-    margin: 2rem 0 0 0 !important;
-    /* Added top margin for mobile stacking */
+    margin: 0 auto !important;
 }
 
-@media (min-width: 992px) {
+@media (max-width: 991px) {
     .compact-evolution {
-        margin: 0 !important;
+        max-width: 100% !important;
+        margin-top: 2rem !important;
     }
 }
 
 .compact-evolution .evolution-content {
-    padding: 1.25rem;
+    padding: 1rem;
 }
 
 .compact-evolution .evolution-heading {
-    font-size: 1.1rem;
-    /* Enlarged from 0.95rem */
-    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
 }
 
 .compact-evolution .archetype-comparison-preview {
@@ -2331,19 +2458,13 @@ ITEM PAGE: deck
 }
 
 .compact-evolution .mini-card-thumb {
-    flex: 0 0 55px;
-}
-
-.compact-evolution .discover-more {
-    width: 100%;
-    /* Default 100% for mobile */
-    font-size: 0.8rem;
+    flex: 0 0 60px;
 }
 
 @media (min-width: 992px) {
     .compact-evolution .discover-more {
-        width: 70px;
-        font-size: 0.65rem;
+        width: 65px;
+        font-size: 0.8rem;
     }
 }
 

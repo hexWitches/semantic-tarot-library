@@ -350,6 +350,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event listeners
     searchInputs.forEach(input => {
         const form = input.closest('form');
+        const clearBtn = input.parentElement.querySelector('.search-clear-btn');
+
+        if (clearBtn) {
+            clearBtn.addEventListener('click', () => {
+                input.value = '';
+                input.focus();
+                // Manually trigger input event for live update
+                input.dispatchEvent(new Event('input'));
+            });
+        }
 
         input.addEventListener('input', (e) => {
             const query = e.target.value.trim();
