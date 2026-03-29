@@ -4,13 +4,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const homepageContent = document.getElementById('homepageContent');
     const scrollThreshold = 50;
 
-    if (window.scrollY > scrollThreshold) {
+    if (navbar && homepageContent && window.scrollY > scrollThreshold) {
         navbar.classList.remove('initial-navbar');
         navbar.classList.add('scrolled-navbar');
         homepageContent.classList.add('revealed');
     }
 
     window.addEventListener('scroll', () => {
+        if (!navbar || !homepageContent) return;
+        
         if (window.scrollY > scrollThreshold) {
             if (navbar.classList.contains('initial-navbar')) {
                 navbar.classList.remove('initial-navbar');

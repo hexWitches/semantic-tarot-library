@@ -2174,6 +2174,8 @@ ITEM PAGE: deck
 #navbarBrandMobile,
 #navbarSearchMobile {
     transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
+    opacity: 1;
+    visibility: visible;
 }
 
 /* Initially hidden only on pages that use the initial-navbar class (like the Homepage) */
@@ -2209,9 +2211,8 @@ ITEM PAGE: deck
 .scrolled-navbar #navbarSearch,
 .scrolled-navbar #navbarBrandMobile,
 .scrolled-navbar #navbarSearchMobile {
-    opacity: 1;
-    visibility: visible;
-    display: flex;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 
@@ -2243,61 +2244,14 @@ ITEM PAGE: deck
     }
 }
 
-/* --- Mobile Search Toggler Icon Swap --- */
-.mobile-search-toggler .icon-close {
-    display: none;
-    stroke: var(--dark-amethyst);
+/* --- Mobile Search Toggler --- */
+.mobile-search-toggler {
+    color: var(--floral-white);
 }
 
-.dropdown.show .mobile-search-toggler .icon-search {
-    display: none;
-}
-
-.dropdown.show .mobile-search-toggler .icon-close {
-    display: inline-block;
-}
-
-/* --- Custom Search Clear Button --- */
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration {
-  -webkit-appearance: none;
-  display: none;
-}
-
-input[type="search"]::-ms-clear,
-input[type="search"]::-ms-reveal {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
-.search-input-group {
-    position: relative;
-    width: 100%;
-    display: flex;
-    align-items: center;
-}
-
+/* --- Custom Search Clear Button (Reverted) --- */
 .search-clear-btn {
-    position: absolute;
-    right: 45px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    z-index: 5;
-    display: none;
-    line-height: 0;
-    transition: opacity 0.2s ease;
-    color: var(--dark-amethyst);
-}
-
-.search-clear-btn:hover {
-    opacity: 0.7;
+    display: none !important;
 }
 
 #navbarSearch input {
