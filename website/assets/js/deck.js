@@ -38,14 +38,14 @@ async function initDeckPage() {
 
             console.log("Deck description found:", extraTexts);
             console.log("Deck data successfully found:", deckData);
-                fillDeckMetadata(deckData, graph, extraTexts);
-            } else {
-                console.warn("Deck not found in the Knowledge Graph.");
-            }
-            
-            renderDeckCards(graph, deckId);
-        
-        } catch (error) {
+            fillDeckMetadata(deckData, graph, extraTexts);
+        } else {
+            console.warn("Deck not found in the Knowledge Graph.");
+        }
+
+        renderDeckCards(graph, deckId);
+
+    } catch (error) {
         console.error("Error loading the deck page:", error);
     }
 }
@@ -56,15 +56,15 @@ async function initDeckPage() {
  */
 function getEntityLabel(graph, entityData) {
     if (!entityData) return null;
-    
+
     // If it's an array (like your author_id), take the first one or handle both
     const data = Array.isArray(entityData) ? entityData[0] : entityData;
-    
+
     const idToFind = typeof data === 'string' ? data : data['@id'];
     if (!idToFind) return null;
 
     const entity = graph.find(obj => obj['@id'] === idToFind);
-    
+
     if (!entity) {
         // Safe split: only if idToFind exists and contains ':'
         return idToFind.includes(':') ? idToFind.split(':').pop().replace(/-/g, ' ') : idToFind;
@@ -80,10 +80,10 @@ function getEntityLabel(graph, entityData) {
     }
 
     // Handle other labels
-    return entity.label || 
-           entity['rdfs:label'] || 
-           entity.card_name || 
-           idToFind.split(':').pop().replace(/-/g, ' ');
+    return entity.label ||
+        entity['rdfs:label'] ||
+        entity.card_name ||
+        idToFind.split(':').pop().replace(/-/g, ' ');
 }
 
 /**
@@ -108,7 +108,7 @@ function fillDeckMetadata(deck, graph, extraTexts) {
 
     // 2. Description (Only from texts.json)
     const descriptionEl = document.getElementById('deck_description');
-    
+
     if (extraTexts && extraTexts.long_description) {
         // Inserisce la descrizione lunga supportando i tag HTML (em, br, ecc.)
         descriptionEl.innerHTML = extraTexts.long_description;
@@ -125,7 +125,7 @@ function fillDeckMetadata(deck, graph, extraTexts) {
         if (!el) return;
 
         // Clear the container (the <a> tag or its parent)
-        el.innerHTML = ""; 
+        el.innerHTML = "";
 
         // If there are no data
         if (!entityData || (Array.isArray(entityData) && entityData.length === 0)) {
@@ -142,7 +142,7 @@ function fillDeckMetadata(deck, graph, extraTexts) {
 
             // if null, return nothing
             if (!label || label === "-") {
-                return; 
+                return;
             }
 
             const fullId = data['@id'] || data;
@@ -163,7 +163,7 @@ function fillDeckMetadata(deck, graph, extraTexts) {
                 } else {
                     link.href = `person.html?id=${cleanId}`;
                 }
-                
+
                 el.appendChild(link);
             }
 
@@ -178,7 +178,7 @@ function fillDeckMetadata(deck, graph, extraTexts) {
     };
 
 
-   // 3. Populate Linked Metadata
+    // 3. Populate Linked Metadata
     // Note: Use full URL key for locationCreated if mapped that way in JSON-LD
     setMetaLink('location_created', deck.location_created);
     setMetaLink('author_id', deck.author_id || deck.hasAuthor);
@@ -207,6 +207,30 @@ function fillDeckMetadata(deck, graph, extraTexts) {
     setMetaText('publisher', deck.publisher);
     setMetaText('current_card_count', deck.current_card_count);
     setMetaText('original_card_count', deck.original_card_count);
+
+    // Set Digital Source URL
+    const sourceUrlEl = document.getElementById('source_url');
+    if (sourceUrlEl) {
+        if (deck.source_url) {
+            let url = deck.source_url;
+            if (typeof url === 'object' && url['@id']) {
+                url = url['@id'];
+            } else if (Array.isArray(url)) {
+                url = url[0]['@id'] || url[0];
+            }
+            sourceUrlEl.href = url;
+            sourceUrlEl.target = '_blank';
+            sourceUrlEl.innerText = 'View original';
+            sourceUrlEl.style.textDecoration = '';
+            sourceUrlEl.style.pointerEvents = 'auto';
+        } else {
+            sourceUrlEl.removeAttribute('href');
+            sourceUrlEl.innerText = '-';
+            sourceUrlEl.style.textDecoration = 'none';
+            sourceUrlEl.style.color = 'inherit';
+            sourceUrlEl.style.pointerEvents = 'none';
+        }
+    }
 }
 
 /**
@@ -215,7 +239,7 @@ function fillDeckMetadata(deck, graph, extraTexts) {
 function renderDeckCards(graph, deckId) {
     const carouselInner = document.getElementById('carouselInner');
     if (!carouselInner) return;
-    
+
     carouselInner.innerHTML = ""; // Clear template
 
     // Filter cards where 'isContainedIn' matches our deckId
@@ -257,7 +281,7 @@ function renderDeckCards(graph, deckId) {
         // First try to parse the number if it's standard 1-10
         const num = parseInt(card.card_number, 10);
         if (!isNaN(num)) return num;
-        
+
         // Next, fallback to checking titles for court cards or Aces
         const title = (card.title || "").toLowerCase();
         if (title.includes('ace')) return 1;
@@ -265,35 +289,35 @@ function renderDeckCards(graph, deckId) {
         if (title.includes('knight')) return 12;
         if (title.includes('queen')) return 13;
         if (title.includes('king')) return 14;
-        
+
         return 0; // Catch-all
     };
 
     const sortedCards = deckCards.sort((a, b) => {
         const typeA = Array.isArray(a['@type']) ? a['@type'] : [a['@type']];
         const typeB = Array.isArray(b['@type']) ? b['@type'] : [b['@type']];
-        
+
         const isMajorA = typeA.includes('smt:MajorArcana');
         const isMajorB = typeB.includes('smt:MajorArcana');
-        
+
         // 1. Prioritize Major Arcana over Minor Arcana
         if (isMajorA && !isMajorB) return -1;
         if (!isMajorA && isMajorB) return 1;
-        
+
         // 2. Both are Major Arcana: sort by their Roman Numeral
         if (isMajorA && isMajorB) {
             return romanToInt(a.card_number) - romanToInt(b.card_number);
         }
-        
+
         // 3. Both are Minor Arcana: Sort alphabetically by suit
         const getSuitId = (card) => card.suit_id ? (card.suit_id['@id'] || card.suit_id) : '';
         const suitA = getSuitId(a);
         const suitB = getSuitId(b);
-        
+
         if (suitA !== suitB) {
             return suitA.localeCompare(suitB);
         }
-        
+
         // 4. Same Suit: Sort by inherent rank (1 to 14)
         return getMinorRank(a) - getMinorRank(b);
     });
@@ -302,7 +326,7 @@ function renderDeckCards(graph, deckId) {
     sortedCards.forEach((card, index) => {
         const fullId = card['@id'];
         const cleanCardId = fullId.replace('smtg:', '');
-       
+
         const rawUrl = card.image_url ? card.image_url['@id'] : null;
         const imagePath = getLocalImagePath(rawUrl);
 

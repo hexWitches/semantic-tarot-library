@@ -90,9 +90,33 @@
             </nav>      
         </div>
 
-        <section class="item-section container-fluid px-5">
+        <section class="item-section container-fluid px-5 position-relative">
+            <!-- Desktop Arrows -->
+            <a href="#" class="nav-arrow prev-arrow d-none d-md-flex" id="prev_card_desktop" aria-label="Previous Card">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                </svg>
+            </a>
+            <a href="#" class="nav-arrow next-arrow d-none d-md-flex" id="next_card_desktop" aria-label="Next Card">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+            </a>
+
             <div class="row align-items-center row-gap-4">
-                <div class="col-md-7 d-flex justify-content-center">
+                <div class="col-md-7 d-flex justify-content-center position-relative">
+                    <!-- Mobile Arrows -->
+                    <a href="#" class="nav-arrow prev-arrow-mobile d-md-none" id="prev_card_mobile" aria-label="Previous Card">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="nav-arrow next-arrow-mobile d-md-none" id="next_card_mobile" aria-label="Next Card">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </a>
+
                     <div class="card-image-wrapper">
                         <img src="" class="card-main-img" alt="Tarot Card" id="image_url">
                     </div>
@@ -193,6 +217,59 @@
                 </div>
             </div>
             
+        </section>
+
+        <section class="related-topics-section container-fluid px-5">
+            <h2 class="section-title text-center mb-5">Explore Related Topics</h2>
+            
+            <div class="topics-carousel-container position-relative">
+                <!-- Navigation Arrows (reusing card.html styles) -->
+                <button class="nav-arrow prev-arrow-mobile border-0" id="prev_topic" onclick="document.getElementById('topicsCarousel').scrollBy({left: -220, behavior: 'smooth'})" style="left: -10px; z-index: 20;" aria-label="Scroll left">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+                </button>
+                
+                <button class="nav-arrow next-arrow-mobile border-0" id="next_topic" onclick="document.getElementById('topicsCarousel').scrollBy({left: 220, behavior: 'smooth'})" style="right: -10px; z-index: 20;" aria-label="Scroll right">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </button>
+
+                <div class="topics-carousel d-flex gap-4 overflow-auto" id="topicsCarousel">
+                    <!-- Square Cards Placeholders -->
+                    <div class="topic-card">
+                        <div class="topic-card-inner">
+                            <h4>Archetypes</h4>
+                            <p>Dig deeper into the meaning</p>
+                        </div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-card-inner">
+                            <h4>Symbols</h4>
+                            <p>Dig deeper into the meaning</p>
+                        </div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-card-inner">
+                            <h4>History</h4>
+                            <p>Dig deeper into the meaning</p>
+                        </div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-card-inner">
+                            <h4>Astrology</h4>
+                            <p>Dig deeper into the meaning</p>
+                        </div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-card-inner">
+                            <h4>Occult</h4>
+                            <p>Dig deeper into the meaning</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
         
 

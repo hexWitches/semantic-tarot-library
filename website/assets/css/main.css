@@ -64,7 +64,8 @@ h3 {
 .navbar-brand {
     color: var(--floral-white) !important;
     font-family: var(--header-font);
-    font-size: 1.7rem; /* Enlarged from 1.5rem */
+    font-size: 1.7rem;
+    /* Enlarged from 1.5rem */
 }
 
 .navbar-nav {
@@ -93,10 +94,11 @@ h3 {
         margin: 0 !important;
     }
 
-    .custom-navbar .navbar-collapse > form {
+    .custom-navbar .navbar-collapse>form {
         margin-left: auto !important;
         display: flex;
-        max-width: 260px;  /* Prevent the form from growing too wide */
+        max-width: 260px;
+        /* Prevent the form from growing too wide */
     }
 
     /* On homepage, the scrolled-navbar has its own flex rules — undo the position:absolute on brand */
@@ -107,7 +109,7 @@ h3 {
     }
 
     /* On homepage, the search form should follow the flex rules, not be constrained */
-    .scrolled-navbar .navbar-collapse > form {
+    .scrolled-navbar .navbar-collapse>form {
         max-width: none;
         flex: 1 0 0;
     }
@@ -118,6 +120,7 @@ h3 {
     .navbar-nav {
         gap: 0.8rem !important;
     }
+
     .custom-navbar .navbar-brand {
         font-size: 1.5rem !important;
     }
@@ -767,7 +770,8 @@ footer a {
 
 .search-suggestion-ghost {
     position: absolute;
-    inset: 0;                    /* fills the wrapper exactly */
+    inset: 0;
+    /* fills the wrapper exactly */
     pointer-events: none;
     color: var(--dark-amethyst);
     opacity: 0.4;
@@ -775,7 +779,8 @@ footer a {
     z-index: 5;
     font-family: var(--text-font);
     display: flex;
-    align-items: center;         /* vertically centers inline with input text */
+    align-items: center;
+    /* vertically centers inline with input text */
     overflow: hidden;
     box-sizing: border-box;
 }
@@ -1798,8 +1803,153 @@ ITEM PAGE: deck
     }
 }
 
+/* --- Card Navigation Arrows --- */
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(36, 0, 70, 0.7);
+    /* dark-amethyst with opacity */
+    color: var(--floral-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.nav-arrow:hover {
+    background-color: var(--brick-red);
+    color: var(--floral-white);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.nav-arrow.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.prev-arrow {
+    left: 1rem;
+}
+
+.next-arrow {
+    right: 1rem;
+}
+
+/* Mobile arrows override */
+.prev-arrow-mobile {
+    left: 0.5rem;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(36, 0, 70, 0.85);
+}
+
+.next-arrow-mobile {
+    right: 0.5rem;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(36, 0, 70, 0.85);
+}
+
+@media (min-width: 1400px) {
+    .prev-arrow {
+        left: 2rem;
+    }
+
+    .next-arrow {
+        right: 2rem;
+    }
+}
+
 .description-section {
-    padding-top: 0%;
+    padding-top: 5%;
+}
+
+.description-section a {
+    color: var(--brick-red);
+    text-decoration: none;
+}
+
+.description-section a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+}
+
+/* --- Related Topics Carousel --- */
+.related-topics-section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.related-topics-section h2 {
+    font-family: var(--header-font);
+    font-size: 2rem;
+    color: var(--brick-red);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.topics-carousel-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.topics-carousel {
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    padding: 1rem 0;
+}
+
+.topics-carousel::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari and Opera */
+}
+
+.topic-card {
+    min-width: 200px;
+    height: 200px;
+    background-color: var(--dark-amethyst);
+    border-radius: 12px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border: 1px solid var(--brick-red);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--floral-white);
+}
+
+.topic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.topic-card-inner h4 {
+    font-family: var(--header-font);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.topic-card-inner p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin: 0;
+    line-height: 1.3;
 }
 
 .evolution-frame {
@@ -1880,7 +2030,8 @@ ITEM PAGE: deck
 
 .evolution-heading {
     font-family: var(--text-font);
-    font-size: 1.25rem; /* Enlarged from 1.1rem */
+    font-size: 1.25rem;
+    /* Enlarged from 1.1rem */
     color: var(--dark-amethyst);
     margin-bottom: 2rem;
     line-height: 1.4;
@@ -2129,7 +2280,8 @@ ITEM PAGE: deck
 }
 
 .section-title {
-    font-size: 1.6rem; /* Enlarged from 1.4rem */
+    font-size: 1.6rem;
+    /* Enlarged from 1.4rem */
     font-family: var(--header-font);
     color: var(--dark-amethyst);
     letter-spacing: 2px;
@@ -2137,7 +2289,8 @@ ITEM PAGE: deck
 
 .section-desc {
     color: var(--dark-amethyst);
-    font-size: 1.15rem; /* Enlarged from 0.95rem */
+    font-size: 1.15rem;
+    /* Enlarged from 0.95rem */
     max-width: 800px;
     margin: 0 auto;
     line-height: 1.6;
@@ -2153,7 +2306,8 @@ ITEM PAGE: deck
     max-width: 100% !important;
     border: 1px solid var(--brick-red);
     box-shadow: none;
-    margin: 2rem 0 0 0 !important; /* Added top margin for mobile stacking */
+    margin: 2rem 0 0 0 !important;
+    /* Added top margin for mobile stacking */
 }
 
 @media (min-width: 992px) {
@@ -2167,7 +2321,8 @@ ITEM PAGE: deck
 }
 
 .compact-evolution .evolution-heading {
-    font-size: 1.1rem; /* Enlarged from 0.95rem */
+    font-size: 1.1rem;
+    /* Enlarged from 0.95rem */
     margin-bottom: 1.5rem;
 }
 
@@ -2180,7 +2335,8 @@ ITEM PAGE: deck
 }
 
 .compact-evolution .discover-more {
-    width: 100%; /* Default 100% for mobile */
+    width: 100%;
+    /* Default 100% for mobile */
     font-size: 0.8rem;
 }
 
@@ -2211,19 +2367,22 @@ ITEM PAGE: deck
 .discovery-carousel-container {
     width: 100%;
     position: relative;
-    padding-bottom: 2.5rem; /* Match standardized bottom padding */
+    padding-bottom: 2.5rem;
+    /* Match standardized bottom padding */
 }
 
 @media (max-width: 991px) {
     .discovery-carousel-container {
-        padding-bottom: 1rem; /* Match mobile standard */
+        padding-bottom: 1rem;
+        /* Match mobile standard */
     }
 }
 
 .discovery-carousel-section .section-title {
     color: var(--dark-amethyst);
     font-family: var(--header-font);
-    padding: 2.5rem 2rem 0.5rem;   /* Match standardized top padding */
+    padding: 2.5rem 2rem 0.5rem;
+    /* Match standardized top padding */
     position: relative;
     z-index: 5;
     text-transform: none;
@@ -2231,7 +2390,8 @@ ITEM PAGE: deck
 
 @media (max-width: 991px) {
     .discovery-carousel-section .section-title {
-        padding: 1rem 2rem 0.5rem; /* Match mobile standard */
+        padding: 1rem 2rem 0.5rem;
+        /* Match mobile standard */
     }
 }
 
@@ -2393,20 +2553,24 @@ ITEM PAGE: deck
 
 .ontology-svg-container {
     width: 100%;
-    aspect-ratio: 16 / 9; /* Made taller for better visibility */
+    aspect-ratio: 16 / 9;
+    /* Made taller for better visibility */
     border-radius: 12px;
     overflow: hidden;
-    background-color: white; /* Subtle tint to match the site better */
+    background-color: white;
+    /* Subtle tint to match the site better */
     position: relative;
     cursor: grab;
     user-select: none;
-    border: 1px solid rgba(0,0,0,0.1); /* Slightly firmer border */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    /* Slightly firmer border */
 }
 
 .ontology-svg-container img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Changed from cover to show whole image */
+    object-fit: contain;
+    /* Changed from cover to show whole image */
     transform-origin: center center;
     display: block;
     pointer-events: none;
@@ -2427,9 +2591,11 @@ ITEM PAGE: deck
 
 @media (max-width: 768px) {
     .ontology-svg-container {
-        aspect-ratio: 4 / 3; /* Taller on mobile for easier interaction */
+        aspect-ratio: 4 / 3;
+        /* Taller on mobile for easier interaction */
     }
 }
+
 /* --- SPARQL Endpoint (Yasgui) --- */
 #yasgui {
     margin-top: 1rem;

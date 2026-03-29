@@ -38,6 +38,7 @@ async function initCardPage() {
             console.log("Card data successfully found:", cardData);
 
             fillCardMetadata(cardData, graph, extraTexts);
+            updateNavigation(cardData, graph);
         } else {
             console.warn("Card not found in the Knowledge Graph.");
         }
@@ -317,6 +318,124 @@ function fillCardMetadata(card, graph, extraTexts) {
             evolutionFrame.style.display = 'none';
         }
     }
+}
+
+/**
+ * Helper: Updates Previous & Next Card Navigation Arrows
+ */
+function updateNavigation(currentCard, graph) {
+    const deckRef = currentCard.contained_in_deck_id || currentCard.isContainedIn;
+    if (!deckRef) return;
+    const deckId = deckRef['@id'] || deckRef;
+
+    // 1. Filter cards from the same deck
+    const deckCards = graph.filter(obj => {
+        if (!obj['@type']) return false;
+        const types = Array.isArray(obj['@type']) ? obj['@type'] : [obj['@type']];
+        const isCard = types.some(t => ['smt:MajorArcana', 'smt:MinorArcana', 'smt:NumberedCard', 'smt:CourtCard'].includes(t));
+        if (!isCard) return false;
+
+        const cDeckRef = obj.contained_in_deck_id || obj.isContainedIn;
+        if (!cDeckRef) return false;
+        const cDeckId = cDeckRef['@id'] || cDeckRef;
+        return cDeckId === deckId;
+    });
+
+    // 2. Sorting Helpers
+    const parseNumber = (numStr) => {
+        if (!numStr) return 0; // Default undefined numbers (like the Fool) to 0
+        const s = numStr.toString().trim().toUpperCase();
+        if (/^\d+$/.test(s)) return parseInt(s, 10);
+        
+        // Roman Numeral parser
+        const romanMap = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };
+        let num = 0;
+        for (let i = 0; i < s.length; i++) {
+            const curr = romanMap[s[i]];
+            if (!curr) continue;
+            const next = romanMap[s[i + 1]];
+            if (next && curr < next) {
+                num += (next - curr);
+                i++;
+            } else {
+                num += curr;
+            }
+        }
+        return num || 0;
+    };
+
+    const getRankValue = (cardObj) => {
+        if (cardObj.card_number) return parseNumber(cardObj.card_number);
+        
+        let baseVal = 20; 
+        const label = (cardObj.label || cardObj.title || cardObj.card_name || getEntityLabel(graph, cardObj) || "").toLowerCase();
+        
+        if (label.includes("page") || label.includes("fante")) return 11;
+        if (label.includes("knight") || label.includes("cavalliere") || label.includes("cavaliere")) return 12;
+        if (label.includes("queen") || label.includes("regina")) return 13;
+        if (label.includes("king") || label.includes("re")) return 14;
+        
+        return baseVal;
+    };
+
+    // 3. Sort Cards
+    deckCards.sort((a, b) => {
+        const typesA = Array.isArray(a['@type']) ? a['@type'] : [a['@type']];
+        const typesB = Array.isArray(b['@type']) ? b['@type'] : [b['@type']];
+
+        const isMajorA = typesA.includes('smt:MajorArcana');
+        const isMajorB = typesB.includes('smt:MajorArcana');
+
+        if (isMajorA && !isMajorB) return -1;
+        if (!isMajorA && isMajorB) return 1;
+
+        if (isMajorA && isMajorB) {
+            return parseNumber(a.card_number) - parseNumber(b.card_number);
+        }
+
+        // Both Minor Arcana
+        const suitA = getEntityLabel(graph, a.suit_id) || "";
+        const suitB = getEntityLabel(graph, b.suit_id) || "";
+
+        if (suitA.toLowerCase() < suitB.toLowerCase()) return -1;
+        if (suitA.toLowerCase() > suitB.toLowerCase()) return 1;
+
+        return getRankValue(a) - getRankValue(b);
+    });
+
+    // 4. Update UI Arrows
+    const currentIndex = deckCards.findIndex(c => c['@id'] === currentCard['@id']);
+    if (currentIndex === -1) return;
+
+    const setArrow = (idPrefix, targetIndex) => {
+        const desktopEl = document.getElementById(`${idPrefix}_card_desktop`);
+        const mobileEl = document.getElementById(`${idPrefix}_card_mobile`);
+        const elList = [desktopEl, mobileEl];
+        
+        if (targetIndex >= 0 && targetIndex < deckCards.length) {
+            const targetId = deckCards[targetIndex]['@id'].replace('smtg:', '');
+            elList.forEach(el => {
+                if (el) {
+                    el.href = `card.html?id=${targetId}`;
+                    el.classList.remove('disabled');
+                    el.style.opacity = '1';
+                    el.style.pointerEvents = 'auto';
+                }
+            });
+        } else {
+            elList.forEach(el => {
+                if (el) {
+                    el.href = '#';
+                    el.classList.add('disabled');
+                    el.style.opacity = '0.3';
+                    el.style.pointerEvents = 'none';
+                }
+            });
+        }
+    };
+
+    setArrow('prev', currentIndex - 1);
+    setArrow('next', currentIndex + 1);
 }
 
 document.addEventListener('DOMContentLoaded', initCardPage);
