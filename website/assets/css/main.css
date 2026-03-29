@@ -296,8 +296,9 @@ footer a {
     text-align: justify;
 }
 
-/* filters */
-#collection-sidebar {
+/* Filters for collection and explore page */
+#collection-sidebar,
+#explore-sidebar {
     background-color: var(--dark-amethyst);
     padding: 2rem 1.5rem;
     border-radius: 8px;
@@ -320,7 +321,9 @@ footer a {
 @media (max-width: 991px) {
 
     #collection-sidebar,
-    #collection-content {
+    #collection-content,
+    #explore-sidebar,
+    #explore-content-section {
         display: block;
         /* Content is block, Sidebar is grid but we handle it below */
         position: static !important;
@@ -328,7 +331,8 @@ footer a {
         max-width: none !important;
     }
 
-    #collection-sidebar {
+    #collection-sidebar,
+    #explore-sidebar {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: auto;
@@ -2715,6 +2719,27 @@ input[type="search"]::-ms-reveal {
         aspect-ratio: 4 / 3;
         /* Taller on mobile for easier interaction */
     }
+}
+
+
+/*  ------------------------- 
+    EXPLORE PAGE
+    -------------------------   */
+
+/* --- Explore Page Grid --- */
+.explore-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.explore-grid .topic-card {
+    min-width: 0;
+    /* Reset from carousel width */
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    background-color: var(--chocolate-plum);
 }
 
 /* --- SPARQL Endpoint (Yasgui) --- */
