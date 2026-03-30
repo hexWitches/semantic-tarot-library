@@ -94,8 +94,14 @@
     },
     "person": {
         "person_waite": {
-            "bio": "",
-            "keywords": ""
+            "bio": "<p>\n  <strong>Arthur Edward Waite</strong> (1857–1942) was a prolific British-American mystic, scholar, and the primary architect of the 1910 <strong>Rider-Waite-Smith</strong> tarot deck. A leading member of the <strong>Hermetic Order of the Golden Dawn</strong>, Waite sought to \"rectify\" the Tarot, stripping away what he considered the crude errors of earlier fortune-telling models to reveal a cohesive system of <i>Divine Vision</i>.\n</p>\n\n<p>\n  His contribution to the deck was one of <strong>structural and symbolic oversight</strong>. He directed <strong>Pamela Colman Smith</strong> to incorporate specific astrological and Kabalistic markers, most notably transposing the cards of <strong>Strength</strong> and <strong>Justice</strong> to better suit the Golden Dawn's system. Through his companion text, <em>The Pictorial Key to the Tarot</em>, Waite established the modern standard for tarot interpretation, focusing on the <strong>\"Secret Tradition\"</strong> and the soul's progression through various stages of initiation.\n</p>\n\n<p>\n  In the early 20th-century context, Waite represents the <strong>intellectualization of occultism</strong>. He viewed the Tarot as a <i>\"House of Doctrine\"</i> rather than a tool for simple divination. His life’s work was dedicated to the synthesis of alchemy, Freemasonry, and Christian mysticism, treating the cards as <strong>cultural and spiritual objects</strong> that facilitate a deeper understanding of the relationship between the Divine and the Universe.\n</p>",            
+            "keywords": [
+                "Waite",
+                "Arthur Edward",
+                "Rider Waite",
+                "Rider Waite Smith", 
+                "Rider and Company"
+        ]
         },
         "person_smith": {
             "bio": "",
