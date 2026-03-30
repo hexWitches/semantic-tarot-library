@@ -98,7 +98,7 @@
             <ul class="breadcrumb-list">
                 <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
                 <li class="breadcrumb-item active"><a href="explore.html">Explore</a></li>
-                <li class="breadcrumb-item active"><a href="person.html">Person</a></li>
+                <li class="breadcrumb-item active"><a id="breadcrumb-person" href="#">Person</a></li>
             </ul>
         </nav>
     </div>
@@ -114,19 +114,22 @@
         <div class="people-info-card p-4 p-md-5">
             <div class="row align-items-start">
                 <div class="col-md-4 col-lg-3 text-center mb-4 mb-md-0">
-                    <img src="https://via.placeholder.com/300x400.png?text=Person+Image" alt="Person Image" class="img-fluid rounded shadow">
+                    <img id="person-portrait" src="assets/images/explore/people/portrait-placeholder.jpg" alt="Person Image" class="img-fluid rounded shadow">
                 </div>
                 <div class="col-md-8 col-lg-9 d-flex flex-column justify-content-center h-100">
-                    <h2 class="person-name mb-2">Placeholder Name</h2>
-                    <div class="person-metadata mb-4 pb-2 border-bottom">
-                        <span class="fst-italic opacity-75">Profession / Role</span>
-                        <span class="mx-2 opacity-50">|</span>
-                        <span class="opacity-75">Date of Birth - Date of Death</span>
+                    <h2 id="person-name" class="person-name mb-2"></h2>
+                    <div class="person-metadata mb-4 pb-2 border-bottom d-flex flex-wrap align-items-center justify-content-between">
+                        <div>
+                            <span id="person-nationality" class="fst-italic opacity-75"></span>
+                            <span class="mx-2 opacity-50">|</span>
+                            <span id="person-dates" class="opacity-75"></span>
+                        </div>
+                        <div id="person-authorities" class="d-flex gap-2 mt-2 mt-sm-0">
+                            <!-- Authority links injected dynamically -->
+                        </div>
                     </div>
-                    <div class="person-bio">
-                        <p class="bio-excerpt mb-2">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nec magna non lectus convallis sollicitudin a id justo. Ut ac nisl non ipsum vulputate placerat eget ac dolor. Vivamus interdum, odio sit amet feugiat laoreet, purus velit dignissim nisl, nec faucibus tortor nulla eget dui.
-                        </p>
+                    <div id="person-bio-container" class="person-bio d-none">
+                        <div id="bio-excerpt" class="bio-excerpt mb-2"></div>
                         <div class="accordion" id="bioAccordion">
                             <div class="accordion-item border-0 bg-transparent">
                                 <h2 class="accordion-header" id="headingBio">
@@ -135,13 +138,59 @@
                                     </button>
                                 </h2>
                                 <div id="collapseBio" class="accordion-collapse collapse" aria-labelledby="headingBio" data-bs-parent="#bioAccordion">
-                                    <div class="accordion-body px-0 pt-3 pb-0">
-                                        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                        <p>Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.</p>
-                                    </div>
+                                    <div id="bio-full" class="accordion-body px-0 pt-3 pb-0"></div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Topics Section -->
+    <section class="related-topics-section container-fluid px-5 mb-5 content-to-reveal">
+        <h2 class="section-title text-center mb-5">Explore Related Topics</h2>
+
+        <div class="topics-carousel-container position-relative">
+            <button class="nav-arrow prev-arrow-mobile border-0" id="prev_topic"
+                onclick="document.getElementById('topicsCarousel').scrollBy({left: -220, behavior: 'smooth'})"
+                style="left: -10px; z-index: 20;" aria-label="Scroll left">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                    class="bi bi-chevron-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                </svg>
+            </button>
+
+            <button class="nav-arrow next-arrow-mobile border-0" id="next_topic"
+                onclick="document.getElementById('topicsCarousel').scrollBy({left: 220, behavior: 'smooth'})"
+                style="right: -10px; z-index: 20;" aria-label="Scroll right">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                    class="bi bi-chevron-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                </svg>
+            </button>
+
+            <div class="topics-carousel d-flex gap-4 overflow-auto" id="topicsCarousel">
+                <!-- Square Cards Placeholders -->
+                <div class="topic-card">
+                    <div class="topic-card-inner">
+                        <h4>Deck</h4>
+                        <p>Placeholder related deck</p>
+                    </div>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-card-inner">
+                        <h4>Person</h4>
+                        <p>Placeholder related person</p>
+                    </div>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-card-inner">
+                        <h4>Location</h4>
+                        <p>Placeholder related location</p>
                     </div>
                 </div>
             </div>
@@ -214,6 +263,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/search.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/person.js"></script>
 </body>
 
 </html>

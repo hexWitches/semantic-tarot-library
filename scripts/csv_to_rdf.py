@@ -134,10 +134,6 @@ def process_csv(file_path, id_column, default_class):
                     predicate = namespaces["schema"]["birthDate"] if "birth" in header else namespaces["schema"]["deathDate"]
                     g.add((subject_uri, predicate, Literal(val)))
 
-                elif header in ["birth_year_display", "death_year_display"]:
-                        prefix_text = "Born: " if "birth" in header else "Died: "
-                        g.add((subject_uri, RDFS.comment, Literal(f"{prefix_text}{val}", lang="en")))
-
                 # Generic mapping from mapping.csv
                 elif header in predicate_map:
                     predicate = predicate_map[header]

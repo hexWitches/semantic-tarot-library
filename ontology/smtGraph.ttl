@@ -2207,9 +2207,9 @@ smtg:card-pierpont-morgan-20 a odi:DeckCard,
         smtg:person-zavattari ;
     odi:hasCurrentLocation smtg:the-morgan-library-museum ;
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/ViscontiSforzaTarot/m630_20.jpg> ;
-    odi:hasName "King of Coins" ;
+    odi:hasName "King of Pentacles" ;
     odi:isContainedIn smtg:deck-pierpont-morgan ;
-    smt:hasSuit smtg:coins .
+    smt:hasSuit smtg:pentacles .
 
 smtg:card-pierpont-morgan-21 a odi:DeckCard,
         smt:MinorArcana ;
@@ -2217,9 +2217,9 @@ smtg:card-pierpont-morgan-21 a odi:DeckCard,
         smtg:person-zavattari ;
     odi:hasCurrentLocation smtg:the-morgan-library-museum ;
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/ViscontiSforzaTarot/m630_21.jpg> ;
-    odi:hasName "Queen of Coins" ;
+    odi:hasName "Queen of Pentacles" ;
     odi:isContainedIn smtg:deck-pierpont-morgan ;
-    smt:hasSuit smtg:coins .
+    smt:hasSuit smtg:pentacles .
 
 smtg:card-pierpont-morgan-22 a odi:DeckCard,
         smt:MinorArcana ;
@@ -2324,10 +2324,10 @@ smtg:card-pierpont-morgan-31 a odi:DeckCard,
         smtg:person-zavattari ;
     odi:hasCurrentLocation smtg:the-morgan-library-museum ;
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/ViscontiSforzaTarot/m630_31.jpg> ;
-    odi:hasName "Seven of Coins" ;
+    odi:hasName "Seven of Pentacles" ;
     odi:isContainedIn smtg:deck-pierpont-morgan ;
     odi:isNumber "7" ;
-    smt:hasSuit smtg:coins .
+    smt:hasSuit smtg:pentacles .
 
 smtg:card-pierpont-morgan-32 a odi:DeckCard,
         smt:MinorArcana ;
@@ -2335,10 +2335,10 @@ smtg:card-pierpont-morgan-32 a odi:DeckCard,
         smtg:person-zavattari ;
     odi:hasCurrentLocation smtg:the-morgan-library-museum ;
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/ViscontiSforzaTarot/m630_32.jpg> ;
-    odi:hasName "Eight of Coins" ;
+    odi:hasName "Eight of Pentacles" ;
     odi:isContainedIn smtg:deck-pierpont-morgan ;
     odi:isNumber "8" ;
-    smt:hasSuit smtg:coins .
+    smt:hasSuit smtg:pentacles .
 
 smtg:card-pierpont-morgan-33 a odi:DeckCard,
         smt:MinorArcana ;
@@ -2346,10 +2346,10 @@ smtg:card-pierpont-morgan-33 a odi:DeckCard,
         smtg:person-zavattari ;
     odi:hasCurrentLocation smtg:the-morgan-library-museum ;
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/ViscontiSforzaTarot/m630_33.jpg> ;
-    odi:hasName "Ten of Coins" ;
+    odi:hasName "Ten of Pentacles" ;
     odi:isContainedIn smtg:deck-pierpont-morgan ;
     odi:isNumber "10" ;
-    smt:hasSuit smtg:coins .
+    smt:hasSuit smtg:pentacles .
 
 smtg:card-pierpont-morgan-34 a odi:DeckCard,
         smt:MinorArcana ;
@@ -2941,7 +2941,7 @@ smtg:card-sola-busca-37 a odi:DeckCard,
     odi:hasAuthor smtg:person-di-maestro-antonio ;
     odi:hasCurrentLocation smtg:pinacoteca-di-brera ;
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/SolaBuscaTarot/sola_busca37.jpg> ;
-    odi:hasName "Ace of Coins" ;
+    odi:hasName "Ace of Pentacles" ;
     odi:isContainedIn smtg:deck-sola-busca ;
     odi:isNumber "1" ;
     smt:hasSuit smtg:pentacles .
@@ -2952,7 +2952,7 @@ smtg:card-sola-busca-38 a odi:DeckCard,
     odi:hasAuthor smtg:person-di-maestro-antonio ;
     odi:hasCurrentLocation smtg:pinacoteca-di-brera ;
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/SolaBuscaTarot/sola_busca38.jpg> ;
-    odi:hasName "Two of Coins" ;
+    odi:hasName "Two of Pentacles" ;
     odi:isContainedIn smtg:deck-sola-busca ;
     odi:isNumber "2" ;
     smt:hasSuit smtg:pentacles .
@@ -2963,7 +2963,7 @@ smtg:card-sola-busca-39 a odi:DeckCard,
     odi:hasAuthor smtg:person-di-maestro-antonio ;
     odi:hasCurrentLocation smtg:pinacoteca-di-brera ;
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/SolaBuscaTarot/sola_busca39.jpg> ;
-    odi:hasName "Three of Coins" ;
+    odi:hasName "Three of Pentacles" ;
     odi:isContainedIn smtg:deck-sola-busca ;
     odi:isNumber "3" ;
     smt:hasSuit smtg:pentacles .
@@ -2983,7 +2983,7 @@ smtg:card-sola-busca-40 a odi:DeckCard,
     odi:hasAuthor smtg:person-di-maestro-antonio ;
     odi:hasCurrentLocation smtg:pinacoteca-di-brera ;
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/SolaBuscaTarot/sola_busca40.jpg> ;
-    odi:hasName "Four of Coins" ;
+    odi:hasName "Four of Pentacles" ;
     odi:isContainedIn smtg:deck-sola-busca ;
     odi:isNumber "4" ;
     smt:hasSuit smtg:pentacles .
@@ -2994,7 +2994,7 @@ smtg:card-sola-busca-41 a odi:DeckCard,
     odi:hasAuthor smtg:person-di-maestro-antonio ;
     odi:hasCurrentLocation smtg:pinacoteca-di-brera ;
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/SolaBuscaTarot/sola_busca41.jpg> ;
-    odi:hasName "Five of Coins" ;
+    odi:hasName "Five of Pentacles" ;
     odi:isContainedIn smtg:deck-sola-busca ;
     odi:isNumber "5" ;
     smt:hasSuit smtg:pentacles .
@@ -3005,7 +3005,7 @@ smtg:card-sola-busca-42 a odi:DeckCard,
     odi:hasAuthor smtg:person-di-maestro-antonio ;
     odi:hasCurrentLocation smtg:pinacoteca-di-brera ;
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/SolaBuscaTarot/sola_busca42.jpg> ;
-    odi:hasName "Six of Coins" ;
+    odi:hasName "Six of Pentacles" ;
     odi:isContainedIn smtg:deck-sola-busca ;
     odi:isNumber "6" ;
     smt:hasSuit smtg:pentacles .
@@ -3016,7 +3016,7 @@ smtg:card-sola-busca-43 a odi:DeckCard,
     odi:hasAuthor smtg:person-di-maestro-antonio ;
     odi:hasCurrentLocation smtg:pinacoteca-di-brera ;
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/SolaBuscaTarot/sola_busca43.jpg> ;
-    odi:hasName "Seven of Coins" ;
+    odi:hasName "Seven of Pentacles" ;
     odi:isContainedIn smtg:deck-sola-busca ;
     odi:isNumber "7" ;
     smt:hasSuit smtg:pentacles .
@@ -3027,7 +3027,7 @@ smtg:card-sola-busca-44 a odi:DeckCard,
     odi:hasAuthor smtg:person-di-maestro-antonio ;
     odi:hasCurrentLocation smtg:pinacoteca-di-brera ;
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/SolaBuscaTarot/sola_busca44.jpg> ;
-    odi:hasName "Eight of Coins" ;
+    odi:hasName "Eight of Pentacles" ;
     odi:isContainedIn smtg:deck-sola-busca ;
     odi:isNumber "8" ;
     smt:hasSuit smtg:pentacles .
@@ -3038,7 +3038,7 @@ smtg:card-sola-busca-45 a odi:DeckCard,
     odi:hasAuthor smtg:person-di-maestro-antonio ;
     odi:hasCurrentLocation smtg:pinacoteca-di-brera ;
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/SolaBuscaTarot/sola_busca45.jpg> ;
-    odi:hasName "Nine of Coins" ;
+    odi:hasName "Nine of Pentacles" ;
     odi:isContainedIn smtg:deck-sola-busca ;
     odi:isNumber "9" ;
     smt:hasSuit smtg:pentacles .
@@ -3049,7 +3049,7 @@ smtg:card-sola-busca-46 a odi:DeckCard,
     odi:hasAuthor smtg:person-di-maestro-antonio ;
     odi:hasCurrentLocation smtg:pinacoteca-di-brera ;
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/SolaBuscaTarot/sola_busca46.jpg> ;
-    odi:hasName "Ten of Coins" ;
+    odi:hasName "Ten of Pentacles" ;
     odi:isContainedIn smtg:deck-sola-busca ;
     odi:isNumber "10" ;
     smt:hasSuit smtg:pentacles .
@@ -3060,7 +3060,7 @@ smtg:card-sola-busca-47 a odi:DeckCard,
     odi:hasAuthor smtg:person-di-maestro-antonio ;
     odi:hasCurrentLocation smtg:pinacoteca-di-brera ;
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/SolaBuscaTarot/sola_busca47.jpg> ;
-    odi:hasName "Knave of Coins" ;
+    odi:hasName "Knave of Pentacles" ;
     odi:isContainedIn smtg:deck-sola-busca ;
     odi:isNumber "11" ;
     smt:hasSuit smtg:pentacles .
@@ -3071,7 +3071,7 @@ smtg:card-sola-busca-48 a odi:DeckCard,
     odi:hasAuthor smtg:person-di-maestro-antonio ;
     odi:hasCurrentLocation smtg:pinacoteca-di-brera ;
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/SolaBuscaTarot/sola_busca48.jpg> ;
-    odi:hasName "Knight of Coins - Sarafino" ;
+    odi:hasName "Knight of Pentacles - Sarafino" ;
     odi:isContainedIn smtg:deck-sola-busca ;
     odi:isNumber "12" ;
     smt:hasSuit smtg:pentacles .
@@ -3082,7 +3082,7 @@ smtg:card-sola-busca-49 a odi:DeckCard,
     odi:hasAuthor smtg:person-di-maestro-antonio ;
     odi:hasCurrentLocation smtg:pinacoteca-di-brera ;
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/SolaBuscaTarot/sola_busca49.jpg> ;
-    odi:hasName "Queen of Coins - Elena" ;
+    odi:hasName "Queen of Pentacles - Elena" ;
     odi:isContainedIn smtg:deck-sola-busca ;
     odi:isNumber "13" ;
     smt:hasSuit smtg:pentacles .
@@ -3102,7 +3102,7 @@ smtg:card-sola-busca-50 a odi:DeckCard,
     odi:hasAuthor smtg:person-di-maestro-antonio ;
     odi:hasCurrentLocation smtg:pinacoteca-di-brera ;
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/SolaBuscaTarot/sola_busca50.jpg> ;
-    odi:hasName "King of Coins - R. Filippo" ;
+    odi:hasName "King of Pentacles - R. Filippo" ;
     odi:isContainedIn smtg:deck-sola-busca ;
     odi:isNumber "14" ;
     smt:hasSuit smtg:pentacles .
@@ -3698,7 +3698,8 @@ smtg:person-bianca-visconti a odi:Person ;
     foaf:givenName "Bianca Maria" ;
     schema:Nationality "Italian" ;
     schema:birthDate "1425" ;
-    schema:deathDate "1468" .
+    schema:deathDate "1468" ;
+    schema:image <https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/bianca-maria-visconti.jpg> .
 
 smtg:person-filippo-visconti a odi:Person ;
     owl:sameAs viaf:89524548,
@@ -3707,7 +3708,8 @@ smtg:person-filippo-visconti a odi:Person ;
     foaf:givenName "Filippo Maria" ;
     schema:Nationality "Italian" ;
     schema:birthDate "1392" ;
-    schema:deathDate "1447" .
+    schema:deathDate "1447" ;
+    schema:image <https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/filippo-maria-visconti.jpg> .
 
 smtg:person-francesco-sforza a odi:Person ;
     owl:sameAs viaf:89211304,
@@ -3716,7 +3718,8 @@ smtg:person-francesco-sforza a odi:Person ;
     foaf:givenName "Francesco" ;
     schema:Nationality "Italian" ;
     schema:birthDate "1401" ;
-    schema:deathDate "1466" .
+    schema:deathDate "1466" ;
+    schema:image <https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/francesco-sforza.jpg> .
 
 smtg:lineage-marseille a smt:DeckLineage ;
     rdfs:label "Tarot de Marseille" .
@@ -3941,7 +3944,8 @@ smtg:person-waite a odi:Person ;
     foaf:givenName "Arthur Edward" ;
     schema:Nationality "American" ;
     schema:birthDate "1857" ;
-    schema:deathDate "1942" .
+    schema:deathDate "1942" ;
+    schema:image <https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/arthur-waite.jpeg> .
 
 smtg:victoria-and-albert-museum a odi:Place ;
     rdfs:label "Victoria and Albert Museum" ;
@@ -3955,11 +3959,11 @@ smtg:person-smith a odi:Person ;
     foaf:givenName "Pamela" ;
     schema:Nationality "British" ;
     schema:birthDate "1878" ;
-    schema:deathDate "1951" .
+    schema:deathDate "1951" ;
+    schema:image <https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/pamela-smith.jpg> .
 
 smtg:person-zavattari a odi:Person ;
-    rdfs:comment "Born: 15th Century (Active 1414-1453)"@en,
-        "Died: 15th Century (Active 1414-1453)"@en ;
+    rdfs:comment "15th Century (Active 1414-1453)" ;
     owl:sameAs viaf:95694984,
         wd:Q3080890 ;
     foaf:familyName "Zavattari" ;
@@ -4043,8 +4047,7 @@ smtg:deck-noblet a odi:TarotDeck ;
     smt:hasIllustrator smtg:person-noblet .
 
 smtg:person-noblet a odi:Person ;
-    rdfs:comment "Born: 17th century"@en,
-        "Died: 17th century"@en ;
+    rdfs:comment "17th century" ;
     owl:sameAs viaf:304926488,
         wd:Q3173729 ;
     foaf:familyName "Noblet" ;
@@ -4066,8 +4069,7 @@ smtg:deck-sola-busca a odi:TarotDeck ;
     smt:hasIllustrator smtg:person-di-maestro-antonio .
 
 smtg:person-di-maestro-antonio a odi:Person ;
-    rdfs:comment "Born: Mid-15th Century"@en,
-        "Died: after 1511"@en ;
+    rdfs:comment "Mid-15th Century" ;
     owl:sameAs viaf:95725158,
         wd:Q3339920 ;
     foaf:familyName "di maestro Antonio" ;

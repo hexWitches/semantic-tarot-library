@@ -10,6 +10,7 @@ publisher,dcterms,publisher
 source_url,dcterms,source
 card_number,odi,isNumber
 image_url,odi,hasImage
+person_portrait_url,schema,image
 current_location,odi,hasCurrentLocation
 author_id,odi,hasAuthor
 illustrator_id,smt,hasIllustrator
@@ -21,8 +22,7 @@ family_name,foaf,familyName
 nationality,schema,Nationality
 birth_year,schema,birthDate
 death_year,schema,deathDate
-birth_year_display,rdfs,comment
-death_year_display,rdfs,comment
+dates_display,rdfs,comment
 minor_arcana_type,"rdf ",type
 archetype_id,smt,represents
 symbolic_figure_id,smt,containsSymbol
