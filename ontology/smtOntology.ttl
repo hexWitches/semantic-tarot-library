@@ -9,6 +9,7 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 <https://w3id.org/smt-library/ontology> rdf:type owl:Ontology ;
     dcterms:title "SMT Ontology"@en ;
@@ -63,13 +64,13 @@
 
 :SymbolicFigure rdf:type owl:Class ;
     rdfs:subClassOf skos:Concept ;
-    rdfs:label "Symbolic Figure"@en :
+    rdfs:label "Symbolic Figure"@en ;
     skos:broader :Archetype ;
     rdfs:comment "A symbolic element depicted in the Major Arcana card (animal, object, etc.)."@en ;
     rdfs:isDefinedBy <https://github.com/hexWitches/semantic-tarot-library> .
 
 :DeckLineage rdf:type owl:Class ;
-    rdfs:label "Deck Family"@en :
+    rdfs:label "Deck Family"@en ;
     rdfs:comment "A conceptual category representing a specific historical tradition from which individual tarot deck editions or versions derive their structure and imagery."@en ;
     rdfs:isDefinedBy <https://github.com/hexWitches/semantic-tarot-library> .
 
@@ -112,7 +113,3 @@
     rdfs:comment "This property indicates the number representing each Major Arcana"@en ;
     rdfs:label "Has Number"@en ;
     rdfs:isDefinedBy <https://github.com/hexWitches/semantic-tarot-library> .
-
-
-
-    
