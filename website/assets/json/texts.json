@@ -115,16 +115,21 @@
             ]
         },
         "person_noblet": {
-            "bio": "",
-            "keywords": ""
-        },
-        "person_bembo": {
             "bio": "<p>\n  <strong>Jean Noblet</strong> (active c. 1650) was a master card-maker (<i>maître cartier</i>) in 17th-century Paris, operating a workshop on the Rue des Boucheries. He is historically significant as the creator of the earliest known <strong>Tarot de Marseille (Type I)</strong>, a deck that serves as a foundational cultural object in the history of Western cartomancy.\n</p>\n\n<p>\n  Noblet’s contribution to the Tarot was one of <strong>preservation and artisan excellence</strong>. His deck is characterized by its small, portable size and <strong>bold woodblock engravings</strong>, which captured the transition of Renaissance iconography into a standardized playing card format. Distinctive features of his work include the naming of Arcanum XIII (<i>La Mort</i>) and the raw, unrefined depictions of the <strong>Fool</strong> and the <strong>Devil</strong>, which reflect the visceral social and religious anxieties of mid-17th-century France.\n</p>\n\n<p>\n  In the context of the history of the Tarot, Noblet represents the <strong>guild-based craftsmanship</strong> of the French <i>Ancien Régime</i>. Unlike later occultists, he viewed the cards primarily as tools for the game of <i>Tarocchini</i>, yet his meticulous adherence to traditional motifs ensured the survival of a <strong>symbolic language</strong> that would later be \"discovered\" and interpreted by 18th and 19th-century mystics. His work remains the primary reference for the <strong>archaic Parisian style</strong> of the Tarot.\n</p>",
             "keywords": [
                 "Jean Noblet",
                 "Tarot de Marseille",
                 "Maître Cartier",
                 "Parisian Tarot"
+            ]
+        },
+        "person_bembo": {
+            "bio": "<p>\n  <strong>Bonifacio Bembo</strong> (active c. 1447–1477) was an Italian painter of the <strong>Early Renaissance</strong>, active primarily in Cremona and associated with the aristocratic courts of northern Italy. Although documentary evidence about his life remains limited, he is generally regarded as a member of a prominent family of artists working in <strong>Lombardy</strong> during the fifteenth century. His work is a vital contribution to the visual culture of <strong>aristocratic patronage</strong>, bridging the late Gothic tradition and emerging Renaissance aesthetics.\n</p>\n\n<p>\n  Bembo is most closely associated with the production of the <strong>Visconti–Sforza Tarot</strong>, a group of richly decorated playing cards commissioned by the ducal families of Milan. Created in the mid-fifteenth century, these cards are among the <strong>earliest surviving examples of tarot</strong>. It is essential to note that they were conceived not for divinatory purposes but as <strong>luxury objects</strong> intended for courtly entertainment. The attribution to Bembo is based on <strong>stylistic analysis</strong>, connecting the cards to his documented paintings and the broader artistic context of the Milanese court.\n</p>\n\n<p>\n  His artistic style is characterized by <strong>refined figures</strong>, opulent decorative elements, and the extensive use of <strong>gold backgrounds</strong>. This visual language, particularly evident in the tarot cards, contributes to the <strong>symbolic richness</strong> that would later become central to tarot iconography. Through these works, Bembo occupies a significant position in the history of both early Renaissance art and the development of the <strong>Tarot as a cultural artifact</strong>, preserving a sophisticated world of allegory and elite social play.\n</p>",
+            "keywords": [
+                "Bonifacio Bembo",
+                "Pierpont-Morgan-Bergamo Tarot", 
+                "Visconti Sforza",
+                "Visconti-Sforza Tarot"
             ]
         },
         "person_filippo_visconti": {
