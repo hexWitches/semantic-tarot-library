@@ -2806,3 +2806,29 @@ ITEM PAGE: deck
 .copyright-text {
     background-color: rgba(0, 0, 0, 0.2);
 }
+
+/* PERSON PAGE */
+.people-info-card {
+    background-color: rgba(123, 109, 141, 0.35); /* Dusty lavender with opacity */
+    border-radius: 1.5rem;
+    color: var(--dark-amethyst);
+}
+
+.people-info-card .person-name {
+    font-family: var(--header-font);
+    color: var(--dark-amethyst);
+}
+
+.people-info-card .read-more-btn {
+    color: var(--brick-red) !important;
+    font-family: var(--header-font);
+    font-size: 1.1rem;
+}
+
+.people-info-card .read-more-btn:focus {
+    box-shadow: none;
+}
+
+.people-info-card .accordion-body {
+    color: var(--dark-amethyst);
+}
