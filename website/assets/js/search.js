@@ -215,11 +215,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (results.persons.length > 0) {
             html += `<div class="search-section"><h4>Persons</h4><div class="search-scroller">`;
             results.persons.forEach(person => {
-                // Placeholder image for persons for now
+                const imgUrl = getImageUrl(person.image, 'person');
+                const placeholder = `${basePath}assets/images/explore/people/portrait-placeholder.jpg`;
                 html += `
                     <a href="${basePath}person.html?id=${person.id}" class="search-result-item person-result">
                         <div class="person-img-wrapper">
-                            <img src="${basePath}assets/images/logo/purple.png" alt="${person.title}">
+                            <img src="${imgUrl}" alt="${person.title}" onerror="this.src='${placeholder}';">
                         </div>
                         <div class="search-item-info">${person.title}</div>
                     </a>`;
@@ -251,6 +252,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function getCoverImageForNode(node, graph) {
         if (!node) return null;
         if (node.image_url?.['@id']) return node.image_url['@id'];
+        if (node.person_portrait_url?.['@id']) return node.person_portrait_url['@id'];
+        if (node.person_portrait_url) return node.person_portrait_url;
 
         if (graph) {
             const nodeId = node['@id'];
@@ -302,8 +305,13 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * Convert GitHub URLs
      */
-    function getImageUrl(imgId) {
-        if (!imgId || typeof imgId !== 'string') return `${basePath}assets/images/placeholder_card.jpg`;
+    function getImageUrl(imgId, type = 'card') {
+        if (!imgId || typeof imgId !== 'string') {
+            if (type === 'person') {
+                return `${basePath}assets/images/explore/people/portrait-placeholder.jpg`;
+            }
+            return `${basePath}assets/images/placeholder_card.jpg`;
+        }
         if (imgId.includes('github.com') && imgId.includes('/blob/')) {
             return imgId
                 .replace('github.com', 'raw.githubusercontent.com')

@@ -269,10 +269,14 @@ function renderSearchView() {
         pagePersons.forEach(person => {
             const cleanId = person['@id'].replace('smtg:', '');
             const name = person.title || (person.given_name + " " + person.family_name);
+            const portraitUrl = person.person_portrait_url?.['@id'] || person.person_portrait_url || null;
+            const imgUrl = getLocalImagePath(portraitUrl, 'person');
+            const placeholder = 'assets/images/explore/people/portrait-placeholder.jpg';
+            
             personsHTML += `
                 <a href="person.html?id=${cleanId}" class="person-circle-item text-center text-decoration-none" style="width: 120px;">
                     <div class="person-img-circle mx-auto mb-2">
-                         <img src="assets/images/logo/purple.png" alt="${name}" style="width: 100%; height: 100%; object-fit: cover;">
+                         <img src="${imgUrl}" alt="${name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='${placeholder}';">
                     </div>
                     <span class="person-name text-white small d-block">${name}</span>
                 </a>
@@ -543,8 +547,13 @@ function renderGridView() {
 }
 
 // convert GitHub blob URLs to raw image URLs (same as deck.js)
-function getLocalImagePath(imgId) {
-    if (!imgId || typeof imgId !== 'string') return 'assets/images/placeholder_card.jpg';
+function getLocalImagePath(imgId, type = 'card') {
+    if (!imgId || typeof imgId !== 'string') {
+        if (type === 'person') {
+            return 'assets/images/explore/people/portrait-placeholder.jpg';
+        }
+        return 'assets/images/placeholder_card.jpg';
+    }
     if (imgId.includes('github.com') && imgId.includes('/blob/')) {
         return imgId
             .replace('github.com', 'raw.githubusercontent.com')
