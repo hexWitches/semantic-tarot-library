@@ -5,10 +5,10 @@ from rdflib import Graph, URIRef, Literal, Namespace
 from rdflib.namespace import RDF, RDFS, OWL, XSD
 
 # Namespace configuration
-GRAPH_URI = Namespace("https://w3id.org/smt-library/graph")
+GRAPH_URI = Namespace("https://w3id.org/smt-library/graph/")
 
 namespaces = {
-    "smtg" : Namespace("https://w3id.org/smt-library/graph/"),
+    "smtg" : Namespace(GRAPH_URI),
     "smt": Namespace("https://w3id.org/smt-library/ontology#"),
     "dcterms": Namespace("http://purl.org/dc/terms/"),
     "owl": Namespace("http://www.w3.org/2002/07/owl#"),
@@ -47,7 +47,7 @@ with open("mapping-files/mapping_authority_entities.csv", encoding="utf-8") as f
             "geonames": URIRef(row["geonames_id"].strip()) if row["geonames_id"] else None
         }
 
-# Identifier clenaing function (slugify): removve accents, special charatcers, replace space with dashes to create valid URIs
+# Identifier cleaning function: remove accents, special chracters, replace space with dashes to create valid URIs
 def clean_id(text): 
     if not text:
         return ""

@@ -1,6 +1,6 @@
 # Scripts Directory
 
-This directory contains the Python-based automation and data processing pipeline for the Semantic Tarot Library. These tools handle everything from converting raw data into Linked Data to dynamically updating the website's daily content.
+This directory contains the Python-based automation and data processing pipeline for the Semantic Tarot Library.
 
 ## Setup
 
@@ -34,13 +34,4 @@ python scripts/iiif_gallica.py "MANIFEST_URL" -o "MyOutputFolder"
 
 # Standard Library Downloader (Yale, Harvard)
 python scripts/iiif_yale.py "MANIFEST_URL" -o "MyOutputFolder" -s 2500
-```
-
-### Website Automation
-* **`card_of_the_day.py`**: Automates the "Card of the Day" feature on the homepage. It selects a card based on the current date, retrieves its generic description and archetype evolution, and performs a regex-based injection of the new HTML content directly into `index.html`.
-
-**Usage:**
-```bash
-# Safely resolves paths relative to its location, allowing execution from anywhere!
-python scripts/card_of_the_day.py
 ```

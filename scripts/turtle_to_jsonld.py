@@ -2,13 +2,11 @@ import csv
 from rdflib import Graph 
 import json 
 
-# 1. Load the graph you created from CSVs
+# Load the graph
 g = Graph()
 g.parse("ontology/smtGraph.ttl", format="turtle")
 
-# 2. Define the "Context"
-# This is the most important part of JSON-LD. 
-# It tells the computer: "When I say 'label', I actually mean 'rdfs:label'".
+# Define the "Context"
 context = {
         "smtg": "https://w3id.org/smt-library/graph/",
         "dcterms" : "http://purl.org/dc/terms/",
@@ -27,27 +25,29 @@ context = {
         "vann": "http://purl.org/vocab/vann/"
 }
 
-## 3. Read mapping.csv to add property aliases
-# Expected columns: predicate (CSV header), ontology_prefix, ontology_predicate
+## Read mapping.csv to add property aliases
 try:
     with open("mapping-files/mapping.csv", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
-            alias = row["predicate"].strip() # e.g., "birth_year"
-            prefix = row["ontology_prefix"].strip() # e.g., "schema"
-            prop = row["ontology_predicate"].strip() # e.g., "birthDate"
+            alias = row["predicate"].strip()
+            prefix = row["ontology_prefix"].strip()
+            prop = row["ontology_predicate"].strip()
             
-            # Create the JSON-LD mapping: "birth_year": "schema:birthDate"
+            # Skip aliasing rdf:type to prevent hiding @type
+            if prefix == "rdf" and prop == "type":
+                continue
+            
+            # Create the JSON-LD mapping
             context[alias] = f"{prefix}:{prop}"
 except FileNotFoundError:
     print("Warning: mapping.csv not found, using base prefixes only.")
 
 
-# 5. Serialize to JSON-LD
-# We pass the dynamically built context here
+# Serialize to JSON-LD
 jsonld_output = g.serialize(format='json-ld', context=context, indent=4)
 
-# 6. Save the result
+# Save the result
 with open("website/assets/json/smtGraph.jsonld", "w", encoding="utf-8") as f:
     f.write(jsonld_output)
 

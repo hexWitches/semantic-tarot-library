@@ -307,3 +307,18 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+// SPARQL ENDPOINT //
+document.addEventListener('DOMContentLoaded', () => {
+    const yasguiElement = document.getElementById("yasgui");
+    if (yasguiElement) {
+        const yasgui = new Yasgui(yasguiElement, {
+            requestConfig: {
+                endpoint: "https://api.triplydb.com/datasets/sararoggi/smt-dataset/sparql",
+            },
+            copyEndpointGui: true,
+            persistenceId: "smt-library-yasgui"
+        });
+        yasgui.getTab().setQuery("SELECT * WHERE {\n  ?sub ?pred ?obj .\n} LIMIT 10");
+    }
+});
