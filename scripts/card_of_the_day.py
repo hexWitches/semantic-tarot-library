@@ -201,7 +201,7 @@ def update_homepage():
                                 <div class="evolution-frame compact-evolution mt-0 mx-0">
                                     <div class="evolution-content">
                                         <h3 class="evolution-heading">
-                                            Minor Arcana: The mundane mirrored. <br>Explore the <span class="highlight">four suits</span> and their meanings.
+                                            The mundane mirrored. <br>Explore the <span class="highlight">four suits</span> and their meanings.
                                         </h3>
                                     </div>
             
@@ -261,13 +261,13 @@ def update_homepage():
                             <div class="row align-items-center gy-4">
                                 <div class="col-md-3 text-center">
                                     <a href="{detail_url}" id="dailyCardLink">
-                                        <img src="{main_image}" id="dailyCardImage" class="img-fluid rounded-3" alt="Card of the Day" style="max-height: 320px; width: auto; display: block; margin: 0 auto;">
+                                        <img src="{main_image}" id="dailyCardImage" class="img-fluid rounded-3" alt="Card of the Day" style="max-height: 320px; width: auto; display: block; margin: 0 auto; color: var(--deep-plum);">
                                     </a>
                                 </div>
                                 
                                 <div class="col-md-5 px-md-4 text-md-start">
                                     <h3 id="dailyCardTitle" style="font-family: 'Cinzel', serif; font-size: 1.6rem; margin-bottom: 0.5rem; color: var(--deep-plum);">{title}</h3>
-                                    <p id="dailyCardDesc" class="mb-0" style="font-size: 1.15rem; line-height: 1.5;">{desc}</p>
+                                    <p id="dailyCardDesc" class="mb-0" style="font-size: 1.15rem; line-height: 1.5; color: var(--deep-plum);">{desc}</p>
                                 </div>
                                 
                                 <div class="col-md-4" id="dailyCardRightCol">

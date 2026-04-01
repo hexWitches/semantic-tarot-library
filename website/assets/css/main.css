@@ -132,6 +132,39 @@ h3 {
         padding-top: 1rem;
         padding-bottom: 1rem;
     }
+
+    /* Reduce navbar padding on all mobile/tablet to give more room */
+    .custom-navbar {
+        padding: 10px 25px !important;
+    }
+}
+
+/* Specific adjustments for smaller mobile screens */
+@media (max-width: 576px) {
+    .custom-navbar {
+        padding: 8px 12px !important;
+    }
+
+    .navbar-brand {
+        font-size: 1.25rem !important;
+        margin: 0 !important;
+        /* Center it with internal flex logic since mx-auto might wrap on tiny screens */
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    /* Force the container to stay on one row */
+    .custom-navbar > .container-fluid {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* Ensure icons don't wrap */
+    .navbar-toggler, .dropdown {
+        flex-shrink: 0;
+    }
 }
 
 .navbar-nav .nav-link {
@@ -472,7 +505,7 @@ footer a {
 }
 
 .filter-suboption-btn.active {
-    background-color: #BC5B50;
+    background-color: var(--brick-red);
 }
 
 
@@ -2284,31 +2317,52 @@ ITEM PAGE: deck
     color: var(--floral-white);
 }
 
-/* --- Custom Search Clear Button (Reverted) --- */
+/* --- Custom Search Clear Button (Fixed) --- */
 .search-clear-btn {
-    display: none !important;
+    position: absolute;
+    right: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 10;
+    display: none;
+    align-items: center;
+    justify-content: center;
 }
 
-#navbarSearch input {
-    padding-right: 75px !important;
+/* Hide browse native search cancel buttons */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+    display: none;
+}
+
+#navbarSearch .search-clear-btn {
+    right: 45px;
 }
 
 .search-bar-hero .search-clear-btn {
-    right: 60px;
+    right: 52px;
 }
 
 .mobile-search-dropdown .search-clear-btn {
     right: 42px;
 }
 
-.mobile-search-dropdown input {
-    padding-right: 75px !important;
+.search-input-group input:not(:placeholder-shown) ~ .search-clear-btn {
+    display: flex;
 }
 
-.search-input-group input:not(:placeholder-shown)~.search-clear-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.search-clear-btn svg {
+    stroke: black;
+    stroke-width: 1.2px;
+    transition: opacity 0.2s;
+}
+
+.search-clear-btn:hover svg {
+    opacity: 0.7;
 }
 
 .search-suggestion-ghost {
@@ -2367,14 +2421,15 @@ ITEM PAGE: deck
 /* Custom Buttons */
 .btn-brick-red {
     background-color: transparent;
-    color: #BC5B50;
-    border: 2px solid #BC5B50 !important;
+    color: var(--brick-red);
+    border: 2px solid var(--brick-red) !important;
     transition: all 0.3s ease;
     font-weight: 600;
 }
 
 .btn-brick-red:hover {
-    background-color: #BC5B50;
+    background-color: var(--brick-red);
+    border-color: var(--brick-red) !important;
     color: white !important;
 }
 
