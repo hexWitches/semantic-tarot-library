@@ -75,7 +75,10 @@ let matchingPersons = [];
 
 function nodeToName(id) {
     if (!id) return "";
-    return id.split(':').pop().split('_').pop().replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    const parts = id.split(/[:\/]/);
+    const lastPart = parts.pop();
+    const cleanName = lastPart.replace(/^(person|deck|card)-/, '').replace(/-/g, ' ');
+    return cleanName.replace(/\b\w/g, c => c.toUpperCase());
 }
 
 async function loadCollection() {
@@ -270,13 +273,20 @@ function renderSearchView() {
             const cleanId = person['@id'].replace('smtg:', '');
             const name = person.title || (person.given_name + " " + person.family_name);
             const portraitUrl = person.person_portrait_url?.['@id'] || person.person_portrait_url || null;
-            const imgUrl = getLocalImagePath(portraitUrl, 'person');
-            const placeholder = 'assets/images/explore/people/portrait-placeholder.jpg';
+            let imgUrl = getLocalImagePath(typeof portraitUrl === 'string' ? portraitUrl : null, 'person');
+            
+            const nameId = cleanId.split(/[:\/]/).pop().replace('person-', '');
+            const specificPlaceholder = `assets/images/explore/people/${nameId}-placeholder.jpg`;
+            const generalPlaceholder = 'assets/images/explore/people/portrait-placeholder.jpg';
+            
+            if (imgUrl.endsWith('portrait-placeholder.jpg')) {
+                imgUrl = specificPlaceholder;
+            }
             
             personsHTML += `
                 <a href="person.html?id=${cleanId}" class="person-circle-item text-center text-decoration-none" style="width: 120px;">
                     <div class="person-img-circle mx-auto mb-2">
-                         <img src="${imgUrl}" alt="${name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='${placeholder}';">
+                         <img src="${imgUrl}" alt="${name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='${generalPlaceholder}';">
                     </div>
                     <span class="person-name text-white small d-block">${name}</span>
                 </a>
@@ -377,10 +387,13 @@ function applyFiltering() {
         // match persons
         matchingPersons = allPersons.filter(person => {
             const id = person['@id']?.replace('smtg:', '');
-            const name = (nodeToName(id) || "").toLowerCase();
-            const personId = id.replace(/-/g, '_');
-            const keywords = (textsData.person?.[personId]?.keywords || []).map(k => k.toLowerCase());
-            return name.includes(query) || keywords.some(k => k.includes(query));
+            const givenName = person.given_name || "";
+            const familyName = person.family_name || "";
+            const fullName = `${givenName} ${familyName}`.trim();
+            const fullNameLower = fullName.toLowerCase();
+            const idName = (nodeToName(id) || "").toLowerCase();
+            
+            return fullNameLower.includes(query) || idName.includes(query);
         });
 
         // filter cards based on search

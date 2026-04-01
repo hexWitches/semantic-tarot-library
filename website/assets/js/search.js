@@ -115,14 +115,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const graph = smtData['@graph'] || [];
         graph.forEach(node => {
             const title = (node.title || "").toLowerCase();
+            const givenName = node.given_name || "";
+            const familyName = node.family_name || "";
+            const fullName = `${givenName} ${familyName}`.trim();
+            const fullNameLower = fullName.toLowerCase();
+            
             const type = node['@type'] || "";
             const isCard = Array.isArray(type) ? type.includes('odi:DeckCard') : type === 'odi:DeckCard';
-            const isDeck = type === 'odi:TarotDeck';
-            const isPerson = type === 'odi:Person';
+            const isDeck = Array.isArray(type) ? type.includes('odi:TarotDeck') : type === 'odi:TarotDeck';
+            const isPerson = Array.isArray(type) ? type.includes('odi:Person') : type === 'odi:Person';
 
-            if (title.includes(q)) {
-                const id = node['@id'].replace('smtg:', '');
-                const resultObj = { id, title: node.title, image: getCoverImageForNode(node, graph) };
+            if (title.includes(q) || (isPerson && fullNameLower.includes(q))) {
+                const id = node['@id'].split(/[:\/]/).pop();
+                const resultObj = { 
+                    id, 
+                    title: node.title || fullName || formatName(id), 
+                    image: getCoverImageForNode(node, graph) 
+                };
 
                 if (isCard) results.cards.push(resultObj);
                 else if (isDeck) results.decks.push(resultObj);
@@ -137,8 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (keywords.some(k => k.includes(q))) {
                 const cleanId = deckId.replace('deck_', 'deck-').replace(/_/g, '-');
                 if (!results.decks.find(d => d.id === cleanId)) {
-                    const graphNode = graph.find(n => n['@id'].replace('smtg:', '') === cleanId);
-                    results.decks.push({ id: cleanId, title: formatName(deckId), image: getCoverImageForNode(graphNode, graph) });
+                    const graphNode = graph.find(n => n['@id'].split(/[:\/]/).pop() === cleanId);
+                    results.decks.push({ id: cleanId, title: graphNode?.title || formatName(deckId), image: getCoverImageForNode(graphNode, graph) });
                 }
             }
         });
@@ -149,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (keywords.some(k => k.includes(q))) {
                 const cleanId = cardId.replace('card_', 'card-').replace(/_/g, '-');
                 if (!results.cards.find(c => c.id === cleanId)) {
-                    let graphNode = graph.find(n => n['@id'].replace('smtg:', '') === cleanId);
+                    let graphNode = graph.find(n => n['@id'].split(/[:\/]/).pop() === cleanId);
                     if (!graphNode && data.card_name) {
                         // Fallback: Mismatched ID, match by exact title instead
                         graphNode = graph.find(n => n.title === data.card_name && (n['@type'] === 'odi:DeckCard' || (Array.isArray(n['@type']) && n['@type'].includes('odi:DeckCard'))));
@@ -159,17 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Search Persons keywords
-        Object.entries(textsData.person || {}).forEach(([personId, data]) => {
-            const keywords = (data.keywords || []).map(k => k.toLowerCase());
-            if (keywords.some(k => k.includes(q))) {
-                const cleanId = personId.replace('person_', 'person-');
-                if (!results.persons.find(p => p.id === cleanId)) {
-                    const graphNode = graph.find(n => n['@id'].replace('smtg:', '') === cleanId);
-                    results.persons.push({ id: cleanId, title: formatName(personId), image: getCoverImageForNode(graphNode, graph) });
-                }
-            }
-        });
+        // Skip textsData.person search to avoid cross-polluting person results (e.g. Sforza showing up when searching Bembo)
 
         renderResults(results);
     }
@@ -178,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * Helper to format generic names from IDs
      */
     function formatName(id) {
-        return id.split('_').pop().replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        return id.replace(/^(person|deck|card)_/, '').replace(/[_-]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
     }
 
     /**
@@ -215,12 +214,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (results.persons.length > 0) {
             html += `<div class="search-section"><h4>Persons</h4><div class="search-scroller">`;
             results.persons.forEach(person => {
-                const imgUrl = getImageUrl(person.image, 'person');
-                const placeholder = `${basePath}assets/images/explore/people/portrait-placeholder.jpg`;
+                const nameId = person.id.replace('person-', '');
+                const specificPlaceholder = `${basePath}assets/images/explore/people/${nameId}-placeholder.jpg`;
+                const generalPlaceholder = `${basePath}assets/images/explore/people/portrait-placeholder.jpg`;
+                
+                let imgUrl = getImageUrl(person.image, 'person');
+                if (imgUrl.endsWith('portrait-placeholder.jpg')) {
+                    imgUrl = specificPlaceholder;
+                }
+                
                 html += `
                     <a href="${basePath}person.html?id=${person.id}" class="search-result-item person-result">
                         <div class="person-img-wrapper">
-                            <img src="${imgUrl}" alt="${person.title}" onerror="this.src='${placeholder}';">
+                            <img src="${imgUrl}" alt="${person.title}" onerror="this.src='${generalPlaceholder}';">
                         </div>
                         <div class="search-item-info">${person.title}</div>
                     </a>`;
@@ -251,9 +257,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function getCoverImageForNode(node, graph) {
         if (!node) return null;
-        if (node.image_url?.['@id']) return node.image_url['@id'];
-        if (node.person_portrait_url?.['@id']) return node.person_portrait_url['@id'];
-        if (node.person_portrait_url) return node.person_portrait_url;
+        
+        // 1. Check for specific portrait or image URL
+        const portraitUrl = node.person_portrait_url?.['@id'] || node.person_portrait_url;
+        if (portraitUrl && typeof portraitUrl === 'string') return portraitUrl;
+
+        const imageUrl = node.image_url?.['@id'] || node.image_url;
+        if (imageUrl && typeof imageUrl === 'string') return imageUrl;
+
+        const isPerson = node['@type'] === 'odi:Person' || (Array.isArray(node['@type']) && node['@type'].includes('odi:Person'));
+        if (isPerson) return null;
+        
+        // 2. For cards and decks (or as fallback for persons), look through the graph
 
         if (graph) {
             const nodeId = node['@id'];

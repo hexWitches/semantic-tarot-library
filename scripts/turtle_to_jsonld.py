@@ -20,7 +20,11 @@ context = {
         "schema" : "https://schema.org/",
         "smt" : "https://w3id.org/smt-library/ontology#",
         "viaf" : "http://viaf.org/viaf/",
-        "wd" : "https://www.wikidata.org/entity/"
+        "wd" : "https://www.wikidata.org/entity/",
+        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "vann": "http://purl.org/vocab/vann/"
 }
 
 ## 3. Read mapping.csv to add property aliases

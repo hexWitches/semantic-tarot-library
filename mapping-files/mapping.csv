@@ -31,3 +31,4 @@ alt_title,skos,altLabel
 broader_archetype_id,skos,broader
 archetype_number,smt,hasNumber
 lineage_label,rdfs,label
+person_portrait_url,schema,image
