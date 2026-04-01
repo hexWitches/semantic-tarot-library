@@ -184,7 +184,7 @@
                         <div class="evolution-frame compact-evolution mt-0 mx-0">
                             <div class="evolution-content">
                                 <h3 class="evolution-heading">
-                                    Minor Arcana: The mundane mirrored. <br>Explore the <span class="highlight">four suits</span> and their meanings.
+                                    The mundane mirrored. <br>Explore the <span class="highlight">four suits</span> and their meanings.
                                 </h3>
                             </div>
                             <a href="suits.html" id="dailyCardDiscoverMore" class="discover-more">

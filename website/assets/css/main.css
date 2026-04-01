@@ -153,10 +153,10 @@ h3 {
         text-align: center;
     }
 
-    /* Force the container to stay on one row */
+    /* Ensure the container can wrap so the mobile menu opens on a new row */
     .custom-navbar > .container-fluid {
         display: flex !important;
-        flex-wrap: nowrap !important;
+        flex-wrap: wrap !important;
         align-items: center;
         justify-content: space-between;
     }
@@ -326,7 +326,14 @@ footer a {
 }
 
 .collection-desc {
-    text-align: justify;
+    text-align: left;
+    margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .collection-desc {
+        text-align: justify;
+    }
 }
 
 /* Filters for collection and explore page */
@@ -2876,7 +2883,13 @@ input[type="search"]::-webkit-search-results-decoration {
     color: var(--dark-amethyst);
     font-size: 1.15rem;
     line-height: 1.7;
-    text-align: justify;
+    text-align: left;
+}
+
+@media (min-width: 768px) {
+    .history-text-container {
+        text-align: justify;
+    }
 }
 
 .history-text-container h2 {
