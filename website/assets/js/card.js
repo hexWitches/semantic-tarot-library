@@ -502,7 +502,7 @@ function generateRelatedTopics(card, graph) {
     }
 
     // Persons connected (author, illustrator, publisher)
-    const personProps = ['author_id', 'illustrator_id', 'publisher_id'];
+    const personProps = ['author_id', 'illustrator_id', 'publisher'];
     const personMap = new Map();
 
     personProps.forEach(prop => {
@@ -511,13 +511,15 @@ function generateRelatedTopics(card, graph) {
             const persons = Array.isArray(propData) ? propData : [propData];
             persons.forEach(personData => {
                 const label = getEntityLabel(graph, personData);
-                if (label && label !== "-") {
-                    const fullId = personData['@id'] || personData;
+                const isEntity = typeof personData === 'object' && personData['@id'];
+                
+                if (label && label !== "-" && isEntity) {
+                    const fullId = personData['@id'];
                     const cleanId = fullId.replace('smtg:', '');
                     
                     let roleStr = "Author";
                     if (prop === 'illustrator_id') roleStr = "Illustrator";
-                    if (prop === 'publisher_id') roleStr = "Publisher";
+                    if (prop === 'publisher') roleStr = "Publisher";
                     
                     if (personMap.has(cleanId)) {
                         const existing = personMap.get(cleanId);

@@ -1916,16 +1916,20 @@ ITEM PAGE: deck
     padding-top: 5%;
 }
 
+/* Handle links in card description and person page description */
+.person-bio a,
 .description-section a {
     color: var(--brick-red);
     text-decoration: none;
 }
 
+.person-bio a:hover,
 .description-section a:hover {
     text-decoration: underline;
     text-underline-offset: 3px;
     text-decoration-thickness: 1px;
 }
+
 
 /* --- Related Topics Carousel --- */
 .related-topics-section {

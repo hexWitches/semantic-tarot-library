@@ -213,7 +213,7 @@ function fillPersonMetadata(person, extraTexts, graph) {
                 });
             };
 
-            return checkRef(item.author_id) || checkRef(item.illustrator_id);
+            return checkRef(item.author_id) || checkRef(item.illustrator_id) || checkRef(item.publisher);
         });
 
         if (relatedDecks && relatedDecks.length > 0) {
