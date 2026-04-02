@@ -176,5 +176,5 @@ process_csv("data/figures.csv", "symbolic_figure_id", namespaces["smt"]["Symboli
 process_csv("data/deck_lineage.csv", "deck_lineage_id", namespaces["smt"]["DeckLineage"])
 
 # Saving
-g.serialize(destination="ontology/smtGraph.ttl", format="turtle", base=GRAPH_URI)
+g.serialize(destination="ontology/smtGraph.ttl", format="turtle")
 print("The spell has been cast: smtGraph.ttl appeared.")
