@@ -22,7 +22,8 @@ namespaces = {
     "viaf": Namespace("http://viaf.org/viaf/"),
     "wd": Namespace("https://www.wikidata.org/entity/"),
     "gn": Namespace("http://www.geonames.org/ontology#"),
-    "vann": Namespace("http://purl.org/vocab/vann/")
+    "vann": Namespace("http://purl.org/vocab/vann/"),
+    "void": Namespace("http://rdfs.org/ns/void#")
 }
 
 # Associate CSV columns with ontology properties 
@@ -68,6 +69,25 @@ for prefix, ns in namespaces.items():
 
 DATA = namespaces["smtg"]
 SMT = namespaces["smt"]
+dataset = URIRef(GRAPH_URI)
+g.bind("smtg", GRAPH_URI)
+VOID = namespaces["void"]
+DCTERMS = namespaces["dcterms"]
+VANN = namespaces["vann"]
+
+# define the dataset
+g.add((dataset, RDF.type, VOID.Dataset))
+g.add((dataset, DCTERMS.title, Literal("The SMT Graph", lang="en")))
+g.add((dataset, DCTERMS.description, Literal("A dataset providing a semantic representation of tarot decks and their constituent cards, aligned with the SMT ontology.", lang="en")))
+g.add((dataset, DCTERMS.creator, Literal("Miriana Pinto")))
+g.add((dataset, DCTERMS.creator, Literal("Sara Roggiani")))
+g.add((dataset, DCTERMS.conformsTo, URIRef("https://w3id.org/smt-library/ontology")))
+g.add((dataset, VOID.vocabulary, URIRef("https://w3id.org/smt-library/ontology")))
+g.add((dataset, VOID.dataDump, URIRef("https://w3id.org/smt-library/graph.ttl")))
+g.add((dataset, DCTERMS.created, Literal("2026-03-03", datatype=XSD.date)))
+g.add((dataset, DCTERMS.license, URIRef("https://creativecommons.org/licenses/by/4.0/")))
+g.add((dataset, DCTERMS.publisher, URIRef("https://github.com/hexWitches")))
+g.add((dataset, VANN.preferredNamespacePrefix, Literal("smtg")))
 
 
 def process_csv(file_path, id_column, default_class):
@@ -156,5 +176,5 @@ process_csv("data/figures.csv", "symbolic_figure_id", namespaces["smt"]["Symboli
 process_csv("data/deck_lineage.csv", "deck_lineage_id", namespaces["smt"]["DeckLineage"])
 
 # Saving
-g.serialize(destination="ontology/smtGraph.ttl", format="turtle", base=GRAPH_URI)
+g.serialize(destination="ontology/smtGraph.ttl", format="turtle")
 print("The spell has been cast: smtGraph.ttl appeared.")

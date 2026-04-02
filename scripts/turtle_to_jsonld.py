@@ -22,8 +22,11 @@ context = {
         "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
         "xsd": "http://www.w3.org/2001/XMLSchema#",
         "skos": "http://www.w3.org/2004/02/skos/core#",
-        "vann": "http://purl.org/vocab/vann/"
+        "vann": "http://purl.org/vocab/vann/",
+        "void": "http://rdfs.org/ns/void#"
 }
+
+context["@language"] = "en"
 
 ## Read mapping.csv to add property aliases
 try:
