@@ -1,7 +1,10 @@
 /**
  * explore.js
- * Dynamically populates the Explore page grid with People, Archetypes, and Topics.
+ * Dynamically populates and filters the Explore page grid.
  */
+
+let fullDataset = []; // Store the full list of items globally after fetching
+let activeFilters = new Set(); // Track multiple active filter categories
 
 async function initExplorePage() {
     try {
@@ -15,24 +18,20 @@ async function initExplorePage() {
         const textsData = await textsRes.json();
         const graph = graphData['@graph'];
 
-        const exploreGrid = document.querySelector('.explore-grid');
-        if (!exploreGrid) return;
-
-        exploreGrid.innerHTML = ''; // Clear placeholders
-
-        const allItems = [];
+        fullDataset = [];
 
         // 2. Collect People (odi:Person)
         graph.forEach(item => {
             const types = Array.isArray(item['@type']) ? item['@type'] : [item['@type']];
             if (types.includes('odi:Person')) {
                 const fullName = [item.given_name, item.family_name].filter(Boolean).join(' ');
-                const cleanId = item['@id'].replace('smtg:', '');
+                const cleanId = item['@id'] ? item['@id'].replace('smtg:', '') : '';
 
-                allItems.push({
+                fullDataset.push({
                     title: fullName,
-                    subtitle: "Biography",
-                    link: `person.html?id=${cleanId}`
+                    subtitle: "Explore the Life",
+                    link: `person.html?id=${cleanId}`,
+                    category: 'people'
                 });
             }
         });
@@ -42,12 +41,13 @@ async function initExplorePage() {
             const types = Array.isArray(item['@type']) ? item['@type'] : [item['@type']];
             if (types.includes('smt:Archetype')) {
                 const label = item.label || item['skos:prefLabel'] || 'Archetype';
-                const cleanId = item['@id'].replace('smtg:', '');
+                const cleanId = item['@id'] ? item['@id'].replace('smtg:', '') : '';
 
-                allItems.push({
+                fullDataset.push({
                     title: label,
                     subtitle: "Deepen the Archetype",
-                    link: `deepening.html?id=${cleanId}`
+                    link: `deepening.html?id=${cleanId}`,
+                    category: 'arcana'
                 });
             }
         });
@@ -58,23 +58,24 @@ async function initExplorePage() {
             if (key === 'archetypes_page') return;
 
             const pageData = explorePages[key];
-            const title = pageData.title || key.replace('_', ' ').replace('page', '').trim();
+            // Use the title from JSON, or a cleaned version of the key as fallback
+            const title = pageData.title || key.replace(/_/g, ' ').replace('page', '').trim();
 
-            allItems.push({
+            fullDataset.push({
                 title: title,
                 subtitle: "Explore the Topic",
-                link: `deepening.html?id=${key}`
+                link: `deepening.html?id=${key}`,
+                // Logic: suits_page is category 'suits', everything else is 'mirroring'
+                category: key === 'suits_page' ? 'suits' : 'mirroring'
             });
         });
 
-        // 5. Sort Alphabetically
-        allItems.sort((a, b) => a.title.localeCompare(b.title));
+        // 5. Initial Sort and Render
+        fullDataset.sort((a, b) => a.title.localeCompare(b.title));
+        renderGrid(fullDataset);
 
-        // 6. Generate Cards
-        allItems.forEach(item => {
-            const card = createTopicCard(item.title, item.subtitle, item.link);
-            exploreGrid.appendChild(card);
-        });
+        // 6. Setup Listeners
+        setupFilterListeners();
 
     } catch (error) {
         console.error("Error initializing Explore page:", error);
@@ -82,11 +83,114 @@ async function initExplorePage() {
 }
 
 /**
+ * Renders the topic cards in the grid.
+ * @param {Array} items 
+ */
+function renderGrid(items) {
+    const exploreGrid = document.querySelector('.explore-grid');
+    if (!exploreGrid) return;
+
+    exploreGrid.innerHTML = ''; // Clear current grid
+
+    items.forEach(item => {
+        const card = createTopicCard(item.title, item.subtitle, item.link);
+        exploreGrid.appendChild(card);
+    });
+
+    // If no items match, show a friendly message
+    if (items.length === 0) {
+        const noResults = document.createElement('div');
+        noResults.className = 'col-12 text-center my-5';
+        noResults.innerHTML = `<p class="lead" style="color: var(--floral-white); opacity: 0.7;">No items match the selected filters.</p>`;
+        exploreGrid.appendChild(noResults);
+    }
+}
+
+/**
+ * Sets up filtering listeners for sidebar buttons.
+ */
+function setupFilterListeners() {
+    const filterBtns = document.querySelectorAll('.filter-btn, .filter-suboption-btn');
+    const clearAllBtn = document.getElementById('clear-all-filters');
+
+    // Clear All Logic
+    if (clearAllBtn) {
+        // Hide by default if nothing is selected
+        clearAllBtn.style.display = 'none';
+
+        clearAllBtn.addEventListener('click', () => {
+            activeFilters.clear();
+
+            // Also close any expanded menus
+            document.querySelectorAll('.filter-expandable, .filter-suboptions').forEach(el => {
+                el.classList.remove('open');
+            });
+
+            updateFilterUI();
+            renderGrid(fullDataset);
+        });
+    }
+
+    // Toggle Labels Logic
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            const category = this.dataset.filter || this.dataset.subfilter;
+            if (!category) return;
+
+            // Toggle category in the Set
+            if (activeFilters.has(category)) {
+                activeFilters.delete(category);
+                // If we're turning it off, also remove 'open' state if it has no suboptions
+                const group = this.closest('.filter-group');
+                const hasSuboptions = group ? group.querySelector('.filter-suboptions') : null;
+                if (!hasSuboptions) {
+                    this.classList.remove('open');
+                }
+            } else {
+                activeFilters.add(category);
+            }
+
+            updateFilterUI();
+            applyFilters();
+        });
+    });
+}
+
+/**
+ * Filters the dataset based on active categories and re-renders.
+ */
+function applyFilters() {
+    if (activeFilters.size === 0) {
+        renderGrid(fullDataset);
+    } else {
+        const filtered = fullDataset.filter(item => activeFilters.has(item.category));
+        renderGrid(filtered);
+    }
+}
+
+/**
+ * Updates the visual state (active class) of buttons and visibility of Clear All.
+ */
+function updateFilterUI() {
+    const filterBtns = document.querySelectorAll('.filter-btn, .filter-suboption-btn');
+    const clearAllBtn = document.getElementById('clear-all-filters');
+
+    filterBtns.forEach(btn => {
+        const category = btn.dataset.filter || btn.dataset.subfilter;
+        if (category && activeFilters.has(category)) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    if (clearAllBtn) {
+        clearAllBtn.style.display = activeFilters.size > 0 ? 'inline-block' : 'none';
+    }
+}
+
+/**
  * Creates a standard topic card element.
- * @param {string} title 
- * @param {string} subtitle 
- * @param {string} linkUrl 
- * @returns {HTMLElement}
  */
 function createTopicCard(title, subtitle, linkUrl) {
     const linkWrapper = document.createElement('a');

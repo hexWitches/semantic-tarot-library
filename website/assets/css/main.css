@@ -365,11 +365,8 @@ footer a {
     #collection-content,
     #explore-sidebar,
     #explore-content-section {
-        display: block;
-        /* Content is block, Sidebar is grid but we handle it below */
+        /* Allow flex order to work by NOT forcing block */
         position: static !important;
-        width: 100% !important;
-        max-width: none !important;
     }
 
     #collection-sidebar,
@@ -379,6 +376,17 @@ footer a {
         grid-template-rows: auto;
         gap: 15px;
         margin-bottom: 2rem !important;
+        /* Disable sticky when stacked at top */
+        position: static;
+        top: 0;
+        width: 100% !important;
+        max-width: none !important;
+    }
+
+    #collection-content,
+    #explore-content-section {
+        width: 100% !important;
+        max-width: none !important;
     }
 
     .filters-title {

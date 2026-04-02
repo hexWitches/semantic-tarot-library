@@ -199,7 +199,7 @@ function fillPersonMetadata(person, extraTexts, graph) {
     if (topicsContainer && topicsSection && graph) {
         topicsContainer.innerHTML = ''; // Start empty
 
-        // Find all decks where this person is author or illustrator
+        // Find all decks where this person is author, illustrator or publisher
         const relatedDecks = graph.filter(item => {
             const typeArr = Array.isArray(item['@type']) ? item['@type'] : [item['@type']];
             if (!typeArr.includes('odi:TarotDeck')) return false;
