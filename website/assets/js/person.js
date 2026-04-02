@@ -278,7 +278,7 @@ function fillPersonMetadata(person, extraTexts, graph) {
                 titleEl.className = 'm-0';
 
                 const subtitleEl = document.createElement('p');
-                subtitleEl.innerText = 'Collaborator';
+                subtitleEl.innerText = 'Person';
                 subtitleEl.className = 'small mt-2 mb-0 text-uppercase tracking-wide';
 
                 innerEl.appendChild(titleEl);

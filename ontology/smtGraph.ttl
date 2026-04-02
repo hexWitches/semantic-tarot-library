@@ -14,7 +14,7 @@
 @prefix wd: <https://www.wikidata.org/entity/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://w3id.org/smt-library/graph/> a void:Dataset ;
+smtg: a void:Dataset ;
     dcterms:conformsTo <https://w3id.org/smt-library/ontology> ;
     dcterms:created "2026-03-03"^^xsd:date ;
     dcterms:creator "Miriana Pinto",
@@ -478,7 +478,8 @@ smtg:card-brambilla-42 a odi:DeckCard,
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/TarocchiBrambilla/42.jpg> ;
     odi:hasName "Imperatore" ;
     odi:isContainedIn smtg:deck-brambilla ;
-    odi:isNumber "IV" .
+    odi:isNumber "IV" ;
+    smt:represents smtg:concept-emperor .
 
 smtg:card-brambilla-43 a odi:DeckCard,
         smt:MajorArcana ;
@@ -487,7 +488,8 @@ smtg:card-brambilla-43 a odi:DeckCard,
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/TarocchiBrambilla/43.jpg> ;
     odi:hasName "Donna della Fortuna (o la Ruota della Fortuna)" ;
     odi:isContainedIn smtg:deck-brambilla ;
-    odi:isNumber "X" .
+    odi:isNumber "X" ;
+    smt:represents smtg:concept-wheel-of-fortune .
 
 smtg:card-brambilla-44 a odi:DeckCard,
         smt:MinorArcana,
@@ -3852,13 +3854,6 @@ smtg:person-cicognara a odi:Person ;
     schema:birthDate "1480" ;
     schema:deathDate "1500" .
 
-smtg:concept-emperor a smt:Archetype ;
-    dcterms:description "Represents authority, structure, and a father figure."@en ;
-    skos:altLabel "L’Empereur",
-        "L’Imperatore" ;
-    skos:prefLabel "The Emperor" ;
-    smt:hasNumber "4" .
-
 smtg:concept-juggler a smt:Archetype ;
     dcterms:description "Represents manifestation, resourcefulness, and power."@en ;
     skos:altLabel "Bagatino",
@@ -3890,6 +3885,13 @@ smtg:concept-death a smt:Archetype ;
         "La Morte" ;
     skos:prefLabel "Death" ;
     smt:hasNumber "13" .
+
+smtg:concept-emperor a smt:Archetype ;
+    dcterms:description "Represents authority, structure, and a father figure."@en ;
+    skos:altLabel "L’Empereur",
+        "L’Imperatore" ;
+    skos:prefLabel "The Emperor" ;
+    smt:hasNumber "4" .
 
 smtg:concept-fool a smt:Archetype ;
     dcterms:description "Represents beginnings, innocence, and spontaneous action. Usually an unnumbered card, but sometimes it is numbered as 0 or more rarely XXII."@en ;
