@@ -26,8 +26,6 @@ context = {
         "void": "http://rdfs.org/ns/void#"
 }
 
-context["@language"] = "en"
-
 ## Read mapping.csv to add property aliases
 try:
     with open("mapping-files/mapping.csv", encoding="utf-8") as f:
