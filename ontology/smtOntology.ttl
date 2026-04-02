@@ -12,7 +12,7 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 <https://w3id.org/smt-library/ontology> rdf:type owl:Ontology ;
-    dcterms:title "SMT Ontology"@en ;
+    dcterms:title "The SMT Ontology"@en ;
     dcterms:description "An ontology for the description of tarot decks."@en ;
     dcterms:creator "Miriana Pinto",
         "Sara Roggiani" ;
@@ -22,7 +22,7 @@
     dcterms:publisher <https://github.com/hexWitches> ;
     schema:codeRepository <https://github.com/hexWitches/semantic-tarot-library> ;
     vann:preferredNamespacePrefix "smt" ;
-    rdfs:comment "A longer comment about the ontology and its purposes, components and else."@en .
+    rdfs:comment "An ontology designed to represent the structural and symbolic characteristics of Tarot decks. It provides a formal framework for classifying Major and Minor Arcana, identifying deck lineages (families), and mapping the relationships between cards, their numeric values, and the archetypal figures they represent."@en .
 
 # ===== CLASSES ================
 :MajorArcana rdf:type owl:Class ;

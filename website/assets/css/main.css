@@ -154,7 +154,7 @@ h3 {
     }
 
     /* Ensure the container can wrap so the mobile menu opens on a new row */
-    .custom-navbar > .container-fluid {
+    .custom-navbar>.container-fluid {
         display: flex !important;
         flex-wrap: wrap !important;
         align-items: center;
@@ -162,7 +162,8 @@ h3 {
     }
 
     /* Ensure icons don't wrap */
-    .navbar-toggler, .dropdown {
+    .navbar-toggler,
+    .dropdown {
         flex-shrink: 0;
     }
 }
@@ -2171,7 +2172,7 @@ ITEM PAGE: deck
 .hero-section {
     min-height: 80vh;
     background-color: var(--floral-white);
-    padding: 40px 50px 60px 50px;
+    padding: 20px 50px 50px 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -2197,26 +2198,42 @@ ITEM PAGE: deck
 }
 
 .hero-image {
-    max-width: 450px;
+    max-width: 560px;
     width: 100%;
     height: auto;
 }
 
 .hero-text p.hero-description {
-    font-size: 1.35rem;
-    line-height: 1.6;
+    font-size: 1.25rem;
+    line-height: 1.7;
     text-align: center;
     color: var(--dark-amethyst);
+    margin-bottom: 0;
+    text-wrap: pretty;
+}
+
+.hero-text p.hero-description-cta {
+    margin-top: 1.5rem;
+    text-align: center !important;
 }
 
 @media (min-width: 768px) {
     .hero-text p.hero-description {
+        font-size: 1.4rem;
         text-align: justify;
     }
 }
 
+@media (max-width: 575px) {
+    .hero-text p.hero-description {
+        font-size: 1.1rem;
+        line-height: 1.75;
+        padding: 0 0.5rem;
+    }
+}
+
 .hero-search-wrapper {
-    margin-top: 2rem;
+    margin-top: 0.25rem;
 }
 
 .search-bar-hero {
@@ -2358,7 +2375,7 @@ input[type="search"]::-webkit-search-results-decoration {
     right: 42px;
 }
 
-.search-input-group input:not(:placeholder-shown) ~ .search-clear-btn {
+.search-input-group input:not(:placeholder-shown)~.search-clear-btn {
     display: flex;
 }
 
@@ -2947,6 +2964,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 @media (max-width: 767.98px) {
     #person-portrait {
-        max-width: 200px; /* Snugger avatar sizing on small phone screens */
+        max-width: 200px;
+        /* Snugger avatar sizing on small phone screens */
     }
 }
