@@ -3717,26 +3717,6 @@ smtg:person-bianca-visconti a odi:Person ;
     schema:deathDate "1468" ;
     schema:image <https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/bianca-maria-visconti.jpg> .
 
-smtg:person-filippo-visconti a odi:Person ;
-    owl:sameAs viaf:89524548,
-        wd:Q289285 ;
-    foaf:familyName "Visconti" ;
-    foaf:givenName "Filippo Maria" ;
-    schema:Nationality "Italian" ;
-    schema:birthDate "1392" ;
-    schema:deathDate "1447" ;
-    schema:image <https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/filippo-maria-visconti.jpg> .
-
-smtg:person-francesco-sforza a odi:Person ;
-    owl:sameAs viaf:89211304,
-        wd:Q310536 ;
-    foaf:familyName "Sforza" ;
-    foaf:givenName "Francesco" ;
-    schema:Nationality "Italian" ;
-    schema:birthDate "1401" ;
-    schema:deathDate "1466" ;
-    schema:image <https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/francesco-sforza.jpg> .
-
 smtg:lineage-marseille a smt:DeckLineage ;
     rdfs:label "Tarot de Marseille" .
 
@@ -3753,8 +3733,28 @@ smtg:paris a schema:Place ;
     owl:sameAs gn:2988507,
         wd:Q90 .
 
+smtg:person-filippo-visconti a odi:Person ;
+    owl:sameAs viaf:89524548,
+        wd:Q289285 ;
+    foaf:familyName "Visconti" ;
+    foaf:givenName "Filippo Maria" ;
+    schema:Nationality "Italian" ;
+    schema:birthDate "1392" ;
+    schema:deathDate "1447" ;
+    schema:image <https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/filippo-maria-visconti.jpg> .
+
 smtg:venice a schema:Place ;
     rdfs:label "Venice" .
+
+smtg:person-francesco-sforza a odi:Person ;
+    owl:sameAs viaf:89211304,
+        wd:Q310536 ;
+    foaf:familyName "Sforza" ;
+    foaf:givenName "Francesco" ;
+    schema:Nationality "Italian" ;
+    schema:birthDate "1401" ;
+    schema:deathDate "1466" ;
+    schema:image <https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/francesco-sforza.jpg> .
 
 smtg:lineage-visconti-sforza a smt:DeckLineage ;
     rdfs:label "Visconti-Sforza" .
@@ -3993,7 +3993,7 @@ smtg:deck-pierpont-morgan a odi:TarotDeck ;
         "Visconti-Sforza Tarot" ;
     dcterms:description "Created shortly after 1450, the Visconti-Sforza Tarot is among the oldest surviving decks from the era when tarot was played at court. Today, its remaining cards are housed at the Accademia Carrara and The Morgan Library & Museum. Attributed primarily to Bonifacio Bembo and Francesco Zavattari, the deck features richly dressed noble figures – likely inspired by the Visconti and Sforza courts – set against luminous gold and decorative backgrounds. Three replacement trumps were later painted by Antonio Cicognara."@en ;
     dcterms:isVersionOf smtg:lineage-visconti-sforza ;
-    dcterms:publisher "Francesco Sforza (commissioned by)" ;
+    dcterms:publisher smtg:person-francesco-sforza ;
     dcterms:source <https://www.themorgan.org/collection/tarot-cards> ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
@@ -4015,7 +4015,7 @@ smtg:deck-brambilla a odi:TarotDeck ;
     dcterms:alternativeTitle "Brera-Brambilla" ;
     dcterms:description "Created in the mid-15th century and attributed to the painter Bonifacio Bembo, the Tarocchi Brambilla is one of the earliest surviving Italian tarot decks. Likely commissioned for the court of Milan under Francesco Sforza, it reflects the artistic culture and heraldic symbolism of the Visconti–Sforza dynasty. Originally composed of 68 cards, only 48 survive today, preserved in the Pinacoteca di Brera in Milan. Hand-painted on pressed cardboard and richly embellished with gold and silver leaf, the cards were crafted as luxury objects rather than printed playing cards."@en ;
     dcterms:isVersionOf smtg:lineage-visconti-sforza ;
-    dcterms:publisher "Francesco Sforza (commissioned by)" ;
+    dcterms:publisher smtg:person-francesco-sforza ;
     dcterms:source <https://catalogo.beniculturali.it/detail/HistoricOrArtisticProperty/0300097697-0> ;
     odi:hasAuthor smtg:person-bembo ;
     odi:hasCurrentNumberOfCards "48" ;
@@ -4030,7 +4030,7 @@ smtg:deck-modrone a odi:TarotDeck ;
         "Visconti Tarot" ;
     dcterms:description "The Visconti deck, commissioned around 1466 by the Visconti family and attributed to Bonifacio Bembo, stands among the oldest surviving tarot decks. Hand-painted and adorned with gold and silver leaf, it was designed as a luxury courtly object rather than for mass production. With 67 surviving cards, the deck reveals the earliest evolution of tarot imagery, including expanded court figures — male and female Knights and Pages – and the rare inclusion of the theological virtues among the trumps (Faith, Hope, Charity)."@en ;
     dcterms:isVersionOf smtg:lineage-visconti-sforza ;
-    dcterms:publisher "Filippo Maria Visconti (commissioned by)" ;
+    dcterms:publisher smtg:person-filippo-visconti ;
     dcterms:source <https://beinecke.library.yale.edu/collections/highlights/visconti-tarot> ;
     odi:hasAuthor smtg:person-bembo ;
     odi:hasCurrentNumberOfCards "67" ;

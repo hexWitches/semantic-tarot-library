@@ -117,6 +117,16 @@ def process_csv(file_path, id_column, default_class):
                         for entity_id in ids:
                             g.add((subject_uri, predicate_map[header], DATA[entity_id]))
                 
+                # Publisher (can be an entity or literal)
+                elif header == "publisher": 
+                    if header in predicate_map: 
+                        entity_id = clean_id(val)
+                        if "person" in entity_id:
+                            g.add((subject_uri, predicate_map[header], DATA[entity_id]))
+                        else:
+                            g.add((subject_uri, predicate_map[header], Literal(val)))
+
+                
                 # Locations 
                 elif header in ["location_created", "current_location"]:
                     loc_id = clean_id(val)
