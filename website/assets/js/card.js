@@ -39,6 +39,7 @@ async function initCardPage() {
 
             fillCardMetadata(cardData, graph, extraTexts);
             updateNavigation(cardData, graph);
+            generateRelatedTopics(cardData, graph);
         } else {
             console.warn("Card not found in the Knowledge Graph.");
         }
@@ -436,6 +437,128 @@ function updateNavigation(currentCard, graph) {
 
     setArrow('prev', currentIndex - 1);
     setArrow('next', currentIndex + 1);
+}
+
+/**
+ * Populates the Related Topics Section Dynamically
+ */
+function generateRelatedTopics(card, graph) {
+    const topicsCarousel = document.getElementById('topicsCarousel');
+    if (!topicsCarousel) return;
+
+    topicsCarousel.innerHTML = ''; // clear placeholders
+
+    const types = Array.isArray(card['@type']) ? card['@type'] : [card['@type']];
+    const isMajor = types.includes('smt:MajorArcana');
+    const isMinor = types.includes('smt:MinorArcana') || types.includes('smt:CourtCard') || types.includes('smt:NumberedCard');
+
+    // Helper to create a card
+    const createTopicCard = (title, subtitle, linkUrl) => {
+        const linkWrapper = document.createElement('a');
+        linkWrapper.href = linkUrl;
+        linkWrapper.style.textDecoration = 'none';
+        linkWrapper.style.color = 'inherit';
+        linkWrapper.style.display = 'block';
+
+        const cardDiv = document.createElement('div');
+        cardDiv.className = 'topic-card';
+        
+        const innerDiv = document.createElement('div');
+        innerDiv.className = 'topic-card-inner';
+        
+        const h4 = document.createElement('h4');
+        h4.innerText = title;
+        
+        const p = document.createElement('p');
+        p.innerText = subtitle;
+        
+        innerDiv.appendChild(h4);
+        innerDiv.appendChild(p);
+        cardDiv.appendChild(innerDiv);
+        linkWrapper.appendChild(cardDiv);
+        
+        topicsCarousel.appendChild(linkWrapper);
+    };
+
+    let deckObj = null;
+    const deckRef = card.contained_in_deck_id || card.isContainedIn;
+    if (deckRef) {
+        const deckId = deckRef['@id'] || deckRef;
+        deckObj = graph.find(d => d['@id'] === deckId);
+    }
+
+    if (isMajor) {
+        // Archetypes
+        if (card.archetype_id) {
+            const archIdRaw = Array.isArray(card.archetype_id) ? card.archetype_id[0] : card.archetype_id;
+            const archId = (archIdRaw['@id'] || archIdRaw).replace('smtg:', '');
+            let label = getEntityLabel(graph, card.archetype_id);
+            if (!label || label === '-') label = 'Archetype';
+            createTopicCard(label, 'Dig deeper into the meaning', `deepening.html?id=${archId}`);
+        }
+        
+        // Symbols
+        createTopicCard('Symbols', 'Explore the hidden symbols', '#');
+    }
+
+    // Persons connected (author, illustrator, publisher)
+    const personProps = ['author_id', 'illustrator_id', 'publisher_id'];
+    const personMap = new Map();
+
+    personProps.forEach(prop => {
+        const propData = card[prop] || (deckObj && deckObj[prop]);
+        if (propData) {
+            const persons = Array.isArray(propData) ? propData : [propData];
+            persons.forEach(personData => {
+                const label = getEntityLabel(graph, personData);
+                if (label && label !== "-") {
+                    const fullId = personData['@id'] || personData;
+                    const cleanId = fullId.replace('smtg:', '');
+                    
+                    let roleStr = "Author";
+                    if (prop === 'illustrator_id') roleStr = "Illustrator";
+                    if (prop === 'publisher_id') roleStr = "Publisher";
+                    
+                    if (personMap.has(cleanId)) {
+                        const existing = personMap.get(cleanId);
+                        if (!existing.roles.includes(roleStr)) {
+                            existing.roles.push(roleStr);
+                        }
+                    } else {
+                        personMap.set(cleanId, {
+                            label: label,
+                            roles: [roleStr]
+                        });
+                    }
+                }
+            });
+        }
+    });
+
+    personMap.forEach((data, cleanId) => {
+        const rolesCombined = data.roles.join(" & ");
+        createTopicCard(data.label, `Discover the ${rolesCombined}`, `person.html?id=${cleanId}`);
+    });
+
+    // Deck
+    if (deckObj) {
+        const deckLabel = getEntityLabel(graph, deckObj) || 'Deck';
+        const deckId = deckObj['@id'].replace('smtg:', '');
+        createTopicCard(deckLabel, 'Explore the full deck', `deck.html?id=${deckId}`);
+    }
+
+    // Suits (if minor arcana)
+    if (isMinor) {
+        if (card.suit_id) {
+            const suitIdRaw = Array.isArray(card.suit_id) ? card.suit_id[0] : card.suit_id;
+            const suitId = (suitIdRaw['@id'] || suitIdRaw).replace('smtg:', '');
+            let suitLabel = getEntityLabel(graph, card.suit_id);
+            if (!suitLabel || suitLabel === "-") suitLabel = 'Suit';
+            
+            const capitalizedSuit = suitLabel.charAt(0).toUpperCase() + suitLabel.slice(1);
+            createTopicCard(capitalizedSuit, 'Discover the Suit', `deepening.html?id=${suitId}`);
+        }
+    }
 }
 
 document.addEventListener('DOMContentLoaded', initCardPage);

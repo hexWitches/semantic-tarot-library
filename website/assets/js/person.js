@@ -47,6 +47,34 @@ function getLocalImagePath(imageUrl) {
     return imageUrl;
 }
 
+/**
+ * Helper: Finds an entity in the graph by ID and returns its human-readable label
+ */
+function getEntityLabel(graph, entityData) {
+    if (!entityData) return null;
+
+    const data = Array.isArray(entityData) ? entityData[0] : entityData;
+    const idToFind = typeof data === 'string' ? data : data['@id'];
+    if (!idToFind) return null;
+
+    const entity = graph.find(obj => obj['@id'] === idToFind);
+
+    if (!entity) {
+        return idToFind.includes(':') ? idToFind.split(':').pop().replace(/-/g, ' ') : idToFind;
+    }
+
+    if (entity.given_name || entity.family_name) {
+        const first = entity.given_name || "";
+        const last = entity.family_name || "";
+        return `${first} ${last}`.trim();
+    }
+
+    return entity.label ||
+        entity['rdfs:label'] ||
+        entity.lineage_label ||
+        idToFind.split(':').pop().replace(/-/g, ' ');
+}
+
 function fillPersonMetadata(person, extraTexts, graph) {
     const givenName = person.given_name || '';
     const familyName = person.family_name || '';
@@ -188,42 +216,19 @@ function fillPersonMetadata(person, extraTexts, graph) {
             return checkRef(item.author_id) || checkRef(item.illustrator_id);
         });
 
-        if (relatedDecks.length > 0) {
+        if (relatedDecks && relatedDecks.length > 0) {
+            const collaborators = new Map(); // ID -> Name
+
+            // 1. Show Decks
             relatedDecks.forEach(deck => {
                 const deckId = deck['@id'];
                 const cleanDeckId = deckId.replace('smtg:', '');
-
-                // Find first card belonging to this deck to use as cover image
-                let coverImgUrl = '';
-                const deckCards = graph.filter(c => {
-                    const typeArr = Array.isArray(c['@type']) ? c['@type'] : [c['@type']];
-                    if (!typeArr.includes('odi:DeckCard')) return false;
-
-                    const cDeck = c.contained_in_deck_id || c.isContainedIn;
-                    if (!cDeck) return false;
-                    const cDeckId = typeof cDeck === 'object' ? cDeck['@id'] : cDeck;
-                    return cDeckId === deckId;
-                });
-
-                if (deckCards.length > 0) {
-                    const fool = deckCards.find(c => c.card_number === '0');
-                    const coverCard = fool || deckCards[0];
-                    const rawUrl = coverCard.image_url ? (coverCard.image_url['@id'] || coverCard.image_url) : null;
-                    if (rawUrl) coverImgUrl = getLocalImagePath(rawUrl);
-                }
-
                 const title = deck.title || deck.alternative_title || 'Tarot Deck';
 
                 const cardEl = document.createElement('a');
                 cardEl.href = `deck.html?id=${cleanDeckId}`;
                 cardEl.className = 'topic-card text-decoration-none';
-
-                if (coverImgUrl) {
-                    cardEl.classList.add('has-bg');
-                    cardEl.style.backgroundImage = `url('${coverImgUrl}')`;
-                } else {
-                    cardEl.style.backgroundColor = 'var(--dark-amethyst)';
-                }
+                cardEl.style.backgroundColor = 'var(--dark-amethyst)';
 
                 const innerEl = document.createElement('div');
                 innerEl.className = 'topic-card-inner';
@@ -240,7 +245,48 @@ function fillPersonMetadata(person, extraTexts, graph) {
                 innerEl.appendChild(subtitleEl);
                 cardEl.appendChild(innerEl);
                 topicsContainer.appendChild(cardEl);
+
+                // Collect collaborators
+                const collectCollaborators = (field) => {
+                    if (!field) return;
+                    const arr = Array.isArray(field) ? field : [field];
+                    arr.forEach(ref => {
+                        const id = typeof ref === 'object' ? ref['@id'] : ref;
+                        if (id && id !== person['@id']) {
+                            const label = getEntityLabel(graph, id);
+                            if (label) collaborators.set(id, label);
+                        }
+                    });
+                };
+                collectCollaborators(deck.author_id);
+                collectCollaborators(deck.illustrator_id);
             });
+
+            // 2. Show Collaborators
+            collaborators.forEach((name, id) => {
+                const cleanId = id.replace('smtg:', '');
+                const cardEl = document.createElement('a');
+                cardEl.href = `person.html?id=${cleanId}`;
+                cardEl.className = 'topic-card text-decoration-none';
+                cardEl.style.backgroundColor = 'var(--dark-amethyst)';
+
+                const innerEl = document.createElement('div');
+                innerEl.className = 'topic-card-inner';
+
+                const titleEl = document.createElement('h4');
+                titleEl.innerText = name;
+                titleEl.className = 'm-0';
+
+                const subtitleEl = document.createElement('p');
+                subtitleEl.innerText = 'Collaborator';
+                subtitleEl.className = 'small mt-2 mb-0 text-uppercase tracking-wide';
+
+                innerEl.appendChild(titleEl);
+                innerEl.appendChild(subtitleEl);
+                cardEl.appendChild(innerEl);
+                topicsContainer.appendChild(cardEl);
+            });
+
             topicsSection.classList.remove('d-none');
         } else {
             topicsSection.classList.add('d-none');

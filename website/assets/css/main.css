@@ -1961,10 +1961,11 @@ ITEM PAGE: deck
 }
 
 .topic-card {
-    min-width: 200px;
+    width: 200px;
     height: 200px;
     background-color: var(--dark-amethyst);
     border-radius: 12px;
+    flex: 0 0 200px;
     flex-shrink: 0;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
@@ -1985,37 +1986,8 @@ ITEM PAGE: deck
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* topic card in person.html */
-.topic-card.has-bg {
-    background-size: cover;
-    background-position: center top;
-}
 
-.topic-card.has-bg .topic-card-inner {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 50%;
-    /* Apply a flat, razor-sharp translucent block instead of a gradient fade */
-    background-color: rgba(171, 52, 40, 0.85);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: var(--floral-white);
-    padding: 15px;
-    transform: translateY(100%);
-    opacity: 0;
-    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    pointer-events: none;
-    z-index: 2;
-}
-
-.topic-card.has-bg:hover .topic-card-inner {
-    opacity: 1;
-    transform: translateY(0);
-}
+/* topic card adjustments */
 
 .topic-card-inner h4 {
     font-family: var(--header-font);
