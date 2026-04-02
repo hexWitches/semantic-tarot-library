@@ -146,10 +146,11 @@ function fillDeckMetadata(deck, graph, extraTexts) {
             }
 
             const fullId = data['@id'] || data;
-            const cleanId = fullId.replace('smtg:', '');
+            const cleanId = typeof fullId === 'string' ? fullId.replace('smtg:', '') : '';
+            const isEntity = typeof data === 'object' && data['@id'];
 
-            // Check if it's a location - if so, NO LINK
-            if (elementId === 'location_created') {
+            // Check if it's a location or a simple literal - if so, NO LINK
+            if (elementId === 'location_created' || !isEntity) {
                 const span = document.createElement('span');
                 span.innerText = label;
                 el.appendChild(span);
@@ -183,6 +184,7 @@ function fillDeckMetadata(deck, graph, extraTexts) {
     setMetaLink('location_created', deck.location_created);
     setMetaLink('author_id', deck.author_id || deck.hasAuthor);
     setMetaLink('illustrator_id', deck.illustrator_id);
+    setMetaLink('publisher', deck.publisher);
     setMetaLink('deck_lineage_id', deck.deck_lineage_id);
 
     // 4. Populate Simple Text Metadata
@@ -204,7 +206,6 @@ function fillDeckMetadata(deck, graph, extraTexts) {
     }
 
     setMetaText('publication_year', deck.publication_year);
-    setMetaText('publisher', deck.publisher);
     setMetaText('current_card_count', deck.current_card_count);
     setMetaText('original_card_count', deck.original_card_count);
 
