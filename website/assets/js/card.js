@@ -286,7 +286,8 @@ function fillCardMetadata(card, graph, extraTexts) {
             });
 
             renderThumbs(relatedCards);
-            updateDiscoverLink('#'); // Change later
+            const cleanArchId = archetypeId.replace('smtg:', '');
+            updateDiscoverLink(`deepening.html?id=${cleanArchId}`);
 
         } else if (types.includes('smt:MinorArcana') && card.suit_id) {
             evolutionFrame.style.display = 'flex';
@@ -312,7 +313,7 @@ function fillCardMetadata(card, graph, extraTexts) {
             // Randomize and take 3
             const shuffledCards = relatedCards.sort(() => 0.5 - Math.random());
             renderThumbs(shuffledCards);
-            updateDiscoverLink('#'); // Keep empty/placeholder as requested
+            updateDiscoverLink('deepening.html?id=suits_page');
 
         } else {
             // Hide for anything lacking an archetype or suit
@@ -347,7 +348,7 @@ function updateNavigation(currentCard, graph) {
         if (!numStr) return 0; // Default undefined numbers (like the Fool) to 0
         const s = numStr.toString().trim().toUpperCase();
         if (/^\d+$/.test(s)) return parseInt(s, 10);
-        
+
         // Roman Numeral parser
         const romanMap = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };
         let num = 0;
@@ -367,15 +368,15 @@ function updateNavigation(currentCard, graph) {
 
     const getRankValue = (cardObj) => {
         if (cardObj.card_number) return parseNumber(cardObj.card_number);
-        
-        let baseVal = 20; 
+
+        let baseVal = 20;
         const label = (cardObj.label || cardObj.title || cardObj.card_name || getEntityLabel(graph, cardObj) || "").toLowerCase();
-        
+
         if (label.includes("page") || label.includes("fante")) return 11;
         if (label.includes("knight") || label.includes("cavalliere") || label.includes("cavaliere")) return 12;
         if (label.includes("queen") || label.includes("regina")) return 13;
         if (label.includes("king") || label.includes("re")) return 14;
-        
+
         return baseVal;
     };
 
@@ -412,7 +413,7 @@ function updateNavigation(currentCard, graph) {
         const desktopEl = document.getElementById(`${idPrefix}_card_desktop`);
         const mobileEl = document.getElementById(`${idPrefix}_card_mobile`);
         const elList = [desktopEl, mobileEl];
-        
+
         if (targetIndex >= 0 && targetIndex < deckCards.length) {
             const targetId = deckCards[targetIndex]['@id'].replace('smtg:', '');
             elList.forEach(el => {
@@ -462,21 +463,21 @@ function generateRelatedTopics(card, graph) {
 
         const cardDiv = document.createElement('div');
         cardDiv.className = 'topic-card';
-        
+
         const innerDiv = document.createElement('div');
         innerDiv.className = 'topic-card-inner';
-        
+
         const h4 = document.createElement('h4');
         h4.innerText = title;
-        
+
         const p = document.createElement('p');
         p.innerText = subtitle;
-        
+
         innerDiv.appendChild(h4);
         innerDiv.appendChild(p);
         cardDiv.appendChild(innerDiv);
         linkWrapper.appendChild(cardDiv);
-        
+
         topicsCarousel.appendChild(linkWrapper);
     };
 
@@ -496,7 +497,7 @@ function generateRelatedTopics(card, graph) {
             if (!label || label === '-') label = 'Archetype';
             createTopicCard(label, 'Dig deeper into the meaning', `deepening.html?id=${archId}`);
         }
-        
+
         // Symbols
         createTopicCard('Symbols', 'Explore the hidden symbols', '#');
     }
@@ -512,15 +513,15 @@ function generateRelatedTopics(card, graph) {
             persons.forEach(personData => {
                 const label = getEntityLabel(graph, personData);
                 const isEntity = typeof personData === 'object' && personData['@id'];
-                
+
                 if (label && label !== "-" && isEntity) {
                     const fullId = personData['@id'];
                     const cleanId = fullId.replace('smtg:', '');
-                    
+
                     let roleStr = "Author";
                     if (prop === 'illustrator_id') roleStr = "Illustrator";
                     if (prop === 'publisher') roleStr = "Publisher";
-                    
+
                     if (personMap.has(cleanId)) {
                         const existing = personMap.get(cleanId);
                         if (!existing.roles.includes(roleStr)) {
@@ -556,7 +557,7 @@ function generateRelatedTopics(card, graph) {
             const suitId = (suitIdRaw['@id'] || suitIdRaw).replace('smtg:', '');
             let suitLabel = getEntityLabel(graph, card.suit_id);
             if (!suitLabel || suitLabel === "-") suitLabel = 'Suit';
-            
+
             const capitalizedSuit = suitLabel.charAt(0).toUpperCase() + suitLabel.slice(1);
             createTopicCard(capitalizedSuit, 'Discover the Suit', `deepening.html?id=${suitId}`);
         }
