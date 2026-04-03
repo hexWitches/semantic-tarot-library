@@ -26,6 +26,9 @@
                 "Hand-painted",
                 "Visconti di Modrone",
                 "Visconti tarot"
+            ],
+            "related_topics": [
+                "visconti_page"
             ]
         },
         "deck_pierpont_morgan": {
@@ -46,6 +49,9 @@
                 "The Morgan Library & Museum",
                 "The Morgan Library and Museum",
                 "Accademia Carrara Bergamo"
+            ],
+            "related_topics": [
+                "visconti_page"
             ]
         },
         "deck_brambilla": {
@@ -60,6 +66,9 @@
                 "Hand-painted",
                 "Pinacoteca di Brera",
                 "Francesco Sforza"
+            ],
+            "related_topics": [
+                "visconti_page"
             ]
         },
         "deck_rider_waite_smith": {
@@ -76,6 +85,9 @@
                 "London",
                 "Victoria and Albert Museum",
                 "rider waite smith"
+            ],
+            "related_topics": [
+                "rider_sola_busca_page"
             ]
         },
         "deck_sola_busca": {
@@ -89,6 +101,9 @@
                 "Marquise Busca and Count Sola",
                 "Hermetic-alchemical tradition",
                 "Greco-Roman heroes"
+            ],
+            "related_topics": [
+                "rider_sola_busca_page"
             ]
         }
     },

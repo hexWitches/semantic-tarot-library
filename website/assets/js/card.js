@@ -39,7 +39,7 @@ async function initCardPage() {
 
             fillCardMetadata(cardData, graph, extraTexts);
             updateNavigation(cardData, graph);
-            generateRelatedTopics(cardData, graph);
+            generateRelatedTopics(cardData, graph, textsData);
         } else {
             console.warn("Card not found in the Knowledge Graph.");
         }
@@ -443,7 +443,7 @@ function updateNavigation(currentCard, graph) {
 /**
  * Populates the Related Topics Section Dynamically
  */
-function generateRelatedTopics(card, graph) {
+function generateRelatedTopics(card, graph, textsData) {
     const topicsCarousel = document.getElementById('topicsCarousel');
     if (!topicsCarousel) return;
 
@@ -486,6 +486,26 @@ function generateRelatedTopics(card, graph) {
     if (deckRef) {
         const deckId = deckRef['@id'] || deckRef;
         deckObj = graph.find(d => d['@id'] === deckId);
+    }
+
+    // --- NEW: Add topics related to the DECK itself ---
+    if (deckObj && textsData && textsData.decks) {
+        const deckIdRaw = deckObj['@id'].replace('smtg:', '');
+        const normalizedDeckId = deckIdRaw.replace(/-/g, '_');
+        const deckTextData = textsData.decks[normalizedDeckId];
+
+        if (deckTextData && deckTextData.related_topics) {
+            deckTextData.related_topics.forEach(topicId => {
+                const topic = textsData.explore && textsData.explore[topicId];
+                if (topic) {
+                    createTopicCard(
+                        topic.title || "Related Topic", 
+                        'Discover the history of this deck', 
+                        `deepening.html?id=${topicId}`
+                    );
+                }
+            });
+        }
     }
 
     if (isMajor) {
