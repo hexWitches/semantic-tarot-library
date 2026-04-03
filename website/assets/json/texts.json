@@ -7521,7 +7521,7 @@
             "intro": "The Visconti–Sforza tarot refers to a group of <strong>illustrated card decks</strong> produced in northern Italy during the middle of the fifteenth century. Commissioned by the ruling families of Milan – the Visconti and later the Sforza – these cards are among the oldest surviving examples of what would eventually become the tarot. Today they survive only in fragments scattered among museums, libraries, and private collections, yet they remain invaluable witnesses to the early history of the game.",
             "banner_image": {
                 "path": "assets/images/explore/visconti-sforza-deck.png",
-                "alt": "A wide shot comparing three historical French tarot cards."
+                "alt": "Image comparing Visconti Sforza Tarot decks."
             },
             "body_content": [
                 {
@@ -7531,7 +7531,18 @@
             ]
         },
         "rider_sola_busca_page": {
-            "title": "Sola Busca and Rider Waite"
+            "title": "Sola Busca and Rider Waite",
+            "intro": "",
+            "banner_image": {
+                "path": "assets/images/explore/rider-sola.png",
+                "alt": "An image comparing Rider Waite and Sola Busca Tarot decks."
+            },
+            "body_content": [
+                {
+                    "type": "text",
+                    "content": ""
+                }
+            ]
         },
         "archetypes_page": {
             "concept_fool": {
@@ -7719,14 +7730,14 @@
             "concept_death": {
                 "subtitle": "«Remember that life is limited and so are the good and evil of men»",
                 "img": {
-                    "path": "",
+                    "path": "assets/images/collection/RiderWaiteSmithTarot/014.jpg",
                     "alt": "The Death archetype.",
                     "caption": "The Death card from the Rider-Waite deck."
                 },
                 "body_content": [
                     {
                         "type": "text",
-                        "content": ""
+                        "content": "Lorem ipsum boh qualcosa giusto per vedere come viene. Lorem ipsum boh qualcosa giusto per vedere come viene. Lorem ipsum boh qualcosa giusto per vedere come viene. Lorem ipsum boh qualcosa giusto per vedere come viene. Lorem ipsum boh qualcosa giusto per vedere come viene. Lorem ipsum boh qualcosa giusto per vedere come viene. Lorem ipsum boh qualcosa giusto per vedere come viene. Lorem ipsum boh qualcosa giusto per vedere come viene. Lorem ipsum boh qualcosa giusto per vedere come viene."
                     }
                 ]
             },

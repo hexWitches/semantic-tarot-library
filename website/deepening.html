@@ -123,12 +123,10 @@
                     <h1 class="display-5 fw-bold page-title">Topic title</h1>
                 </div>
             </div>
-            <div class="lc-block col-lg-8 mx-auto">
-                <div>
-                    <p class="lead collection-desc mb-0">
-                        Intro.
-                    </p>
-                </div>
+            <div class="lc-block col-lg-9 mx-auto">
+                <p class="lead collection-desc mb-0 text-center">
+                    Intro.
+                </p>
             </div>
         </header>
 
@@ -137,9 +135,19 @@
         </section>
 
         <section class="container px-4 px-md-5 mb-5 pb-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-9 topic-text-container">
+            <div id="deepening-main-row" class="row justify-content-center">
+                <!-- Archetype Portrait (Left Column) -->
+                <div id="archetype-portrait-col" class="col-lg-4 mb-4" style="display: none;">
+                    <div id="archetype-portrait-container"></div>
+                </div>
 
+                <!-- Content & Metadata (Right Column) -->
+                <div id="main-content-col" class="col-lg-9">
+                    <!-- Archetype Metadata (only for archetypes) -->
+                    <div id="archetype-metadata-container" class="mb-4"></div>
+
+                    <div class="topic-text-container">
+                    </div>
                 </div>
             </div>
         </section>
