@@ -187,7 +187,7 @@
                                     The mundane mirrored. <br>Explore the <span class="highlight">four suits</span> and their meanings.
                                 </h3>
                             </div>
-                            <a href="suits.html" id="dailyCardDiscoverMore" class="discover-more">
+                            <a href="website/deepening.html?id=suits_page" id="dailyCardDiscoverMore" class="discover-more">
                                 <span class="discover-svg">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
                                         <circle cx="4" cy="8" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="12" cy="8" r="1.5"/>
@@ -227,6 +227,9 @@
                             </div>`;
                     });
 
+                    const archetypeParam = archetypeId ? graphIdToCardParam(archetypeId) : "";
+                    const archetypeLink = archetypeParam ? `website/deepening.html?id=${archetypeParam}` : cardLink;
+
                     rightColHtml = `
                         <div class="evolution-frame compact-evolution mt-0 mx-0">
                             <div class="evolution-content">
@@ -237,7 +240,7 @@
                                     ${evoHtml}
                                 </div>
                             </div>
-                            <a href="${cardLink}" id="dailyCardDiscoverMore" class="discover-more">
+                            <a href="${archetypeLink}" id="dailyCardDiscoverMore" class="discover-more">
                                 <span class="discover-svg">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
                                         <circle cx="4" cy="8" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="12" cy="8" r="1.5"/>
