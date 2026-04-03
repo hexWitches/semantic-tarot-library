@@ -46,9 +46,10 @@ function renderTopicPage(pageData) {
     const titleEl = document.querySelector('.page-title');
     if (titleEl) titleEl.innerHTML = title;
 
+    // 2. Intro Text
     const introEl = document.querySelector('.collection-desc');
-    if (introEl && pageData.intro) {
-        introEl.innerHTML = pageData.intro;
+    if (introEl) {
+        introEl.innerHTML = pageData.intro || pageData.subtitle || "";
     }
 
     // 3. Banner Image
@@ -56,7 +57,7 @@ function renderTopicPage(pageData) {
     const bannerImg = bannerSection ? bannerSection.querySelector('img') : null;
     
     // Check for banner data in various possible formats
-    const bannerData = pageData.banner_image || pageData.image_banner || pageData.banner;
+    const bannerData = pageData.banner_image || pageData.image_banner || pageData.banner || pageData.img;
     
     if (bannerData && bannerData.path && bannerImg) {
         bannerImg.src = bannerData.path;
@@ -81,7 +82,7 @@ function renderTopicPage(pageData) {
         } else if (Array.isArray(bodyData)) {
             // Case B: Array of sections (new flexible format)
             bodyData.forEach(section => {
-                const content = section.content || section.text;
+                const content = section.content || section.text || section.concept;
                 if (section.type === 'image') {
                     renderImageSection(container, section.path, section.alt, section.caption);
                 } else if (section.type === 'subtitle') {
@@ -93,7 +94,7 @@ function renderTopicPage(pageData) {
         }
     } else {
         // Case C: Multi-key structure (fallback for specific legacy layouts)
-        const metadataKeys = ['title', 'intro', 'banner', 'image_banner', 'banner_image', 'body', 'body_content'];
+        const metadataKeys = ['title', 'intro', 'subtitle', 'banner', 'image_banner', 'banner_image', 'img', 'body', 'body_content'];
         Object.keys(pageData).forEach(key => {
             if (!metadataKeys.includes(key)) {
                 const heading = key.charAt(0).toUpperCase() + key.slice(1);
