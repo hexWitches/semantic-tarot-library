@@ -70,12 +70,31 @@ async function initExplorePage() {
             });
         });
 
-        // 5. Initial Sort and Render
+        // 5. Initial Sort
         fullDataset.sort((a, b) => a.title.localeCompare(b.title));
-        renderGrid(fullDataset);
 
         // 6. Setup Listeners
         setupFilterListeners();
+
+        // 7. Handle URL Parameters for pre-filtering
+        const urlParams = new URLSearchParams(window.location.search);
+        const filterParam = urlParams.get('filter');
+        if (filterParam) {
+            activeFilters.add(filterParam);
+
+            // Special handling to expand parent category if it's a subfilter
+            const subBtn = document.querySelector(`.filter-suboption-btn[data-subfilter="${filterParam}"]`);
+            if (subBtn) {
+                const group = subBtn.closest('.filter-group');
+                if (group) {
+                    group.querySelectorAll('.filter-expandable, .filter-suboptions').forEach(el => el.classList.add('open'));
+                }
+            }
+        }
+
+        // 8. Initial Render (applying filters if any)
+        updateFilterUI();
+        applyFilters();
 
     } catch (error) {
         console.error("Error initializing Explore page:", error);
