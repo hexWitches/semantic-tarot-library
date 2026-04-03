@@ -494,6 +494,21 @@ function attachFilterListeners() {
             applyFilter(filterType, subfilter);
         });
     });
+
+    // Clear All Filters button
+    const clearAllBtn = document.getElementById('clear-all-filters');
+    if (clearAllBtn) {
+        clearAllBtn.addEventListener('click', () => {
+            resetFilters();
+            // Close all expandable menus for a clean reset
+            document.querySelectorAll('.filter-expandable').forEach(btn => {
+                const group = btn.closest('.filter-group');
+                const suboptions = group.querySelector('.filter-suboptions');
+                btn.classList.remove('open');
+                if (suboptions) suboptions.classList.remove('open');
+            });
+        });
+    }
 }
 
 function updateActiveFilterUI() {
@@ -519,6 +534,13 @@ function updateActiveFilterUI() {
         }
         group.querySelector('.filter-btn')?.classList.toggle('active', isCategoryActive);
     });
+
+    // update clear all button visibility
+    const clearAllBtn = document.getElementById('clear-all-filters');
+    if (clearAllBtn) {
+        const anyFilter = hasActiveFilters() || currentSearch !== '';
+        clearAllBtn.style.display = anyFilter ? 'inline-block' : 'none';
+    }
 }
 
 // UI rendering functions -> generate the html content
