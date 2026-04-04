@@ -14,7 +14,7 @@
 @prefix wd: <https://www.wikidata.org/entity/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://w3id.org/smt-library/graph/> a void:Dataset ;
+smtg: a void:Dataset ;
     dcterms:conformsTo <https://w3id.org/smt-library/ontology> ;
     dcterms:created "2026-03-03"^^xsd:date ;
     dcterms:creator "Miriana Pinto",
@@ -479,6 +479,8 @@ smtg:card-brambilla-42 a odi:DeckCard,
     odi:hasName "Imperatore" ;
     odi:isContainedIn smtg:deck-brambilla ;
     odi:isNumber "IV" ;
+    smt:containsSymbol smtg:fig-eagle-hat,
+        smtg:fig-scepter-emperor ;
     smt:represents smtg:concept-emperor .
 
 smtg:card-brambilla-43 a odi:DeckCard,
@@ -1153,6 +1155,8 @@ smtg:card-modrone-57 a odi:DeckCard,
     odi:hasName "The Empress" ;
     odi:isContainedIn smtg:deck-modrone ;
     odi:isNumber "III" ;
+    smt:containsSymbol smtg:fig-eagle-shield,
+        smtg:fig-scepter-empress ;
     smt:represents smtg:concept-empress .
 
 smtg:card-modrone-58 a odi:DeckCard,
@@ -1163,6 +1167,9 @@ smtg:card-modrone-58 a odi:DeckCard,
     odi:hasName "The Emperor" ;
     odi:isContainedIn smtg:deck-modrone ;
     odi:isNumber "IV" ;
+    smt:containsSymbol smtg:fig-eagle-hat,
+        smtg:fig-pillar-throne,
+        smtg:fig-scepter-emperor ;
     smt:represents smtg:concept-emperor .
 
 smtg:card-modrone-59 a odi:DeckCard,
@@ -1173,6 +1180,7 @@ smtg:card-modrone-59 a odi:DeckCard,
     odi:hasName "The Lovers" ;
     odi:isContainedIn smtg:deck-modrone ;
     odi:isNumber "VI" ;
+    smt:containsSymbol smtg:fig-angel-cupid ;
     smt:represents smtg:concept-lovers .
 
 smtg:card-modrone-60 a odi:DeckCard,
@@ -1193,6 +1201,7 @@ smtg:card-modrone-61 a odi:DeckCard,
     odi:hasName "Strenght" ;
     odi:isContainedIn smtg:deck-modrone ;
     odi:isNumber "XI" ;
+    smt:containsSymbol smtg:fig-lion-tamed ;
     smt:represents smtg:concept-strenght .
 
 smtg:card-modrone-62 a odi:DeckCard,
@@ -1203,6 +1212,7 @@ smtg:card-modrone-62 a odi:DeckCard,
     odi:hasName "Death" ;
     odi:isContainedIn smtg:deck-modrone ;
     odi:isNumber "XIII" ;
+    smt:containsSymbol smtg:fig-scythe-death ;
     smt:represents smtg:concept-death .
 
 smtg:card-modrone-63 a odi:DeckCard,
@@ -1213,6 +1223,7 @@ smtg:card-modrone-63 a odi:DeckCard,
     odi:hasName "Judgement" ;
     odi:isContainedIn smtg:deck-modrone ;
     odi:isNumber "XX" ;
+    smt:containsSymbol smtg:fig-trumpet-angel ;
     smt:represents smtg:concept-judgment .
 
 smtg:card-modrone-64 a odi:DeckCard,
@@ -1260,6 +1271,7 @@ smtg:card-noblet-01 a odi:DeckCard,
     odi:hasName "Le Bateleur" ;
     odi:isContainedIn smtg:deck-noblet ;
     odi:isNumber "I" ;
+    smt:containsSymbol smtg:fig-magician-table ;
     smt:represents smtg:concept-juggler .
 
 smtg:card-noblet-02 a odi:DeckCard,
@@ -1280,6 +1292,8 @@ smtg:card-noblet-03 a odi:DeckCard,
     odi:hasName "L'Emperatrice" ;
     odi:isContainedIn smtg:deck-noblet ;
     odi:isNumber "III" ;
+    smt:containsSymbol smtg:fig-eagle-shield,
+        smtg:fig-scepter-empress ;
     smt:represents smtg:concept-empress .
 
 smtg:card-noblet-04 a odi:DeckCard,
@@ -1290,6 +1304,8 @@ smtg:card-noblet-04 a odi:DeckCard,
     odi:hasName "L'Empereur" ;
     odi:isContainedIn smtg:deck-noblet ;
     odi:isNumber "IV" ;
+    smt:containsSymbol smtg:fig-eagle-shield,
+        smtg:fig-scepter-emperor ;
     smt:represents smtg:concept-emperor .
 
 smtg:card-noblet-05 a odi:DeckCard,
@@ -1300,6 +1316,7 @@ smtg:card-noblet-05 a odi:DeckCard,
     odi:hasName "Le Pape" ;
     odi:isContainedIn smtg:deck-noblet ;
     odi:isNumber "V" ;
+    smt:containsSymbol smtg:fig-scepter-pope ;
     smt:represents smtg:concept-pope .
 
 smtg:card-noblet-06 a odi:DeckCard,
@@ -1310,6 +1327,7 @@ smtg:card-noblet-06 a odi:DeckCard,
     odi:hasName "L'Amoreux" ;
     odi:isContainedIn smtg:deck-noblet ;
     odi:isNumber "VI" ;
+    smt:containsSymbol smtg:fig-angel-cupid ;
     smt:represents smtg:concept-lovers .
 
 smtg:card-noblet-07 a odi:DeckCard,
@@ -1330,6 +1348,7 @@ smtg:card-noblet-08 a odi:DeckCard,
     odi:hasName "Iustice" ;
     odi:isContainedIn smtg:deck-noblet ;
     odi:isNumber "VIII" ;
+    smt:containsSymbol smtg:fid-sword-justice ;
     smt:represents smtg:concept-justice .
 
 smtg:card-noblet-09 a odi:DeckCard,
@@ -1360,6 +1379,7 @@ smtg:card-noblet-11 a odi:DeckCard,
     odi:hasName "Force" ;
     odi:isContainedIn smtg:deck-noblet ;
     odi:isNumber "XI" ;
+    smt:containsSymbol smtg:fig-lion-tamed ;
     smt:represents smtg:concept-strenght .
 
 smtg:card-noblet-12 a odi:DeckCard,
@@ -1380,6 +1400,7 @@ smtg:card-noblet-13 a odi:DeckCard,
     odi:hasName "La Mort" ;
     odi:isContainedIn smtg:deck-noblet ;
     odi:isNumber "XIII" ;
+    smt:containsSymbol smtg:fig-scythe-death ;
     smt:represents smtg:concept-death .
 
 smtg:card-noblet-14 a odi:DeckCard,
@@ -1390,6 +1411,8 @@ smtg:card-noblet-14 a odi:DeckCard,
     odi:hasName "L'Emperance" ;
     odi:isContainedIn smtg:deck-noblet ;
     odi:isNumber "XIV" ;
+    smt:containsSymbol smtg:fig-temperance-vases,
+        smtg:fig-water-alchemical ;
     smt:represents smtg:concept-temperance .
 
 smtg:card-noblet-15 a odi:DeckCard,
@@ -1400,6 +1423,8 @@ smtg:card-noblet-15 a odi:DeckCard,
     odi:hasName "Le Diable" ;
     odi:isContainedIn smtg:deck-noblet ;
     odi:isNumber "XV" ;
+    smt:containsSymbol smtg:fig-devil-chains,
+        smtg:fig-devil-horns ;
     smt:represents smtg:concept-the-devil .
 
 smtg:card-noblet-16 a odi:DeckCard,
@@ -1410,6 +1435,7 @@ smtg:card-noblet-16 a odi:DeckCard,
     odi:hasName "La Maison Dieu" ;
     odi:isContainedIn smtg:deck-noblet ;
     odi:isNumber "XVI" ;
+    smt:containsSymbol smtg:fig-crown-tower ;
     smt:represents smtg:concept-the-tower .
 
 smtg:card-noblet-17 a odi:DeckCard,
@@ -1420,6 +1446,8 @@ smtg:card-noblet-17 a odi:DeckCard,
     odi:hasName "L'Estoille" ;
     odi:isContainedIn smtg:deck-noblet ;
     odi:isNumber "XVII" ;
+    smt:containsSymbol smtg:fig-star-8-points,
+        smtg:fig-water-healing ;
     smt:represents smtg:concept-the-star .
 
 smtg:card-noblet-18 a odi:DeckCard,
@@ -1430,6 +1458,11 @@ smtg:card-noblet-18 a odi:DeckCard,
     odi:hasName "La Lune" ;
     odi:isContainedIn smtg:deck-noblet ;
     odi:isNumber "XVIII" ;
+    smt:containsSymbol smtg:fig-crayfish-moon,
+        smtg:fig-dog-moon,
+        smtg:fig-towers-moon,
+        smtg:fig-water-pool,
+        smtg:fig-wolf-moon ;
     smt:represents smtg:concept-the-moon .
 
 smtg:card-noblet-19 a odi:DeckCard,
@@ -1450,6 +1483,7 @@ smtg:card-noblet-20 a odi:DeckCard,
     odi:hasName "Le Iugement" ;
     odi:isContainedIn smtg:deck-noblet ;
     odi:isNumber "XX" ;
+    smt:containsSymbol smtg:fig-trumpet-angel ;
     smt:represents smtg:concept-judgment .
 
 smtg:card-noblet-21 a odi:DeckCard,
@@ -1460,6 +1494,11 @@ smtg:card-noblet-21 a odi:DeckCard,
     odi:hasName "Le Monde" ;
     odi:isContainedIn smtg:deck-noblet ;
     odi:isNumber "XXI" ;
+    smt:containsSymbol smtg:fig-laurel-wreath,
+        smtg:fig-winged-angel,
+        smtg:fig-winged-bull,
+        smtg:fig-winged-eagle,
+        smtg:fig-winged-lion ;
     smt:represents smtg:concept-the-world .
 
 smtg:card-noblet-22 a odi:DeckCard,
@@ -1469,6 +1508,8 @@ smtg:card-noblet-22 a odi:DeckCard,
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/TarotNoblet/043.jpg> ;
     odi:hasName "Le Fou" ;
     odi:isContainedIn smtg:deck-noblet ;
+    smt:containsSymbol smtg:fig-dog-fool,
+        smtg:fig-staff-fool ;
     smt:represents smtg:concept-fool .
 
 smtg:card-noblet-23 a odi:DeckCard,
@@ -2025,6 +2066,7 @@ smtg:card-pierpont-morgan-01 a odi:DeckCard,
     odi:hasName "The Juggler" ;
     odi:isContainedIn smtg:deck-pierpont-morgan ;
     odi:isNumber "I" ;
+    smt:containsSymbol smtg:fig-magician-table ;
     smt:represents smtg:concept-juggler .
 
 smtg:card-pierpont-morgan-02 a odi:DeckCard,
@@ -2036,6 +2078,7 @@ smtg:card-pierpont-morgan-02 a odi:DeckCard,
     odi:hasName "The High Priestess" ;
     odi:isContainedIn smtg:deck-pierpont-morgan ;
     odi:isNumber "II" ;
+    smt:containsSymbol smtg:fig-scepter-popess ;
     smt:represents smtg:concept-popess .
 
 smtg:card-pierpont-morgan-03 a odi:DeckCard,
@@ -2047,6 +2090,8 @@ smtg:card-pierpont-morgan-03 a odi:DeckCard,
     odi:hasName "The Empress" ;
     odi:isContainedIn smtg:deck-pierpont-morgan ;
     odi:isNumber "III" ;
+    smt:containsSymbol smtg:fig-eagle-shield,
+        smtg:fig-scepter-empress ;
     smt:represents smtg:concept-empress .
 
 smtg:card-pierpont-morgan-04 a odi:DeckCard,
@@ -2058,6 +2103,7 @@ smtg:card-pierpont-morgan-04 a odi:DeckCard,
     odi:hasName "The Hierophant" ;
     odi:isContainedIn smtg:deck-pierpont-morgan ;
     odi:isNumber "V" ;
+    smt:containsSymbol smtg:fig-scepter-pope ;
     smt:represents smtg:concept-pope .
 
 smtg:card-pierpont-morgan-05 a odi:DeckCard,
@@ -2069,6 +2115,7 @@ smtg:card-pierpont-morgan-05 a odi:DeckCard,
     odi:hasName "Love" ;
     odi:isContainedIn smtg:deck-pierpont-morgan ;
     odi:isNumber "VI" ;
+    smt:containsSymbol smtg:fig-angel-cupid ;
     smt:represents smtg:concept-lovers .
 
 smtg:card-pierpont-morgan-06 a odi:DeckCard,
@@ -2112,6 +2159,7 @@ smtg:card-pierpont-morgan-09 a odi:DeckCard,
     odi:hasName "Fortitude" ;
     odi:isContainedIn smtg:deck-pierpont-morgan ;
     odi:isNumber "XI" ;
+    smt:containsSymbol smtg:fig-lion-tamed ;
     smt:represents smtg:concept-strenght .
 
 smtg:card-pierpont-morgan-10 a odi:DeckCard,
@@ -2134,6 +2182,7 @@ smtg:card-pierpont-morgan-11 a odi:DeckCard,
     odi:hasName "Death (Skeleton)" ;
     odi:isContainedIn smtg:deck-pierpont-morgan ;
     odi:isNumber "XIII" ;
+    smt:containsSymbol smtg:fig-scythe-death ;
     smt:represents smtg:concept-death .
 
 smtg:card-pierpont-morgan-12 a odi:DeckCard,
@@ -2144,6 +2193,8 @@ smtg:card-pierpont-morgan-12 a odi:DeckCard,
     odi:hasName "Temperance" ;
     odi:isContainedIn smtg:deck-pierpont-morgan ;
     odi:isNumber "XIV" ;
+    smt:containsSymbol smtg:fig-temperance-vases,
+        smtg:fig-water-alchemical ;
     smt:represents smtg:concept-temperance .
 
 smtg:card-pierpont-morgan-13 a odi:DeckCard,
@@ -2165,6 +2216,7 @@ smtg:card-pierpont-morgan-14 a odi:DeckCard,
     odi:hasName "The Last Judgment" ;
     odi:isContainedIn smtg:deck-pierpont-morgan ;
     odi:isNumber "XX" ;
+    smt:containsSymbol smtg:fig-trumpet-angel ;
     smt:represents smtg:concept-judgment .
 
 smtg:card-pierpont-morgan-15 a odi:DeckCard,
@@ -2175,6 +2227,7 @@ smtg:card-pierpont-morgan-15 a odi:DeckCard,
     odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/ViscontiSforzaTarot/m630_15.jpg> ;
     odi:hasName "The Fool" ;
     odi:isContainedIn smtg:deck-pierpont-morgan ;
+    smt:containsSymbol smtg:fig-staff-fool ;
     smt:represents smtg:concept-fool .
 
 smtg:card-pierpont-morgan-16 a odi:DeckCard,
@@ -2398,6 +2451,8 @@ smtg:card-rider-waite-smith-01 a odi:DeckCard,
     odi:hasName "The Fool" ;
     odi:isContainedIn smtg:deck-rider-waite-smith ;
     odi:isNumber "0" ;
+    smt:containsSymbol smtg:fig-dog-fool,
+        smtg:fig-staff-fool ;
     smt:represents smtg:concept-fool .
 
 smtg:card-rider-waite-smith-02 a odi:DeckCard,
@@ -2409,6 +2464,8 @@ smtg:card-rider-waite-smith-02 a odi:DeckCard,
     odi:hasName "The Magician" ;
     odi:isContainedIn smtg:deck-rider-waite-smith ;
     odi:isNumber "I" ;
+    smt:containsSymbol smtg:fig-infinity-symbol,
+        smtg:fig-magician-table ;
     smt:represents smtg:concept-juggler .
 
 smtg:card-rider-waite-smith-03 a odi:DeckCard,
@@ -2420,6 +2477,9 @@ smtg:card-rider-waite-smith-03 a odi:DeckCard,
     odi:hasName "The High Priestess" ;
     odi:isContainedIn smtg:deck-rider-waite-smith ;
     odi:isNumber "II" ;
+    smt:containsSymbol smtg:fig-crescent-moon,
+        smtg:fig-pillar-jb,
+        smtg:fig-pomegranate ;
     smt:represents smtg:concept-popess .
 
 smtg:card-rider-waite-smith-04 a odi:DeckCard,
@@ -2431,6 +2491,8 @@ smtg:card-rider-waite-smith-04 a odi:DeckCard,
     odi:hasName "The Empress" ;
     odi:isContainedIn smtg:deck-rider-waite-smith ;
     odi:isNumber "III" ;
+    smt:containsSymbol smtg:fig-pomegranate,
+        smtg:fig-scepter-empress ;
     smt:represents smtg:concept-empress .
 
 smtg:card-rider-waite-smith-05 a odi:DeckCard,
@@ -2442,6 +2504,7 @@ smtg:card-rider-waite-smith-05 a odi:DeckCard,
     odi:hasName "The Emperor" ;
     odi:isContainedIn smtg:deck-rider-waite-smith ;
     odi:isNumber "IV" ;
+    smt:containsSymbol smtg:fig-scepter-emperor ;
     smt:represents smtg:concept-emperor .
 
 smtg:card-rider-waite-smith-06 a odi:DeckCard,
@@ -2453,6 +2516,8 @@ smtg:card-rider-waite-smith-06 a odi:DeckCard,
     odi:hasName "The Hierophant" ;
     odi:isContainedIn smtg:deck-rider-waite-smith ;
     odi:isNumber "V" ;
+    smt:containsSymbol smtg:fig-pillar-temple,
+        smtg:fig-scepter-pope ;
     smt:represents smtg:concept-pope .
 
 smtg:card-rider-waite-smith-07 a odi:DeckCard,
@@ -2464,6 +2529,7 @@ smtg:card-rider-waite-smith-07 a odi:DeckCard,
     odi:hasName "The Lovers" ;
     odi:isContainedIn smtg:deck-rider-waite-smith ;
     odi:isNumber "VI" ;
+    smt:containsSymbol smtg:fig-angel-cupid ;
     smt:represents smtg:concept-lovers .
 
 smtg:card-rider-waite-smith-08 a odi:DeckCard,
@@ -2486,6 +2552,8 @@ smtg:card-rider-waite-smith-09 a odi:DeckCard,
     odi:hasName "Strenght" ;
     odi:isContainedIn smtg:deck-rider-waite-smith ;
     odi:isNumber "VIII" ;
+    smt:containsSymbol smtg:fig-infinity-symbol,
+        smtg:fig-lion-tamed ;
     smt:represents smtg:concept-strenght .
 
 smtg:card-rider-waite-smith-10 a odi:DeckCard,
@@ -2508,6 +2576,10 @@ smtg:card-rider-waite-smith-11 a odi:DeckCard,
     odi:hasName "Wheel of Fortune" ;
     odi:isContainedIn smtg:deck-rider-waite-smith ;
     odi:isNumber "X" ;
+    smt:containsSymbol smtg:fig-winged-angel,
+        smtg:fig-winged-bull,
+        smtg:fig-winged-eagle,
+        smtg:fig-winged-lion ;
     smt:represents smtg:concept-wheel-of-fortune .
 
 smtg:card-rider-waite-smith-12 a odi:DeckCard,
@@ -2519,6 +2591,9 @@ smtg:card-rider-waite-smith-12 a odi:DeckCard,
     odi:hasName "Justice" ;
     odi:isContainedIn smtg:deck-rider-waite-smith ;
     odi:isNumber "XI" ;
+    smt:containsSymbol smtg:fig-pillar-law,
+        smtg:fig-scales-justice,
+        smtg:fig-sword-justice ;
     smt:represents smtg:concept-justice .
 
 smtg:card-rider-waite-smith-13 a odi:DeckCard,
@@ -2541,6 +2616,7 @@ smtg:card-rider-waite-smith-14 a odi:DeckCard,
     odi:hasName "Death" ;
     odi:isContainedIn smtg:deck-rider-waite-smith ;
     odi:isNumber "XIII" ;
+    smt:containsSymbol smtg:fig-water-river ;
     smt:represents smtg:concept-death .
 
 smtg:card-rider-waite-smith-15 a odi:DeckCard,
@@ -2552,6 +2628,8 @@ smtg:card-rider-waite-smith-15 a odi:DeckCard,
     odi:hasName "Temperance" ;
     odi:isContainedIn smtg:deck-rider-waite-smith ;
     odi:isNumber "XIV" ;
+    smt:containsSymbol smtg:fig-temperance-vases,
+        smtg:fig-water-alchemical ;
     smt:represents smtg:concept-temperance .
 
 smtg:card-rider-waite-smith-16 a odi:DeckCard,
@@ -2563,6 +2641,8 @@ smtg:card-rider-waite-smith-16 a odi:DeckCard,
     odi:hasName "The Devil" ;
     odi:isContainedIn smtg:deck-rider-waite-smith ;
     odi:isNumber "XV" ;
+    smt:containsSymbol smtg:fig-devil-chains,
+        smtg:fig-devil-horns ;
     smt:represents smtg:concept-the-devil .
 
 smtg:card-rider-waite-smith-17 a odi:DeckCard,
@@ -2574,6 +2654,7 @@ smtg:card-rider-waite-smith-17 a odi:DeckCard,
     odi:hasName "The Tower" ;
     odi:isContainedIn smtg:deck-rider-waite-smith ;
     odi:isNumber "XVI" ;
+    smt:containsSymbol smtg:fig-lightning-bolt ;
     smt:represents smtg:concept-the-tower .
 
 smtg:card-rider-waite-smith-18 a odi:DeckCard,
@@ -2585,6 +2666,8 @@ smtg:card-rider-waite-smith-18 a odi:DeckCard,
     odi:hasName "The Star" ;
     odi:isContainedIn smtg:deck-rider-waite-smith ;
     odi:isNumber "XVII" ;
+    smt:containsSymbol smtg:fig-star-8-points,
+        smtg:fig-water-healing ;
     smt:represents smtg:concept-the-star .
 
 smtg:card-rider-waite-smith-19 a odi:DeckCard,
@@ -2596,6 +2679,11 @@ smtg:card-rider-waite-smith-19 a odi:DeckCard,
     odi:hasName "The Moon" ;
     odi:isContainedIn smtg:deck-rider-waite-smith ;
     odi:isNumber "XVIII" ;
+    smt:containsSymbol smtg:fig-crayfish-moon,
+        smtg:fig-dog-moon,
+        smtg:fig-towers-moon,
+        smtg:fig-water-pool,
+        smtg:fig-wolf-moon ;
     smt:represents smtg:concept-the-moon .
 
 smtg:card-rider-waite-smith-20 a odi:DeckCard,
@@ -2618,6 +2706,7 @@ smtg:card-rider-waite-smith-21 a odi:DeckCard,
     odi:hasName "Judgement" ;
     odi:isContainedIn smtg:deck-rider-waite-smith ;
     odi:isNumber "XX" ;
+    smt:containsSymbol smtg:fig-trumpet-angel ;
     smt:represents smtg:concept-judgment .
 
 smtg:card-rider-waite-smith-22 a odi:DeckCard,
@@ -2629,6 +2718,12 @@ smtg:card-rider-waite-smith-22 a odi:DeckCard,
     odi:hasName "The World" ;
     odi:isContainedIn smtg:deck-rider-waite-smith ;
     odi:isNumber "XXI" ;
+    smt:containsSymbol smtg:fig-infinity-symbol,
+        smtg:fig-laurel-wreath,
+        smtg:fig-winged-angel,
+        smtg:fig-winged-bull,
+        smtg:fig-winged-eagle,
+        smtg:fig-winged-lion ;
     smt:represents smtg:concept-the-world .
 
 smtg:card-rider-waite-smith-23 a odi:DeckCard,
@@ -3467,246 +3562,6 @@ smtg:card-sola-busca-9 a odi:DeckCard,
     odi:isContainedIn smtg:deck-sola-busca ;
     odi:isNumber "VIII" .
 
-smtg:fig-angel-cupid a smt:SymbolicFigure ;
-    dcterms:description "Divine intervention and the higher self overseeing choices."@en ;
-    skos:broader smtg:concept-lovers ;
-    skos:prefLabel "Angel" .
-
-smtg:fig-crayfish-moon a smt:SymbolicFigure ;
-    dcterms:description "Primordial fears emerging from the depths of the psyche."@en ;
-    skos:broader smtg:concept-the-moon ;
-    skos:prefLabel "Crayfish" .
-
-smtg:fig-crescent-moon a smt:SymbolicFigure ;
-    dcterms:description "Intuition, mystery, and the illumination of the hidden psyche."@en ;
-    skos:broader smtg:concept-popess ;
-    skos:prefLabel "Crescent Moon" .
-
-smtg:fig-crossed-keys a smt:SymbolicFigure ;
-    dcterms:description "The keys to the kingdom of heaven and secret doctrine."@en ;
-    skos:broader smtg:concept-pope ;
-    skos:prefLabel "Crossed Keys" .
-
-smtg:fig-crown-tower a smt:SymbolicFigure ;
-    dcterms:description "The ego being stripped of its false authority."@en ;
-    skos:broader smtg:concept-the-tower ;
-    skos:prefLabel "Falling Crown" .
-
-smtg:fig-devil-chains a smt:SymbolicFigure ;
-    dcterms:description "Voluntary bondage to materialism and addiction."@en ;
-    skos:broader smtg:concept-the-devil ;
-    skos:prefLabel "Chains" .
-
-smtg:fig-devil-horns a smt:SymbolicFigure ;
-    dcterms:description "Animalistic desires and the ego's trap."@en ;
-    skos:broader smtg:concept-the-devil ;
-    skos:prefLabel "Horns" .
-
-smtg:fig-dog-fool a smt:SymbolicFigure ;
-    dcterms:description "Animal instinct or the call of the material world."@en ;
-    skos:broader smtg:concept-fool ;
-    skos:prefLabel "Dog" .
-
-smtg:fig-dog-moon a smt:SymbolicFigure ;
-    dcterms:description "The domesticated, civilized aspect of the human mind."@en ;
-    skos:broader smtg:concept-the-moon ;
-    skos:prefLabel "Dog" .
-
-smtg:fig-eagle-shield a smt:SymbolicFigure ;
-    dcterms:description "Spiritual power and sovereignty."@en ;
-    skos:broader smtg:concept-empress ;
-    skos:prefLabel "Eagle" .
-
-smtg:fig-ibis-bird a smt:SymbolicFigure ;
-    dcterms:description "The soul's resting place and the messenger of Thoth."@en ;
-    skos:broader smtg:concept-the-star ;
-    skos:prefLabel "Bird (Ibis)" .
-
-smtg:fig-infinity-symbol a smt:SymbolicFigure ;
-    dcterms:description "Infinite possibilities and the eternal nature of the spirit."@en ;
-    skos:broader smtg:concept-juggler ;
-    skos:prefLabel "Infinity Symbol" .
-
-smtg:fig-lantern-hermit a smt:SymbolicFigure ;
-    dcterms:description "The light of inner wisdom and the search for truth."@en ;
-    skos:broader smtg:concept-hermit ;
-    skos:prefLabel "Lantern" .
-
-smtg:fig-laurel-wreath a smt:SymbolicFigure ;
-    dcterms:description "Victory, protection, and the completion of the great work."@en ;
-    skos:broader smtg:concept-the-world ;
-    skos:prefLabel "Laurel Wreath" .
-
-smtg:fig-lightning-bolt a smt:SymbolicFigure ;
-    dcterms:description "Sudden divine intervention or a flash of overwhelming truth."@en ;
-    skos:broader smtg:concept-the-tower ;
-    skos:prefLabel "Lightning" .
-
-smtg:fig-lion-tamed a smt:SymbolicFigure ;
-    dcterms:description "Raw passion and animal nature calmed by spiritual grace."@en ;
-    skos:broader smtg:concept-strength ;
-    skos:prefLabel "Lion" .
-
-smtg:fig-living-wood a smt:SymbolicFigure ;
-    dcterms:description "The potential for growth even in a state of suspension."@en ;
-    skos:broader smtg:concept-the-hanged-man ;
-    skos:prefLabel "Living Wood" .
-
-smtg:fig-magician-table a smt:SymbolicFigure ;
-    dcterms:description "The physical world where manifestation occurs."@en ;
-    skos:broader smtg:concept-juggler ;
-    skos:prefLabel "Table" .
-
-smtg:fig-man a smt:SymbolicFigure ;
-    dcterms:description "Representing the fixed sign Aquarius and the element Air."@en ;
-    skos:broader smtg:concept-wheel-of-fortune ;
-    skos:prefLabel "The Man" .
-
-smtg:fig-ox a smt:SymbolicFigure ;
-    dcterms:description "Representing the fixed sign Taurus and the element Earth."@en ;
-    skos:broader smtg:concept-wheel-of-fortune ;
-    skos:prefLabel "The Ox" .
-
-smtg:fig-pillars-bj a smt:SymbolicFigure ;
-    dcterms:description "Boaz and Jachin, representing duality and severity/mercy."@en ;
-    skos:broader smtg:concept-popess ;
-    skos:prefLabel "Pillars (B & J)" .
-
-smtg:fig-pomegranate a smt:SymbolicFigure ;
-    dcterms:description "Fertility, the underworld, and the seeds of knowledge."@en ;
-    skos:broader smtg:concept-popess ;
-    skos:prefLabel "Pomegranate" .
-
-smtg:fig-precipice a smt:SymbolicFigure ;
-    dcterms:description "The threshold of the unknown and the leap of faith."@en ;
-    skos:broader smtg:concept-fool ;
-    skos:prefLabel "Precipice" .
-
-smtg:fig-ram-throne a smt:SymbolicFigure ;
-    dcterms:description "Leadership, Mars, and the fire of determination."@en ;
-    skos:broader smtg:concept-emperor ;
-    skos:prefLabel "Ram Heads" .
-
-smtg:fig-scales-justice a smt:SymbolicFigure ;
-    dcterms:description "Balance, fairness, and the weighing of truth."@en ;
-    skos:broader smtg:concept-justice ;
-    skos:prefLabel "Scales" .
-
-smtg:fig-scepter-emperor a smt:SymbolicFigure ;
-    dcterms:description "Structure, worldly dominion, and the firm execution of order."@en ;
-    skos:broader smtg:concept-emperor ;
-    skos:prefLabel "Scepter" .
-
-smtg:fig-scepter-empress a smt:SymbolicFigure ;
-    dcterms:description "Fertility, creative power, and the nurturing rule over the physical world."@en ;
-    skos:broader smtg:concept-empress ;
-    skos:prefLabel "Scepter" .
-
-smtg:fig-scepter-pope a smt:SymbolicFigure ;
-    dcterms:description "Traditional doctrine, religious leadership, and the bridge to the sacred."@en ;
-    skos:broader smtg:concept-pope ;
-    skos:prefLabel "Scepter" .
-
-smtg:fig-scepter-popess a smt:SymbolicFigure ;
-    dcterms:description "Spirituality, divine connection, and the silent authority of knowledge."@en ;
-    skos:broader smtg:concept-popess ;
-    skos:prefLabel "Scepter" .
-
-smtg:fig-scroll-torah a smt:SymbolicFigure ;
-    dcterms:description "Hidden law and sacred subconcious knowledge."@en ;
-    skos:broader smtg:concept-popess ;
-    skos:prefLabel "Scroll" .
-
-smtg:fig-scythe-death a smt:SymbolicFigure ;
-    dcterms:description "The tool of harvest and the inevitable end of cycles."@en ;
-    skos:broader smtg:concept-death ;
-    skos:prefLabel "Scythe" .
-
-smtg:fig-sphinx-black a smt:SymbolicFigure ;
-    dcterms:description "Severity, the hidden obstacles and the subconcious."@en ;
-    skos:broader smtg:concept-chariot ;
-    skos:prefLabel "Black Sphinx" .
-
-smtg:fig-sphinx-white a smt:SymbolicFigure ;
-    dcterms:description "Mercy, the positive force of the will and conscious mind."@en ;
-    skos:broader smtg:concept-chariot ;
-    skos:prefLabel "White Sphinx" .
-
-smtg:fig-staff-fool a smt:SymbolicFigure ;
-    dcterms:description "Support for the journey and a symbol of direction."@en ;
-    skos:broader smtg:concept-fool ;
-    skos:prefLabel "Staff" .
-
-smtg:fig-star-8-points a smt:SymbolicFigure ;
-    dcterms:description "Celestial guidance and the harmony of the cosmos."@en ;
-    skos:broader smtg:concept-the-star ;
-    skos:prefLabel "Eight-pointed Star" .
-
-smtg:fig-sunflowers a smt:SymbolicFigure ;
-    dcterms:description "Radiance, growth, and the alignment with divine light."@en ;
-    skos:broader smtg:concept-the-sun ;
-    skos:prefLabel "Sunflowers" .
-
-smtg:fig-sword-justice a smt:SymbolicFigure ;
-    dcterms:description "The power of logic and the cutting away of falsehood."@en ;
-    skos:broader smtg:concept-justice ;
-    skos:prefLabel "Sword" .
-
-smtg:fig-temperance-vases a smt:SymbolicFigure ;
-    dcterms:description "The alchemy of the soul and the mixing of opposites."@en ;
-    skos:broader smtg:concept-temperance ;
-    skos:prefLabel "Vases" .
-
-smtg:fig-towers-moon a smt:SymbolicFigure ;
-    dcterms:description "The threshold between the known world and the unknown."@en ;
-    skos:broader smtg:concept-the-moon ;
-    skos:prefLabel "Towers" .
-
-smtg:fig-triple-crown a smt:SymbolicFigure ;
-    dcterms:description "Authority over the three realms: physical, emotional, spiritual."@en ;
-    skos:broader smtg:concept-pope ;
-    skos:prefLabel "Triple Crown" .
-
-smtg:fig-trumpet-angel a smt:SymbolicFigure ;
-    dcterms:description "The call to spiritual awakening and the voice of the divine."@en ;
-    skos:broader smtg:concept-judgement ;
-    skos:prefLabel "Trumpet" .
-
-smtg:fig-wheat-field a smt:SymbolicFigure ;
-    dcterms:description "Abundance, harvest, and connection to Mother Earth."@en ;
-    skos:broader smtg:concept-empress ;
-    skos:prefLabel "Wheat" .
-
-smtg:fig-white-horse a smt:SymbolicFigure ;
-    dcterms:description "Purity of purpose and the unstoppable movement of time."@en ;
-    skos:broader smtg:concept-death ;
-    skos:prefLabel "White Horse" .
-
-smtg:fig-winged-angel a smt:SymbolicFigure ;
-    dcterms:description "Representing the fixed sign Aquarius and the element Air."@en ;
-    skos:broader smtg:concept-wheel-of-fortune ;
-    skos:prefLabel "Winged Angel" .
-
-smtg:fig-winged-bull a smt:SymbolicFigure ;
-    dcterms:description "Representing the fixed sign Taurus and the element Earth."@en ;
-    skos:broader smtg:concept-wheel-of-fortune ;
-    skos:prefLabel "Winged Bull" .
-
-smtg:fig-winged-eagle a smt:SymbolicFigure ;
-    dcterms:description "Representing the fixed sign Scorpio and the element Water."@en ;
-    skos:broader smtg:concept-wheel-of-fortune ;
-    skos:prefLabel "Winged Eagle" .
-
-smtg:fig-winged-lion a smt:SymbolicFigure ;
-    dcterms:description "Representing the fixed sign Leo and the element Fire."@en ;
-    skos:broader smtg:concept-wheel-of-fortune ;
-    skos:prefLabel "Winged Lion" .
-
-smtg:fig-wolf-moon a smt:SymbolicFigure ;
-    dcterms:description "The wild, untamed nature of the subconscious."@en ;
-    skos:broader smtg:concept-the-moon ;
-    skos:prefLabel "Wolf" .
-
 smtg:person-bianca-visconti a odi:Person ;
     owl:sameAs viaf:46608333,
         wd:Q1232642 ;
@@ -3716,6 +3571,67 @@ smtg:person-bianca-visconti a odi:Person ;
     schema:birthDate "1425" ;
     schema:deathDate "1468" ;
     schema:image <https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/bianca-maria-visconti.jpg> .
+
+smtg:fig-crescent-moon a smt:SymbolicFigure ;
+    dcterms:description "Intuition, mystery, and the illumination of the hidden psyche."@en ;
+    skos:broader smtg:concept-popess ;
+    skos:prefLabel "Crescent Moon" .
+
+smtg:fig-crown-tower a smt:SymbolicFigure ;
+    dcterms:description "The ego being stripped of its false authority."@en ;
+    skos:broader smtg:concept-the-tower ;
+    skos:prefLabel "Falling Crown" .
+
+smtg:fig-lightning-bolt a smt:SymbolicFigure ;
+    dcterms:description "Sudden divine intervention or a flash of overwhelming truth."@en ;
+    skos:broader smtg:concept-the-tower ;
+    skos:prefLabel "Lightning" .
+
+smtg:fig-pillar-jb a smt:SymbolicFigure ;
+    dcterms:description "Boaz and Jachin, representing duality and severity/mercy."@en ;
+    skos:broader smtg:concept-popess ;
+    skos:prefLabel "Jachin and Boaz" ;
+    skos:related "fig_pillar_temple, fig_pillar_throne, fig_towers_moon, fig_pillar_law" .
+
+smtg:fig-pillar-law a smt:SymbolicFigure ;
+    dcterms:description "The unwavering neutrality of the law, they provide the balance required for the scales of justice."@en ;
+    skos:broader smtg:concept-justice ;
+    skos:prefLabel "The Pillars of Truth" ;
+    skos:related "fig_pillar_throne, fig_pillar_jb, fig_pillar_temple, fig_towers_moon" .
+
+smtg:fig-pillar-temple a smt:SymbolicFigure ;
+    dcterms:description "Free-standing columns framing a central religious figure. They represent the structural laws of the Church and the boundary between the congregation and the divine."@en ;
+    skos:broader smtg:concept-pope ;
+    skos:prefLabel "The Sacred Gateway" ;
+    skos:related "fig_pillar_throne, fig_pillar_jb, fig_towers_moon, fig_pillar_law" .
+
+smtg:fig-pillar-throne a smt:SymbolicFigure ;
+    dcterms:description "Vertical architectural supports integrated into the imperial seat.They signify the rigid stability of the state and earthly power."@en ;
+    skos:broader smtg:concept-emperor ;
+    skos:prefLabel "Ducal Throne Pillars" ;
+    skos:related "fig_pillar_temple, fig_pillar_jb, fig_towers_moon, fig_pillar_law" .
+
+smtg:fig-scales-justice a smt:SymbolicFigure ;
+    dcterms:description "Balance, fairness, and the weighing of truth."@en ;
+    skos:broader smtg:concept-justice ;
+    skos:prefLabel "Scales of Justice" .
+
+smtg:fig-scepter-popess a smt:SymbolicFigure ;
+    dcterms:description "Spirituality, divine connection, and the silent authority of knowledge."@en ;
+    skos:broader smtg:concept-popess ;
+    skos:prefLabel "Popess' Scepter" ;
+    skos:related "fig_scepter_emperor, fig_scepter_pope, fig_scepter_empress" .
+
+smtg:fig-sword-justice a smt:SymbolicFigure ;
+    dcterms:description "The power of logic and the cutting away of falsehood."@en ;
+    skos:broader smtg:concept-justice ;
+    skos:prefLabel "Sword" .
+
+smtg:fig-water-river a smt:SymbolicFigure ;
+    dcterms:description "It symbolizes the boundary between the physical and spiritual worlds and the inevitable passage of time and transition."@en ;
+    skos:broader smtg:concept-death ;
+    skos:prefLabel "The River of Life" ;
+    skos:related "fig_water_healing, fig_water_pool, fig_water_alchemical" .
 
 smtg:lineage-marseille a smt:DeckLineage ;
     rdfs:label "Tarot de Marseille" .
@@ -3746,6 +3662,78 @@ smtg:person-filippo-visconti a odi:Person ;
 smtg:venice a schema:Place ;
     rdfs:label "Venice" .
 
+smtg:fig-crayfish-moon a smt:SymbolicFigure ;
+    dcterms:description "Primordial fears emerging from the depths of the psyche."@en ;
+    skos:broader smtg:concept-the-moon ;
+    skos:prefLabel "Crayfish" .
+
+smtg:fig-devil-chains a smt:SymbolicFigure ;
+    dcterms:description "Voluntary bondage to materialism and addiction."@en ;
+    skos:broader smtg:concept-the-devil ;
+    skos:prefLabel "Chains" .
+
+smtg:fig-devil-horns a smt:SymbolicFigure ;
+    dcterms:description "Animalistic desires and the ego's trap."@en ;
+    skos:broader smtg:concept-the-devil ;
+    skos:prefLabel "Horns" .
+
+smtg:fig-dog-fool a smt:SymbolicFigure ;
+    dcterms:description "Animal instinct or the call of the material world."@en ;
+    skos:broader smtg:concept-fool ;
+    skos:prefLabel "Dog" ;
+    skos:related "fig_dog_moon" .
+
+smtg:fig-dog-moon a smt:SymbolicFigure ;
+    dcterms:description "The domesticated, civilized aspect of the human mind."@en ;
+    skos:broader smtg:concept-the-moon ;
+    skos:prefLabel "The Domesticated Dog" ;
+    skos:related "fig_dog_fool" .
+
+smtg:fig-eagle-hat a smt:SymbolicFigure ;
+    dcterms:description "The eagle represents the temporal power of the state."@en ;
+    skos:broader smtg:concept-emperor ;
+    skos:prefLabel "Eagle Hat" ;
+    skos:related "fig_eagle_shield, fig_winged_eagle" .
+
+smtg:fig-laurel-wreath a smt:SymbolicFigure ;
+    dcterms:description "Victory, protection, and the completion of the great work."@en ;
+    skos:broader smtg:concept-the-world ;
+    skos:prefLabel "Laurel Wreath" .
+
+smtg:fig-pomegranate a smt:SymbolicFigure ;
+    dcterms:description "Fertility, the underworld, and the seeds of knowledge."@en ;
+    skos:broader smtg:concept-empress,
+        smtg:concept-popess ;
+    skos:prefLabel "Pomegranate" .
+
+smtg:fig-star-8-points a smt:SymbolicFigure ;
+    dcterms:description "Celestial guidance and the harmony of the cosmos."@en ;
+    skos:broader smtg:concept-the-star ;
+    skos:prefLabel "Eight-pointed Star" .
+
+smtg:fig-towers-moon a smt:SymbolicFigure ;
+    dcterms:description "The threshold between the known world and the unknown."@en ;
+    skos:broader smtg:concept-the-moon ;
+    skos:prefLabel "The Boundary Towers" ;
+    skos:related "fig_pillar_throne, fig_pillar_jb, fig_pillar_temple, fig_pillar_law" .
+
+smtg:fig-water-healing a smt:SymbolicFigure ;
+    dcterms:description "Water poured onto both land and sea. It symbolizes the restoration of the soul and the continuous replenishment of the collective subconscious."@en ;
+    skos:broader smtg:concept-the-star ;
+    skos:prefLabel "The Living Springs" ;
+    skos:related "fig_water_alchemical, fig_water_pool, fig_water_river" .
+
+smtg:fig-water-pool a smt:SymbolicFigure ;
+    dcterms:description "It represents the deep, hidden layers of the psyche and the primitive instincts that surface during the night of the soul."@en ;
+    skos:broader smtg:concept-the-moon ;
+    skos:prefLabel "The Primordial Abyss" ;
+    skos:related "fig_water_alchemical, fig_water_healing, fig_water_river" .
+
+smtg:fig-wolf-moon a smt:SymbolicFigure ;
+    dcterms:description "The wild, untamed nature of the subconscious."@en ;
+    skos:broader smtg:concept-the-moon ;
+    skos:prefLabel "Wolf" .
+
 smtg:person-francesco-sforza a odi:Person ;
     owl:sameAs viaf:89211304,
         wd:Q310536 ;
@@ -3756,6 +3744,91 @@ smtg:person-francesco-sforza a odi:Person ;
     schema:deathDate "1466" ;
     schema:image <https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/francesco-sforza.jpg> .
 
+smtg:concept-hermit a smt:Archetype ;
+    dcterms:description "Represents soul-searching, introspection, and being alone."@en ;
+    skos:altLabel "L'Eremita",
+        "Le Hermit" ;
+    skos:prefLabel "The Hermit" ;
+    smt:hasNumber "9" .
+
+smtg:concept-the-hanged-man a smt:Archetype ;
+    dcterms:description "Represents pause, surrender, and letting go."@en ;
+    skos:altLabel "L'Appeso",
+        "Le Pendu" ;
+    skos:prefLabel "The Hanged Man" ;
+    smt:hasNumber "12" .
+
+smtg:concept-the-sun a smt:Archetype ;
+    dcterms:description "Represents positivity, warmth, and success."@en ;
+    skos:altLabel "Il Sole",
+        "Le Soleil" ;
+    skos:prefLabel "The Sun" ;
+    smt:hasNumber "19" .
+
+smtg:fig-infinity-symbol a smt:SymbolicFigure ;
+    dcterms:description "Infinite possibilities and the eternal nature of the spirit."@en ;
+    skos:broader smtg:concept-juggler,
+        smtg:concept-strenght,
+        smtg:concept-the-world ;
+    skos:prefLabel "The Infinity Symbol" .
+
+smtg:fig-magician-table a smt:SymbolicFigure ;
+    dcterms:description "The physical world where manifestation occurs."@en ;
+    skos:broader smtg:concept-juggler ;
+    skos:prefLabel "The Artisan's Table" .
+
+smtg:fig-scepter-pope a smt:SymbolicFigure ;
+    dcterms:description "Traditional doctrine, religious leadership, and the bridge to the sacred."@en ;
+    skos:broader smtg:concept-pope ;
+    skos:prefLabel "Pope's Scepter" ;
+    skos:related "fig_scepter_emperor, fig_scepter_empress, fig_scepter_popess" .
+
+smtg:fig-scythe-death a smt:SymbolicFigure ;
+    dcterms:description "The tool of harvest and the inevitable end of cycles."@en ;
+    skos:broader smtg:concept-death ;
+    skos:prefLabel "Scythe" .
+
+smtg:fig-staff-fool a smt:SymbolicFigure ;
+    dcterms:description "Support for the journey and a symbol of direction."@en ;
+    skos:broader smtg:concept-fool ;
+    skos:prefLabel "Staff" .
+
+smtg:fig-temperance-vases a smt:SymbolicFigure ;
+    dcterms:description "The alchemy of the soul and the mixing of opposites."@en ;
+    skos:broader smtg:concept-temperance ;
+    skos:prefLabel "Vases" .
+
+smtg:fig-water-alchemical a smt:SymbolicFigure ;
+    dcterms:description "The fluid poured between two vessels. It represents the \"Life Force\" being refined and the alchemical blending of opposites to create a balanced internal state."@en ;
+    skos:broader smtg:concept-temperance ;
+    skos:prefLabel "The Tempering Stream" ;
+    skos:related "fig_water_healing, fig_water_pool, fig_water_river" .
+
+smtg:fig-winged-angel a smt:SymbolicFigure ;
+    dcterms:description "Representing the fixed sign Aquarius and the element Air."@en ;
+    skos:broader smtg:concept-the-world,
+        smtg:concept-wheel-of-fortune ;
+    skos:prefLabel "Winged Angel" ;
+    skos:related "fig_angel_cupid" .
+
+smtg:fig-winged-bull a smt:SymbolicFigure ;
+    dcterms:description "Representing the fixed sign Taurus and the element Earth."@en ;
+    skos:broader smtg:concept-wheel-of-fortune ;
+    skos:prefLabel "Winged Bull" .
+
+smtg:fig-winged-eagle a smt:SymbolicFigure ;
+    dcterms:description "Representing the fixed sign Scorpio and the element Water."@en ;
+    skos:broader smtg:concept-the-world,
+        smtg:concept-wheel-of-fortune ;
+    skos:prefLabel "Winged Eagle" ;
+    skos:related "fig_eagle_shield, fig_eagle_hat" .
+
+smtg:fig-winged-lion a smt:SymbolicFigure ;
+    dcterms:description "Representing the fixed sign Leo and the element Fire."@en ;
+    skos:broader smtg:concept-wheel-of-fortune ;
+    skos:prefLabel "Winged Lion" ;
+    skos:related "fig_lion_tamed" .
+
 smtg:lineage-visconti-sforza a smt:DeckLineage ;
     rdfs:label "Visconti-Sforza" .
 
@@ -3764,12 +3837,12 @@ smtg:milan a schema:Place ;
     owl:sameAs gn:3173435,
         wd:Q490 .
 
-smtg:concept-hermit a smt:Archetype ;
-    dcterms:description "Represents soul-searching, introspection, and being alone."@en ;
-    skos:altLabel "L'Eremita",
-        "Le Hermit" ;
-    skos:prefLabel "The Hermit" ;
-    smt:hasNumber "9" .
+smtg:concept-chariot a smt:Archetype ;
+    dcterms:description "Represents control, willpower, and victory."@en ;
+    skos:altLabel "Il Carro",
+        "Le Chariot" ;
+    skos:prefLabel "The Chariot" ;
+    smt:hasNumber "7" .
 
 smtg:concept-judgment a smt:Archetype ;
     dcterms:description "Represents rebirth, inner calling, and absolution."@en ;
@@ -3779,42 +3852,12 @@ smtg:concept-judgment a smt:Archetype ;
     skos:prefLabel "Judgement" ;
     smt:hasNumber "20" .
 
-smtg:concept-justice a smt:Archetype ;
-    dcterms:description "Represents justice, fairness, and truth."@en ;
-    skos:altLabel "Giustizia",
-        "Justice" ;
-    skos:prefLabel "Justice" ;
-    smt:hasNumber "8" .
-
-smtg:concept-strenght a smt:Archetype ;
-    dcterms:description "Represents courage, persuasion, and influence."@en ;
-    skos:altLabel "Force",
-        "Fortitude",
-        "La Fortezza",
-        "La Forza" ;
-    skos:prefLabel "Strenght" ;
-    smt:hasNumber "11" .
-
-smtg:concept-temperance a smt:Archetype ;
-    dcterms:description "Represents balance, moderation, and patience."@en ;
-    skos:altLabel "La Temperanza",
-        "Tempérance" ;
-    skos:prefLabel "Temperance" ;
-    smt:hasNumber "14" .
-
 smtg:concept-the-devil a smt:Archetype ;
     dcterms:description "Represents shadow self, attachment, and addiction."@en ;
     skos:altLabel "Il Diavolo",
         "Le Diable" ;
     skos:prefLabel "The Devil" ;
     smt:hasNumber "15" .
-
-smtg:concept-the-hanged-man a smt:Archetype ;
-    dcterms:description "Represents pause, surrender, and letting go."@en ;
-    skos:altLabel "L'Appeso",
-        "Le Pendu" ;
-    skos:prefLabel "The Hanged Man" ;
-    smt:hasNumber "12" .
 
 smtg:concept-the-star a smt:Archetype ;
     dcterms:description "Represents hope, inspiration, and serenity."@en ;
@@ -3824,13 +3867,6 @@ smtg:concept-the-star a smt:Archetype ;
     skos:prefLabel "The Star" ;
     smt:hasNumber "17" .
 
-smtg:concept-the-sun a smt:Archetype ;
-    dcterms:description "Represents positivity, warmth, and success."@en ;
-    skos:altLabel "Il Sole",
-        "Le Soleil" ;
-    skos:prefLabel "The Sun" ;
-    smt:hasNumber "19" .
-
 smtg:concept-the-tower a smt:Archetype ;
     dcterms:description "Represents sudden change, upheaval, and revelation."@en ;
     skos:altLabel "La Maison Dieu",
@@ -3838,12 +3874,41 @@ smtg:concept-the-tower a smt:Archetype ;
     skos:prefLabel "The Tower" ;
     smt:hasNumber "16" .
 
-smtg:concept-the-world a smt:Archetype ;
-    dcterms:description "Represents completion, integration, and accomplishment."@en ;
-    skos:altLabel "Il Mondo",
-        "Le Monde" ;
-    skos:prefLabel "The World" ;
-    smt:hasNumber "21" .
+smtg:fig-angel-cupid a smt:SymbolicFigure ;
+    dcterms:description "Divine intervention and the higher self overseeing choices."@en ;
+    skos:broader smtg:concept-lovers ;
+    skos:prefLabel "Angel" ;
+    skos:related "fig_winged_angel" .
+
+smtg:fig-eagle-shield a smt:SymbolicFigure ;
+    dcterms:description "Spiritual power and sovereignty."@en ;
+    skos:broader smtg:concept-emperor,
+        smtg:concept-empress ;
+    skos:prefLabel "Eagle Shield" ;
+    skos:related "fig_winged_eagle, fig_eagle_hat" .
+
+smtg:fig-lion-tamed a smt:SymbolicFigure ;
+    dcterms:description "Raw passion and animal nature calmed by spiritual grace."@en ;
+    skos:broader smtg:concept-strenght ;
+    skos:prefLabel "Lion" ;
+    skos:related "fig_winged_lion" .
+
+smtg:fig-scepter-emperor a smt:SymbolicFigure ;
+    dcterms:description "Structure, worldly dominion, and the firm execution of order."@en ;
+    skos:broader smtg:concept-emperor ;
+    skos:prefLabel "Emperor's Scepter" ;
+    skos:related "fig_scepter_empress, fig_scepter_pope, fig_scepter_popess" .
+
+smtg:fig-scepter-empress a smt:SymbolicFigure ;
+    dcterms:description "Fertility, creative power, and the nurturing rule over the physical world."@en ;
+    skos:broader smtg:concept-empress ;
+    skos:prefLabel "Empress' Scepter" ;
+    skos:related "fig_scepter_emperor, fig_scepter_pope, fig_scepter_popess" .
+
+smtg:fig-trumpet-angel a smt:SymbolicFigure ;
+    dcterms:description "The call to spiritual awakening and the voice of the divine."@en ;
+    skos:broader smtg:concept-judgement ;
+    skos:prefLabel "Trumpet" .
 
 smtg:person-cicognara a odi:Person ;
     owl:sameAs viaf:62769413,
@@ -3853,6 +3918,14 @@ smtg:person-cicognara a odi:Person ;
     schema:Nationality "Italian" ;
     schema:birthDate "1480" ;
     schema:deathDate "1500" .
+
+smtg:concept-fool a smt:Archetype ;
+    dcterms:description "Represents beginnings, innocence, and spontaneous action. Usually an unnumbered card, but sometimes it is numbered as 0 or more rarely XXII."@en ;
+    skos:altLabel "Il Matto",
+        "Le Fou",
+        "Le Mat" ;
+    skos:prefLabel "The Fool" ;
+    smt:hasNumber "0" .
 
 smtg:concept-juggler a smt:Archetype ;
     dcterms:description "Represents manifestation, resourcefulness, and power."@en ;
@@ -3864,6 +3937,13 @@ smtg:concept-juggler a smt:Archetype ;
     skos:prefLabel "The Juggler" ;
     smt:hasNumber "1" .
 
+smtg:concept-justice a smt:Archetype ;
+    dcterms:description "Represents justice, fairness, and truth."@en ;
+    skos:altLabel "Giustizia",
+        "Justice" ;
+    skos:prefLabel "Justice" ;
+    smt:hasNumber "8" .
+
 smtg:concept-lovers a smt:Archetype ;
     dcterms:description "Represents love, harmony, and choices."@en ;
     skos:altLabel "Gli Amanti",
@@ -3871,35 +3951,6 @@ smtg:concept-lovers a smt:Archetype ;
         "The Love" ;
     skos:prefLabel "The Lovers" ;
     smt:hasNumber "6" .
-
-smtg:concept-chariot a smt:Archetype ;
-    dcterms:description "Represents control, willpower, and victory."@en ;
-    skos:altLabel "Il Carro",
-        "Le Chariot" ;
-    skos:prefLabel "The Chariot" ;
-    smt:hasNumber "7" .
-
-smtg:concept-death a smt:Archetype ;
-    dcterms:description "Represents endings, change, and transition."@en ;
-    skos:altLabel "La Mort",
-        "La Morte" ;
-    skos:prefLabel "Death" ;
-    smt:hasNumber "13" .
-
-smtg:concept-emperor a smt:Archetype ;
-    dcterms:description "Represents authority, structure, and a father figure."@en ;
-    skos:altLabel "L’Empereur",
-        "L’Imperatore" ;
-    skos:prefLabel "The Emperor" ;
-    smt:hasNumber "4" .
-
-smtg:concept-fool a smt:Archetype ;
-    dcterms:description "Represents beginnings, innocence, and spontaneous action. Usually an unnumbered card, but sometimes it is numbered as 0 or more rarely XXII."@en ;
-    skos:altLabel "Il Matto",
-        "Le Fou",
-        "Le Mat" ;
-    skos:prefLabel "The Fool" ;
-    smt:hasNumber "0" .
 
 smtg:concept-pope a smt:Archetype ;
     dcterms:description "Represents spiritual wisdom, religious beliefs, and tradition."@en ;
@@ -3909,12 +3960,28 @@ smtg:concept-pope a smt:Archetype ;
     skos:prefLabel "The Pope" ;
     smt:hasNumber "5" .
 
-smtg:concept-the-moon a smt:Archetype ;
-    dcterms:description "Represents illusion, fear, and anxiety."@en ;
-    skos:altLabel "La Luna",
-        "La Lune" ;
-    skos:prefLabel "The Moon" ;
-    smt:hasNumber "18" .
+smtg:concept-temperance a smt:Archetype ;
+    dcterms:description "Represents balance, moderation, and patience."@en ;
+    skos:altLabel "La Temperanza",
+        "Tempérance" ;
+    skos:prefLabel "Temperance" ;
+    smt:hasNumber "14" .
+
+smtg:concept-death a smt:Archetype ;
+    dcterms:description "Represents endings, change, and transition."@en ;
+    skos:altLabel "La Mort",
+        "La Morte" ;
+    skos:prefLabel "Death" ;
+    smt:hasNumber "13" .
+
+smtg:concept-strenght a smt:Archetype ;
+    dcterms:description "Represents courage, persuasion, and influence."@en ;
+    skos:altLabel "Force",
+        "Fortitude",
+        "La Fortezza",
+        "La Forza" ;
+    skos:prefLabel "Strenght" ;
+    smt:hasNumber "11" .
 
 smtg:concept-empress a smt:Archetype ;
     dcterms:description "Represents femininity, nature, and abundance."@en ;
@@ -3930,6 +3997,27 @@ smtg:concept-popess a smt:Archetype ;
         "The High Priestess" ;
     skos:prefLabel "The Popess" ;
     smt:hasNumber "2" .
+
+smtg:concept-the-moon a smt:Archetype ;
+    dcterms:description "Represents illusion, fear, and anxiety."@en ;
+    skos:altLabel "La Luna",
+        "La Lune" ;
+    skos:prefLabel "The Moon" ;
+    smt:hasNumber "18" .
+
+smtg:concept-the-world a smt:Archetype ;
+    dcterms:description "Represents completion, integration, and accomplishment."@en ;
+    skos:altLabel "Il Mondo",
+        "Le Monde" ;
+    skos:prefLabel "The World" ;
+    smt:hasNumber "21" .
+
+smtg:concept-emperor a smt:Archetype ;
+    dcterms:description "Represents authority, structure, and a father figure."@en ;
+    skos:altLabel "L’Empereur",
+        "L’Imperatore" ;
+    skos:prefLabel "The Emperor" ;
+    smt:hasNumber "4" .
 
 smtg:concept-wheel-of-fortune a smt:Archetype ;
     dcterms:description "Represents good luck, karma, and life cycles."@en ;

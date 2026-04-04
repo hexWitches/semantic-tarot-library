@@ -29,6 +29,7 @@ symbolic_figure_id,smt,containsSymbol
 label,skos,prefLabel
 alt_title,skos,altLabel
 broader_archetype_id,skos,broader
+related_to_id,skos,related
 archetype_number,smt,hasNumber
 lineage_label,rdfs,label
 person_portrait_url,schema,image

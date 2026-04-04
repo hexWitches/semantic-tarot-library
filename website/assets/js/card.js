@@ -499,8 +499,8 @@ function generateRelatedTopics(card, graph, textsData) {
                 const topic = textsData.explore && textsData.explore[topicId];
                 if (topic) {
                     createTopicCard(
-                        topic.title || "Related Topic", 
-                        'Discover the history of this deck', 
+                        topic.title || "Related Topic",
+                        'Discover the history of this deck',
                         `deepening.html?id=${topicId}`
                     );
                 }
@@ -519,7 +519,32 @@ function generateRelatedTopics(card, graph, textsData) {
         }
 
         // Symbols
-        createTopicCard('Symbols', 'Explore the hidden symbols', '#');
+        const symbolsWrapper = document.createElement('div'); // Using div instead of <a> for local script trigger
+        symbolsWrapper.style.cursor = 'pointer';
+
+        const cardDiv = document.createElement('div');
+        cardDiv.className = 'topic-card';
+
+        const innerDiv = document.createElement('div');
+        innerDiv.className = 'topic-card-inner';
+
+        const h4 = document.createElement('h4');
+        h4.innerText = 'Symbols';
+
+        const p = document.createElement('p');
+        p.innerText = 'Explore the hidden symbols';
+
+        innerDiv.appendChild(h4);
+        innerDiv.appendChild(p);
+        cardDiv.appendChild(innerDiv);
+        symbolsWrapper.appendChild(cardDiv);
+
+        symbolsWrapper.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSymbolismOverlay(card, graph);
+        });
+
+        topicsCarousel.appendChild(symbolsWrapper);
     }
 
     // Persons connected (author, illustrator, publisher)
@@ -584,4 +609,223 @@ function generateRelatedTopics(card, graph, textsData) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', initCardPage);
+
+/**
+ * Shows the Symbolism Overlay with a two-column master-detail view
+ */
+function showSymbolismOverlay(card, graph) {
+    const backdrop = document.getElementById('symbolism-backdrop');
+    const overlay = document.getElementById('symbolism-overlay');
+    const symbolListCol = document.getElementById('symbol-list-col');
+    const relatedCardsGrid = document.getElementById('symbol-related-cards');
+
+    if (!backdrop || !overlay || !symbolListCol || !relatedCardsGrid) return;
+
+    symbolListCol.innerHTML = '';
+    relatedCardsGrid.innerHTML = '';
+
+    const figureIds = card.symbolic_figure_id || [];
+
+    if (figureIds.length === 0) {
+        symbolListCol.innerHTML = `<p class="symbol-empty-msg">We haven't mapped this card’s symbols yet. In the meantime, try filtering by 'Scepter', 'Dog', 'Eagle', 'Pillars' or 'Water' to see how our semantic search works!</p>`;
+        document.getElementById('symbol-details-col').style.display = 'none';
+        overlay.classList.add('single-column'); // Optional CSS helper
+    } else {
+        document.getElementById('symbol-details-col').style.display = 'block';
+        overlay.classList.remove('single-column');
+        
+        const idList = Array.isArray(figureIds) ? figureIds : [figureIds];
+
+        idList.forEach((id, index) => {
+            const figureId = typeof id === 'string' ? id : id['@id'];
+            const figure = graph.find(obj => obj['@id'] === figureId);
+            const label = figure ? (figure.label || figure['rdfs:label'] || figureId.split(':').pop().replace(/_/g, ' ')) : 'Unknown Symbol';
+
+            const symbolItem = document.createElement('div');
+            symbolItem.className = 'symbol-item';
+            symbolItem.dataset.id = figureId;
+
+            const mainLabel = document.createElement('strong');
+            mainLabel.className = 'symbol-main-label';
+            mainLabel.innerText = label;
+            symbolItem.appendChild(mainLabel);
+
+            // Related Figures (sub-line)
+            if (figure && figure.related_to_id) {
+                let relatedIds = [];
+                if (Array.isArray(figure.related_to_id)) {
+                    relatedIds = figure.related_to_id;
+                } else if (typeof figure.related_to_id === 'string') {
+                    relatedIds = figure.related_to_id.split(',').map(s => s.trim());
+                } else {
+                    relatedIds = [figure.related_to_id];
+                }
+
+                const relatedLabels = relatedIds.map(relId => {
+                    const rId = (typeof relId === 'string' ? relId : relId['@id']).replace('smtg:', '');
+                    const lookupId1 = `smtg:${rId.replace(/_/g, '-')}`;
+                    const lookupId2 = `smtg:${rId.replace(/-/g, '_')}`;
+                    const relFigure = graph.find(obj => obj['@id'] === lookupId1 || obj['@id'] === lookupId2 || obj['@id'] === rId);
+                    return relFigure ? (relFigure.label || relFigure['rdfs:label']) : rId.replace(/_/g, ' ').replace(/-/g, ' ');
+                }).filter(l => l);
+
+                if (relatedLabels.length > 0) {
+                    const relatedList = document.createElement('p');
+                    relatedList.className = 'symbol-related-list';
+                    relatedList.innerText = relatedLabels.join(', ');
+                    symbolItem.appendChild(relatedList);
+                }
+            }
+
+            // Click Handler
+            symbolItem.addEventListener('click', () => {
+                // Clear active states
+                document.querySelectorAll('.symbol-item').forEach(el => el.classList.remove('active'));
+                symbolItem.classList.add('active');
+                
+                // Show details (description + cards)
+                renderSymbolDetails(figureId, figure, graph, symbolItem);
+            });
+
+            symbolListCol.appendChild(symbolItem);
+
+            // Auto-select first symbol
+            if (index === 0) {
+                symbolItem.click();
+            }
+        });
+    }
+
+    backdrop.style.display = 'block';
+    overlay.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Renders the description under the symbol and updates the right column with related cards
+ */
+function renderSymbolDetails(symbolId, symbolObj, graph, parentElement) {
+    // 1. Handle Description in Left Column
+    document.querySelectorAll('.symbol-description').forEach(el => el.remove());
+    
+    if (symbolObj && symbolObj['dcterms:description']) {
+        const descContent = typeof symbolObj['dcterms:description'] === 'object' 
+            ? (symbolObj['dcterms:description']['@value'] || symbolObj['dcterms:description'].label) 
+            : symbolObj['dcterms:description'];
+            
+        if (descContent) {
+            const descEl = document.createElement('div');
+            descEl.className = 'symbol-description';
+            descEl.innerText = descContent;
+            parentElement.appendChild(descEl);
+        }
+    }
+
+    // 2. Handle Related Cards in Right Column
+    const relatedCardsGrid = document.getElementById('symbol-related-cards');
+    relatedCardsGrid.innerHTML = '';
+
+    // A. Render Primary Symbol Section
+    const primaryCards = findCardsBySymbol(symbolId, graph);
+    const primaryLabel = symbolObj ? (symbolObj.label || symbolId.replace('smtg:', '').replace(/_/g, ' ')) : "this symbol";
+    renderCardSection(relatedCardsGrid, `Also found in`, primaryCards);
+
+    // B. Render Related Symbols Sections
+    if (symbolObj && symbolObj.related_to_id) {
+        let relatedIds = [];
+        if (Array.isArray(symbolObj.related_to_id)) {
+            relatedIds = symbolObj.related_to_id;
+        } else if (typeof symbolObj.related_to_id === 'string') {
+            relatedIds = symbolObj.related_to_id.split(',').map(s => s.trim());
+        } else {
+            relatedIds = [symbolObj.related_to_id];
+        }
+
+        relatedIds.forEach(relId => {
+            const rId = (typeof relId === 'string' ? relId : relId['@id']).replace('smtg:', '');
+            const lookupId1 = `smtg:${rId.replace(/_/g, '-')}`;
+            const lookupId2 = `smtg:${rId.replace(/-/g, '_')}`;
+            const relFigure = graph.find(obj => obj['@id'] === lookupId1 || obj['@id'] === lookupId2 || obj['@id'] === rId);
+            
+            const relLabel = relFigure ? (relFigure.label || relFigure['rdfs:label']) : rId.replace(/_/g, ' ').replace(/-/g, ' ');
+            const relCards = findCardsBySymbol(relFigure ? relFigure['@id'] : lookupId1, graph);
+            
+            if (relCards.length > 0) {
+                renderCardSection(relatedCardsGrid, `Related Symbol: ${relLabel}`, relCards, true);
+            }
+        });
+    }
+}
+
+/**
+ * Global search for any DeckCard that contains a specific symbol
+ */
+function findCardsBySymbol(symbolId, graph) {
+    if (!symbolId) return [];
+    return graph.filter(obj => {
+        if (!obj['@type']) return false;
+        const types = Array.isArray(obj['@type']) ? obj['@type'] : [obj['@type']];
+        if (!types.some(t => t.includes('DeckCard'))) return false;
+
+        const cardSymbols = obj.symbolic_figure_id;
+        if (!cardSymbols) return false;
+
+        const symbolList = Array.isArray(cardSymbols) ? cardSymbols : [cardSymbols];
+        return symbolList.some(s => {
+            const sId = typeof s === 'string' ? s : s['@id'];
+            return sId === symbolId;
+        });
+    });
+}
+
+/**
+ * Appends a titled section of card thumbnails to the container
+ */
+function renderCardSection(container, title, cards, isSubSection = false) {
+    if (!cards || cards.length === 0) return;
+
+    // Create Section Header
+    const sectionHeader = document.createElement('h5');
+    sectionHeader.className = isSubSection ? 'symbol-subsection-title mt-4' : 'symbol-section-subtitle mb-4';
+    sectionHeader.innerText = title;
+    container.appendChild(sectionHeader);
+
+    const grid = document.createElement('div');
+    grid.className = 'symbol-related-cards-grid px-2 mb-4';
+    
+    cards.forEach(card => {
+        const cardTitle = card.title || card.label || "Tarot Card";
+        const imgUrl = card.image_url ? (card.image_url['@id'] || card.image_url) : null;
+        const cleanId = card['@id'].replace('smtg:', '');
+
+        const cardLink = document.createElement('a');
+        cardLink.className = 'mini-card-cross-ref';
+        cardLink.href = `card.html?id=${cleanId}`;
+        cardLink.innerHTML = `
+            <img src="${getLocalImagePath(imgUrl)}" alt="${cardTitle}" onerror="this.src='assets/images/placeholder_card.jpg';">
+            <span>${cardTitle}</span>
+        `;
+        grid.appendChild(cardLink);
+    });
+
+    container.appendChild(grid);
+}
+
+function closeSymbolismOverlay() {
+    const backdrop = document.getElementById('symbolism-backdrop');
+    const overlay = document.getElementById('symbolism-overlay');
+    if (backdrop) backdrop.style.display = 'none';
+    if (overlay) overlay.style.display = 'none';
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initCardPage();
+
+    // Close listeners
+    const closeBtn = document.getElementById('closeSymbolism');
+    const backdrop = document.getElementById('symbolism-backdrop');
+
+    if (closeBtn) closeBtn.addEventListener('click', closeSymbolismOverlay);
+    if (backdrop) backdrop.addEventListener('click', closeSymbolismOverlay);
+});

@@ -277,7 +277,6 @@ function renderArchetypeCarousel(archetypeId, archetypeLabel, graph) {
         return `
             <a href="card.html?id=${cleanId}" class="img-container deck-img-container scroller-card">
                 <img src="${imgUrl}" alt="${cardName}" class="deck-card-img" loading="lazy" onerror="this.src='assets/images/placeholder_card.jpg';">
-                
             </a>`;
     }).join('');
 
