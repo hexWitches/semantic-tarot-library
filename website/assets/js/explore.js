@@ -6,6 +6,9 @@
 let fullDataset = []; // Store the full list of items globally after fetching
 let activeFilters = new Set(); // Track multiple active filter categories
 
+const TOPICS_PER_PAGE = 12;
+let currentPage = 1;
+
 async function initExplorePage() {
     try {
         // 1. Fetch Data
@@ -111,7 +114,12 @@ function renderGrid(items) {
 
     exploreGrid.innerHTML = ''; // Clear current grid
 
-    items.forEach(item => {
+    // Pagination Logic
+    const startIndex = (currentPage - 1) * TOPICS_PER_PAGE;
+    const endIndex = startIndex + TOPICS_PER_PAGE;
+    const itemsToShow = items.slice(startIndex, endIndex);
+
+    itemsToShow.forEach(item => {
         const card = createTopicCard(item.title, item.subtitle, item.link);
         exploreGrid.appendChild(card);
     });
@@ -123,6 +131,46 @@ function renderGrid(items) {
         noResults.innerHTML = `<p class="lead" style="color: var(--floral-white); opacity: 0.7;">No items match the selected filters.</p>`;
         exploreGrid.appendChild(noResults);
     }
+
+    updatePagination(items.length);
+}
+
+/**
+ * Updates the visibility and functionality of pagination arrows.
+ * @param {number} totalItems 
+ */
+function updatePagination(totalItems) {
+    const prevBtn = document.getElementById('grid-prev-btn');
+    const nextBtn = document.getElementById('grid-next-btn');
+    if (!prevBtn || !nextBtn) return;
+
+    const totalPages = Math.ceil(totalItems / TOPICS_PER_PAGE);
+
+    // Show/Hide based on page limits
+    prevBtn.style.display = currentPage <= 1 ? 'none' : 'flex';
+    nextBtn.style.display = currentPage >= totalPages ? 'none' : 'flex';
+
+    // Remove old listeners by cloning
+    const newPrev = prevBtn.cloneNode(true);
+    const newNext = nextBtn.cloneNode(true);
+    prevBtn.parentNode.replaceChild(newPrev, prevBtn);
+    nextBtn.parentNode.replaceChild(newNext, nextBtn);
+
+    newPrev.addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            applyFilters();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    });
+
+    newNext.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+            currentPage++;
+            applyFilters();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    });
 }
 
 /**
@@ -146,7 +194,8 @@ function setupFilterListeners() {
             });
 
             updateFilterUI();
-            renderGrid(fullDataset);
+            currentPage = 1; // Reset to first page
+            applyFilters();
         });
     }
 
@@ -170,6 +219,7 @@ function setupFilterListeners() {
             }
 
             updateFilterUI();
+            currentPage = 1; // Reset to first page
             applyFilters();
         });
     });

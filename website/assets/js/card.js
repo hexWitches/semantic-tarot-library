@@ -488,7 +488,7 @@ function generateRelatedTopics(card, graph, textsData) {
         deckObj = graph.find(d => d['@id'] === deckId);
     }
 
-    // --- NEW: Add topics related to the DECK itself ---
+    // --- Add topics related to the DECK itself ---
     if (deckObj && textsData && textsData.decks) {
         const deckIdRaw = deckObj['@id'].replace('smtg:', '');
         const normalizedDeckId = deckIdRaw.replace(/-/g, '_');
