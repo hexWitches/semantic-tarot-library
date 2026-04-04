@@ -1,49 +1,42 @@
 symbolic_figure_id,label,broader_archetype_id,related_to_id,description
 fig_dog_fool,Dog,concept_fool,fig_dog_moon,Animal instinct or the call of the material world.
 fig_staff_fool,Staff,concept_fool,,Support for the journey and a symbol of direction.
-fig_precipice,Precipice,concept_fool,,The threshold of the unknown and the leap of faith.
-fig_infinity_symbol,Infinity Symbol,concept_juggler,,Infinite possibilities and the eternal nature of the spirit.
-fig_magician_table,Table,concept_juggler,,The physical world where manifestation occurs.
-fig_pillars_bj,Pillars (B & J),concept_popess,,"Boaz and Jachin, representing duality and severity/mercy."
-fig_pomegranate,Pomegranate,concept_popess,,"Fertility, the underworld, and the seeds of knowledge."
-fig_scroll_torah,Scroll,concept_popess,,Hidden law and sacred subconcious knowledge.
+fig_infinity_symbol,The Infinity Symbol,"concept_juggler, concept_strenght, concept_the_world",,Infinite possibilities and the eternal nature of the spirit.
+fig_magician_table,The Artisan's Table,concept_juggler,,The physical world where manifestation occurs.
+fig_pomegranate,Pomegranate,"concept_popess, concept_empress",,"Fertility, the underworld, and the seeds of knowledge."
 fig_crescent_moon,Crescent Moon,concept_popess,,"Intuition, mystery, and the illumination of the hidden psyche."
 fig_scepter_popess,Scepter,concept_popess,"fig_scepter_emperor, fig_scepter_pope, fig_scepter_empress","Spirituality, divine connection, and the silent authority of knowledge."
-fig_eagle_shield,Eagle,concept_empress,fig_winged_eagle,Spiritual power and sovereignty.
-fig_wheat_field,Wheat,concept_empress,,"Abundance, harvest, and connection to Mother Earth."
+fig_pillar_jb,Jachin and Boaz,concept_popess,"fig_pillar_temple, fig_pillar_throne, fig_towers_moon, fig_pillar_law","Boaz and Jachin, representing duality and severity/mercy."
+fig_eagle_shield,Eagle,"concept_empress, concept_emperor","fig_winged_eagle, fig_eagle_hat",Spiritual power and sovereignty.
 fig_scepter_empress,Scepter,concept_empress,"fig_scepter_emperor, fig_scepter_pope, fig_scepter_popess","Fertility, creative power, and the nurturing rule over the physical world."
-fig_ram_throne,Ram Heads,concept_emperor,,"Leadership, Mars, and the fire of determination."
+fig_pillar_throne,Ducal Throne Pillars,concept_emperor,"fig_pillar_temple, fig_pillar_jb, fig_towers_moon, fig_pillar_law",Vertical architectural supports integrated into the imperial seat.They signify the rigid stability of the state and earthly power.
+fig_eagle_hat,Eagle,concept_emperor,"fig_eagle_shield, fig_winged_eagle",The eagle represents the temporal power of the state.
 fig_scepter_emperor,Scepter,concept_emperor,"fig_scepter_empress, fig_scepter_pope, fig_scepter_popess","Structure, worldly dominion, and the firm execution of order."
-fig_crossed_keys,Crossed Keys,concept_pope,,The keys to the kingdom of heaven and secret doctrine.
-fig_triple_crown,Triple Crown,concept_pope,fig_crown_tower,"Authority over the three realms: physical, emotional, spiritual."
 fig_scepter_pope,Scepter,concept_pope,"fig_scepter_emperor, fig_scepter_empress, fig_scepter_popess","Traditional doctrine, religious leadership, and the bridge to the sacred."
+fig_pillar_temple,The Sacred Gateway,concept_pope,"fig_pillar_throne, fig_pillar_jb, fig_towers_moon, fig_pillar_law",Free-standing columns framing a central religious figure. They represent the structural laws of the Church and the boundary between the congregation and the divine.
 fig_angel_cupid,Angel,concept_lovers,fig_winged_angel,Divine intervention and the higher self overseeing choices.
-fig_sphinx_white,White Sphinx,concept_chariot,fig_sphinx_black,"Mercy, the positive force of the will and conscious mind."
-fig_sphinx_black,Black Sphinx,concept_chariot,fig_sphinx_white,"Severity, the hidden obstacles and the subconcious."
 fig_lion_tamed,Lion,concept_strength,fig_winged_lion,Raw passion and animal nature calmed by spiritual grace.
-fig_lantern_hermit,Lantern,concept_hermit,,The light of inner wisdom and the search for truth.
 fig_winged_bull,Winged Bull,concept_wheel_of_fortune,,Representing the fixed sign Taurus and the element Earth.
 fig_winged_lion,Winged Lion,concept_wheel_of_fortune,fig_lion_tamed,Representing the fixed sign Leo and the element Fire.
-fig_winged_eagle,Winged Eagle,concept_wheel_of_fortune,,Representing the fixed sign Scorpio and the element Water.
-fig_winged_angel,Winged Angel,concept_wheel_of_fortune,fig_angel_cupid,Representing the fixed sign Aquarius and the element Air.
-fig_man,The Man,concept_wheel_of_fortune,,Representing the fixed sign Aquarius and the element Air.
-fig_ox,The Ox,concept_wheel_of_fortune,,Representing the fixed sign Taurus and the element Earth.
-fig_scales_justice,Scales,concept_justice,,"Balance, fairness, and the weighing of truth."
+fig_winged_eagle,Winged Eagle,"concept_wheel_of_fortune, concept_the_world","fig_eagle_shield, fig_eagle_hat",Representing the fixed sign Scorpio and the element Water.
+fig_winged_angel,Winged Angel,"concept_wheel_of_fortune, concept_the_world",fig_angel_cupid,Representing the fixed sign Aquarius and the element Air.
+fig_scales_justice,Scales of Justice,concept_justice,,"Balance, fairness, and the weighing of truth."
 fig_sword_justice,Sword,concept_justice,,The power of logic and the cutting away of falsehood.
-fig_living_wood,Living Wood,concept_the_hanged_man,,The potential for growth even in a state of suspension.
+fig_pillar_law,The Pillars of Truth,concept_justice,"fig_pillar_throne, fig_pillar_jb, fig_pillar_temple, fig_towers_moon","The unwavering neutrality of the law, they provide the balance required for the scales of justice."
 fig_scythe_death,Scythe,concept_death,,The tool of harvest and the inevitable end of cycles.
-fig_white_horse,White Horse,concept_death,,Purity of purpose and the unstoppable movement of time.
+fig_water_river,The River of Life,concept_death,"fig_water_healing, fig_water_pool, fig_water_alchemical",It symbolizes the boundary between the physical and spiritual worlds and the inevitable passage of time and transition.
 fig_temperance_vases,Vases,concept_temperance,,The alchemy of the soul and the mixing of opposites.
+fig_water_alchemical,The Tempering Stream,concept_temperance,"fig_water_healing, fig_water_pool, fig_water_river","The fluid poured between two vessels. It represents the ""Life Force"" being refined and the alchemical blending of opposites to create a balanced internal state."
 fig_devil_horns,Horns,concept_the_devil,,Animalistic desires and the ego's trap.
 fig_devil_chains,Chains,concept_the_devil,,Voluntary bondage to materialism and addiction.
 fig_lightning_bolt,Lightning,concept_the_tower,,Sudden divine intervention or a flash of overwhelming truth.
-fig_crown_tower,Falling Crown,concept_the_tower,fig_triple_crown,The ego being stripped of its false authority.
+fig_crown_tower,Falling Crown,concept_the_tower,,The ego being stripped of its false authority.
 fig_star_8_points,Eight-pointed Star,concept_the_star,,Celestial guidance and the harmony of the cosmos.
-fig_ibis_bird,Bird (Ibis),concept_the_star,,The soul's resting place and the messenger of Thoth.
+fig_water_healing,The Living Springs,concept_the_star,"fig_water_alchemical, fig_water_pool, fig_water_river",Water poured onto both land and sea. It symbolizes the restoration of the soul and the continuous replenishment of the collective subconscious.
 fig_wolf_moon,Wolf,concept_the_moon,,"The wild, untamed nature of the subconscious."
 fig_dog_moon,Dog,concept_the_moon,fig_dog_fool,"The domesticated, civilized aspect of the human mind."
 fig_crayfish_moon,Crayfish,concept_the_moon,,Primordial fears emerging from the depths of the psyche.
-fig_towers_moon,Towers,concept_the_moon,,The threshold between the known world and the unknown.
-fig_sunflowers,Sunflowers,concept_the_sun,,"Radiance, growth, and the alignment with divine light."
+fig_towers_moon,The Boundary Towers,concept_the_moon,"fig_pillar_throne, fig_pillar_jb, fig_pillar_temple, fig_pillar_law",The threshold between the known world and the unknown.
+fig_water_pool,The Primordial Abyss,concept_the_moon,"fig_water_alchemical, fig_water_healing, fig_water_river","It represents the deep, hidden layers of the psyche and the primitive instincts that surface during the night of the soul."
 fig_trumpet_angel,Trumpet,concept_judgement,,The call to spiritual awakening and the voice of the divine.
 fig_laurel_wreath,Laurel Wreath,concept_the_world,,"Victory, protection, and the completion of the great work."
