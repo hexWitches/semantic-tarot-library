@@ -7562,11 +7562,6 @@
         "archetypes_page": {
             "concept_fool": {
                 "subtitle": "«Listen to the madness of the heart and be free in choices»",
-                "img": {
-                    "path": "",
-                    "alt": "The Fool archetype.",
-                    "caption": "The Fool card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7576,11 +7571,6 @@
             },
             "concept_juggler": {
                 "subtitle": "«Gain the power to manifest wisdom and guard secrets»",
-                "img": {
-                    "path": "",
-                    "alt": "The Juggler archetype.",
-                    "caption": "The Juggler card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7590,11 +7580,6 @@
             },
             "concept_popess": {
                 "subtitle": "«Trust in feminine wisdom and connection with the High Ones»",
-                "img": {
-                    "path": "",
-                    "alt": "The High Priestess archetype.",
-                    "caption": "The High Priestess card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7604,11 +7589,6 @@
             },
             "concept_empress": {
                 "subtitle": "«Magnify abundance, the feminine and solidarity with others.»",
-                "img": {
-                    "path": "",
-                    "alt": "The Empress archetype.",
-                    "caption": "The Empress card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7618,11 +7598,6 @@
             },
             "concept_emperor": {
                 "subtitle": "«Wield power and dominion for the good of all»",
-                "img": {
-                    "path": "",
-                    "alt": "The Emperor archetype.",
-                    "caption": "The Emperor card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7632,11 +7607,6 @@
             },
             "concept_pope": {
                 "subtitle": "«Rely on ancestral beliefs, rites and wisdoms»",
-                "img": {
-                    "path": "",
-                    "alt": "The Emperor archetype.",
-                    "caption": "The Emperor card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7646,11 +7616,6 @@
             },
             "concept_lovers": {
                 "subtitle": "«Adore the vitality of love in all its ways»",
-                "img": {
-                    "path": "",
-                    "alt": "The Lovers archetype.",
-                    "caption": "The Lovers card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7660,11 +7625,6 @@
             },
             "concept_chariot": {
                 "subtitle": "«Receive the knowledge and decision to guide life on its right path»",
-                "img": {
-                    "path": "",
-                    "alt": "The Chariot archetype.",
-                    "caption": "The Chariot card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7674,11 +7634,6 @@
             },
             "concept_justice": {
                 "subtitle": "«Believe in the morality and ethics of good and right things»",
-                "img": {
-                    "path": "",
-                    "alt": "The Justice archetype.",
-                    "caption": "The Justice card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7688,11 +7643,6 @@
             },
             "concept_hermit": {
                 "subtitle": "«Keep the patience to observe the world from the outside»",
-                "img": {
-                    "path": "",
-                    "alt": "The Hermit archetype.",
-                    "caption": "The Hermit card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7702,11 +7652,6 @@
             },
             "concept_wheel_of_fortune": {
                 "subtitle": "«Know that bliss and fortune is a constant twist»",
-                "img": {
-                    "path": "",
-                    "alt": "The Wheel of Fortune archetype.",
-                    "caption": "The Wheel of Fortune card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7716,11 +7661,6 @@
             },
             "concept_strenght": {
                 "subtitle": "«Trust in our inner wholeness of heart and mind»",
-                "img": {
-                    "path": "",
-                    "alt": "The Strenght archetype.",
-                    "caption": "The Strenght card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7730,11 +7670,6 @@
             },
             "concept_the_hanged_man": {
                 "subtitle": "«Distinguish loyalties from betrayals. Otherwise, punishment will come»",
-                "img": {
-                    "path": "",
-                    "alt": "The Hanged Man archetype.",
-                    "caption": "The Hanged Man card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7744,11 +7679,6 @@
             },
             "concept_death": {
                 "subtitle": "«Remember that life is limited and so are the good and evil of men»",
-                "img": {
-                    "path": "assets/images/collection/RiderWaiteSmithTarot/014.jpg",
-                    "alt": "The Death archetype.",
-                    "caption": "The Death card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7758,11 +7688,6 @@
             },
             "concept_temperance": {
                 "subtitle": "«Level and nurture the wholeness of the balance between the spirit and the soul»",
-                "img": {
-                    "path": "",
-                    "alt": "The Temperance archetype.",
-                    "caption": "The Temperance card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7772,11 +7697,6 @@
             },
             "concept_the_devil": {
                 "subtitle": "«Fight and defeat the forces of darkness hidden in every human being»",
-                "img": {
-                    "path": "",
-                    "alt": "The Devil archetype.",
-                    "caption": "The Devil card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7786,11 +7706,6 @@
             },
             "concept_the_tower": {
                 "subtitle": "«Recognize that there are good and bad changes, accept them and overcome them»",
-                "img": {
-                    "path": "",
-                    "alt": "The Tower archetype.",
-                    "caption": "The Tower card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7800,11 +7715,6 @@
             },
             "concept_the_star": {
                 "subtitle": "«Keep the inner light illuminated at all times, even in the dark»",
-                "img": {
-                    "path": "",
-                    "alt": "The Star archetype.",
-                    "caption": "The Star card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7814,11 +7724,6 @@
             },
             "concept_the_moon": {
                 "subtitle": "«Experience the cycles of time and empower them for good fortune»",
-                "img": {
-                    "path": "",
-                    "alt": "The Moon archetype.",
-                    "caption": "The Moon card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7828,11 +7733,6 @@
             },
             "concept_the_sun": {
                 "subtitle": "«Open your eyes to the eternal and infinite light for peace, health and wisdom»",
-                "img": {
-                    "path": "",
-                    "alt": "The Sun archetype.",
-                    "caption": "The Sun card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7842,11 +7742,6 @@
             },
             "concept_judgment": {
                 "subtitle": "«Find the faculty to discern the just from the unjust and act upon it»",
-                "img": {
-                    "path": "",
-                    "alt": "The Judgement archetype.",
-                    "caption": "The Judgement card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
@@ -7856,11 +7751,6 @@
             },
             "concept_the_world": {
                 "subtitle": "«Discover new realities, far from materiality and pettiness»",
-                "img": {
-                    "path": "",
-                    "alt": "The World archetype.",
-                    "caption": "The World card from the Rider-Waite deck."
-                },
                 "body_content": [
                     {
                         "type": "text",
