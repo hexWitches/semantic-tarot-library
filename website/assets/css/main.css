@@ -532,12 +532,23 @@ footer a {
 }
 
 .card-scroller-wrapper .card-scroller {
-    flex: 1;
+    /* flex: 1; removed to allow centering via margin auto */
+    margin: 0 auto;
 }
 
 .scroller-arrow {
     flex-shrink: 0;
     border-color: rgba(255, 255, 255, 0.5) !important;
+    color: var(--floral-white) !important;
+}
+
+#archetype-carousel-section .scroller-arrow {
+    color: var(--dark-amethyst) !important;
+    border-color: var(--dark-amethyst) !important;
+}
+
+#archetype-carousel-section .scroller-arrow:hover {
+    background-color: var(--dark-amethyst) !important;
     color: var(--floral-white) !important;
 }
 
@@ -653,6 +664,17 @@ footer a {
     padding-bottom: 10px;
     scrollbar-width: thin;
     scrollbar-color: var(--brick-red) transparent;
+    max-width: 100%;
+    /* Ensure it doesn't break layout */
+    justify-content: flex-start;
+    /* Always start from the left to avoid clipping */
+}
+
+/* Tighter spacing for large screens */
+@media (min-width: 1200px) {
+    .card-scroller {
+        gap: 8px;
+    }
 }
 
 .card-scroller::-webkit-scrollbar {
@@ -680,29 +702,32 @@ footer a {
     border-color: var(--floral-white);
 }
 
-/* Scroller card size override — keeps deck dropdown thumbnails compact */
+/* ARCHETYPE CAROUSEL */
+.archetype-carousel-title {
+    font-family: var(--header-font);
+    color: var(--dark-amethyst);
+}
+
 .scroller-card {
-    height: 150px !important;
-    width: 95px !important;
+    display: block !important;
+    text-decoration: none !important;
+    color: inherit !important;
+    height: 240px !important;
+    width: 150px !important;
     flex-shrink: 0;
     border-radius: 4px;
     overflow: hidden;
+    margin: 0 !important;
+    /* Override .deck-img-container's margin: 0 auto */
 }
 
-.scroller-card img {
+.deck-card-img {
+    display: block;
+    margin: 0 auto;
     height: 100% !important;
     width: 100% !important;
     max-height: 100% !important;
     object-fit: contain;
-}
-
-.scroller-card .card-title-overlay {
-    font-size: 0.55rem;
-    line-height: 1.2;
-}
-
-.scroller-card .card-number-overlay {
-    font-size: 0.6rem;
 }
 
 /* grid view  */

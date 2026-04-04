@@ -135,17 +135,39 @@
         </section>
 
         <section class="container px-4 px-md-5 mb-5 pb-5">
+            <!-- Archetype Related Cards Carousel (New) -->
+            <div id="archetype-carousel-section" class="mb-5" style="display: none;">
+                <h3 id="archetype-carousel-title" class="carousel-title archetype-carousel-title text-center mb-4">
+                    Discover the many faces of Archetype
+                </h3>
+                <div class="card-scroller-wrapper">
+                    <button class="scroller-arrow scroller-prev nav-circle-btn" aria-label="Previous cards">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m11 17-5-5 5-5" />
+                            <path d="m18 17-5-5 5-5" />
+                        </svg>
+                    </button>
+                    <div class="card-scroller" id="archetype-cards-scroller">
+                        <!-- Related cards will be injected here -->
+                    </div>
+                    <button class="scroller-arrow scroller-next nav-circle-btn" aria-label="Next cards">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 17 5-5-5-5" />
+                            <path d="m13 17 5-5-5-5" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
             <div id="deepening-main-row" class="row justify-content-center">
-                <!-- Archetype Portrait (Left Column) -->
-                <div id="archetype-portrait-col" class="col-lg-4 mb-4" style="display: none;">
-                    <div id="archetype-portrait-container"></div>
+                <!-- Left Column (Metadata for Archetypes) -->
+                <div id="metadata-col" class="col-lg-4 mb-4" style="display: none;">
+                    <div id="archetype-metadata-container"></div>
                 </div>
 
-                <!-- Content & Metadata (Right Column) -->
                 <div id="main-content-col" class="col-lg-9">
-                    <!-- Archetype Metadata (only for archetypes) -->
-                    <div id="archetype-metadata-container" class="mb-4"></div>
-
                     <div class="topic-text-container">
                     </div>
                 </div>

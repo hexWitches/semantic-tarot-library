@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     item['@id'] === `smtg:${topicId}` || item['@id'] === `smtg:${normalizedId}`
                 );
 
-                renderArchetypePage(pageData, archetypeGraphData);
+                renderArchetypePage(pageData, archetypeGraphData, graph);
             } else {
                 renderTopicPage(pageData);
             }
@@ -60,14 +60,16 @@ document.addEventListener('DOMContentLoaded', async () => {
  * Specialized rendering for Archetype pages.
  * Integrates formal Graph metadata with narrative content and a side portrait.
  */
-function renderArchetypePage(pageData, graphData) {
+function renderArchetypePage(pageData, graphData, allGraph) {
     const title = (graphData && graphData.label) ? graphData.label : (pageData.title || "Archetype Detail");
 
     // 1. Setup Base Layout (Banner hidden)
     setupBasePageLayout(title, pageData, true);
 
-    // 2. Render Side Portrait Image
-    renderArchetypePortrait(pageData);
+    // 2. Render Archetype Related Cards Carousel
+    if (graphData) {
+        renderArchetypeCarousel(graphData['@id'], title, allGraph);
+    }
 
     // 3. Render Archetype Metadata Table
     if (graphData) {
@@ -109,28 +111,32 @@ function setupBasePageLayout(title, pageData, isArchetype) {
 
     // --- GRID ADJUSTMENTS ---
     const parentRow = document.getElementById('deepening-main-row');
-    const portraitCol = document.getElementById('archetype-portrait-col');
+    const metadataCol = document.getElementById('metadata-col');
     const contentCol = document.getElementById('main-content-col');
+    const carouselSection = document.getElementById('archetype-carousel-section');
 
     if (isArchetype) {
-        // Archetype Grid: Side-by-side (4+8)
+        // Archetype Layout: Metadata (col-4) + Text (col-8)
         if (parentRow) parentRow.classList.remove('justify-content-center');
-        if (portraitCol) portraitCol.style.display = 'block';
+        if (metadataCol) metadataCol.style.display = 'block';
         if (contentCol) {
-            contentCol.className = 'col-lg-8 mb-4'; // Remove mx-auto
+            contentCol.className = 'col-lg-8 mb-4';
         }
+        if (carouselSection) carouselSection.style.display = 'block';
     } else {
-        // Standard Grid: Full-width centered (9/12)
+        // Standard Topic Layout: Centered (col-9)
         if (parentRow) parentRow.classList.add('justify-content-center');
-        if (portraitCol) portraitCol.style.display = 'none';
+        if (metadataCol) metadataCol.style.display = 'none';
         if (contentCol) {
             contentCol.className = 'col-lg-9 mx-auto mb-4';
         }
+        if (carouselSection) carouselSection.style.display = 'none';
     }
 
-    // --- BANNER HANDLING ---
+    // --- BANNER HANDLING (Only for Topics) ---
     const bannerSection = document.querySelector('.topic-banner');
     if (bannerSection) {
+        // ... (banner logic remains the same but wrapped in isArchetype check)
         if (isArchetype) {
             bannerSection.style.display = 'none';
         } else {
@@ -151,22 +157,6 @@ function setupBasePageLayout(title, pageData, isArchetype) {
     const metaContainer = document.getElementById('archetype-metadata-container');
     if (metaContainer && !isArchetype) {
         metaContainer.style.display = 'none';
-    }
-}
-
-/**
- * Injects the Archetype portrait image (Left column).
- */
-function renderArchetypePortrait(pageData) {
-    const container = document.getElementById('archetype-portrait-container');
-    if (!container) return;
-
-    const imgData = pageData.img || pageData.banner_image || pageData.image_banner;
-    if (imgData && imgData.path) {
-        container.innerHTML = `
-            <img src="${imgData.path}" alt="${imgData.alt || 'Archetype portrait'}" class="archetype-portrait">
-            ${imgData.caption ? `<p class="archetype-portrait-caption">${imgData.caption}</p>` : ''}
-        `;
     }
 }
 
@@ -246,6 +236,94 @@ function renderBodyContent(pageData) {
             }
         });
     }
+}
+
+/**
+ * Renders the carousel of cards associated with a specific archetype.
+ */
+function renderArchetypeCarousel(archetypeId, archetypeLabel, graph) {
+    const scroller = document.getElementById('archetype-cards-scroller');
+    const section = document.getElementById('archetype-carousel-section');
+    const titleEl = document.getElementById('archetype-carousel-title');
+
+    if (!scroller || !section || !titleEl) return;
+
+    // Set dynamic title
+    titleEl.innerText = `Discover the many faces of ${archetypeLabel}`;
+
+    // Filter cards that represent this archetype
+    const relatedCards = graph.filter(item => {
+        const types = Array.isArray(item['@type']) ? item['@type'] : [item['@type']];
+        if (!types.includes('odi:DeckCard')) return false;
+
+        const arch = item.archetype_id;
+        if (!arch) return false;
+
+        const archId = typeof arch === 'string' ? arch : arch['@id'];
+        return archId === archetypeId;
+    });
+
+    if (relatedCards.length === 0) {
+        section.style.display = 'none';
+        return;
+    }
+
+    scroller.innerHTML = relatedCards.map(card => {
+        const imgUrl = getLocalImagePath(card.image_url?.['@id']);
+        const cardName = card.title || 'Tarot Card';
+        const cardNumber = card.card_number || '';
+        const cleanId = (card['@id'] || '').replace('smtg:', '');
+
+        return `
+            <a href="card.html?id=${cleanId}" class="img-container deck-img-container scroller-card">
+                <img src="${imgUrl}" alt="${cardName}" class="deck-card-img" loading="lazy" onerror="this.src='assets/images/placeholder_card.jpg';">
+                
+            </a>`;
+    }).join('');
+
+    initScrollers();
+}
+
+/**
+ * Initializes carousel arrow sliding.
+ */
+function initScrollers() {
+    const SCROLL_STEP = 330;
+    document.querySelectorAll('.card-scroller-wrapper').forEach(wrapper => {
+        const prevArrow = wrapper.querySelector('.scroller-prev');
+        const nextArrow = wrapper.querySelector('.scroller-next');
+        const scroller = wrapper.querySelector('.card-scroller');
+
+        if (!scroller || !prevArrow || !nextArrow) return;
+
+        // Use standard event listeners (cloning is safer for multiple calls)
+        const newPrev = prevArrow.cloneNode(true);
+        const newNext = nextArrow.cloneNode(true);
+        prevArrow.parentNode.replaceChild(newPrev, prevArrow);
+        nextArrow.parentNode.replaceChild(newNext, nextArrow);
+
+        newPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            scroller.scrollBy({ left: -SCROLL_STEP, behavior: 'smooth' });
+        });
+
+        newNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            scroller.scrollBy({ left: SCROLL_STEP, behavior: 'smooth' });
+        });
+    });
+}
+
+function getLocalImagePath(imgId, type = 'card') {
+    if (!imgId || typeof imgId !== 'string') {
+        return 'assets/images/placeholder_card.jpg';
+    }
+    if (imgId.includes('github.com') && imgId.includes('/blob/')) {
+        return imgId
+            .replace('github.com', 'raw.githubusercontent.com')
+            .replace('/blob/', '/');
+    }
+    return imgId;
 }
 
 /**
