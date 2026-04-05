@@ -128,6 +128,7 @@ h3 {
         padding-top: 1rem;
         padding-bottom: 1rem;
     }
+
     .custom-navbar {
         padding: 10px 25px !important;
     }
@@ -526,13 +527,14 @@ input[type="search"]::-webkit-search-results-decoration {
     top: 50%;
     transform: translateY(-50%);
     pointer-events: none;
-    z-index: 1;
-    white-space: nowrap;
+    z-index: 5;
+    white-space: pre;
     overflow: hidden;
     color: var(--dusty-lavender);
     opacity: 0.5;
     width: 100%;
     box-sizing: border-box;
+    display: block;
 }
 
 .search-input-group input {
@@ -849,10 +851,6 @@ input[type="search"]::-webkit-search-results-decoration {
     }
 
     .carousel-next {
-        right: 100px;
-    }
-
-    .carousel-next {
         right: 10px;
     }
 }
@@ -1014,6 +1012,10 @@ COLLECTION PAGE
 
 .deck-content {
     position: relative;
+    display: flex;
+    padding: 15px 20px;
+    align-items: center;
+    gap: 25px;
 }
 
 .discover-btn {
@@ -1153,13 +1155,8 @@ COLLECTION PAGE
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     color: var(--floral-white);
-}
-
-.deck-content {
-    display: flex;
-    padding: 15px 20px;
-    align-items: center;
-    gap: 25px;
+    width: 100%;
+    margin-bottom: 0 !important;
 }
 
 .deck-cover {
@@ -1190,11 +1187,6 @@ COLLECTION PAGE
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.deck-item {
-    width: 100%;
-    margin-bottom: 0 !important;
 }
 
 .view-deck-tab {
@@ -1428,23 +1420,6 @@ COLLECTION PAGE
     width: 100%;
     display: flex;
     align-items: center;
-}
-
-.search-suggestion-ghost {
-    position: absolute;
-    inset: 0;
-    /* fills the wrapper exactly */
-    pointer-events: none;
-    color: var(--dark-amethyst);
-    opacity: 0.4;
-    white-space: pre;
-    z-index: 5;
-    font-family: var(--text-font);
-    display: flex;
-    align-items: center;
-    /* vertically centers inline with input text */
-    overflow: hidden;
-    box-sizing: border-box;
 }
 
 input[type="search"] {
@@ -2311,24 +2286,17 @@ ITEM PAGE: deck
         padding: 1.5rem;
     }
 
-    /* SHOW the toggle button now */
     .btn-metadata-toggle {
         display: flex;
     }
 
-    /* HIDE the grid by default now */
     .metadata-grid {
         display: none;
         padding-top: 1.5rem;
     }
 
-    /* When active via JS */
     .metadata-grid.show {
         display: flex;
-    }
-
-    .btn-metadata-toggle.active {
-        transform: rotate(180deg);
     }
 
     .metadata-title {
@@ -2355,8 +2323,8 @@ ITEM PAGE: deck
 
 
 
-/*  ------------------------- 
-    ITEM PAGE: card + person  
+/*  -------------------------
+    ITEM PAGE: card + person
     -------------------------   */
 .item-section {
     padding-top: 60px;
@@ -2385,28 +2353,23 @@ ITEM PAGE: deck
         padding: 40px 20px;
     }
 
-    /* 1. Center the Image */
     .card-image-wrapper {
         margin-bottom: 2rem;
         max-width: 250px;
     }
 
-    /* 2. Metadata Card Sync */
     .metadata-card {
-        width: 100% !important;
-        max-width: 100% !important;
+        width: 100%;
+        max-width: 100%;
         padding: 1.5rem;
     }
 
-    /* 3. The Toggle Button & Grid Sync */
     .btn-metadata-toggle {
-        display: flex !important;
-        /* Forces it to show at 991px */
+        display: flex;
     }
 
     .metadata-grid {
         display: none;
-        /* Collapses at 991px */
         padding-top: 1.5rem;
     }
 
