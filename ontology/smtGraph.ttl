@@ -2231,6 +2231,7 @@ smtg:card-pierpont-morgan-15 a odi:DeckCard,
     smt:represents smtg:concept-fool .
 
 smtg:card-pierpont-morgan-16 a odi:DeckCard,
+        smt:CourtCard,
         smt:MinorArcana ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
@@ -2241,6 +2242,7 @@ smtg:card-pierpont-morgan-16 a odi:DeckCard,
     smt:hasSuit smtg:cups .
 
 smtg:card-pierpont-morgan-17 a odi:DeckCard,
+        smt:CourtCard,
         smt:MinorArcana ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
@@ -2251,6 +2253,7 @@ smtg:card-pierpont-morgan-17 a odi:DeckCard,
     smt:hasSuit smtg:cups .
 
 smtg:card-pierpont-morgan-18 a odi:DeckCard,
+        smt:CourtCard,
         smt:MinorArcana ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
@@ -2261,6 +2264,7 @@ smtg:card-pierpont-morgan-18 a odi:DeckCard,
     smt:hasSuit smtg:cups .
 
 smtg:card-pierpont-morgan-19 a odi:DeckCard,
+        smt:CourtCard,
         smt:MinorArcana ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
@@ -2271,6 +2275,7 @@ smtg:card-pierpont-morgan-19 a odi:DeckCard,
     smt:hasSuit smtg:wands .
 
 smtg:card-pierpont-morgan-20 a odi:DeckCard,
+        smt:CourtCard,
         smt:MinorArcana ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
@@ -2281,6 +2286,7 @@ smtg:card-pierpont-morgan-20 a odi:DeckCard,
     smt:hasSuit smtg:pentacles .
 
 smtg:card-pierpont-morgan-21 a odi:DeckCard,
+        smt:CourtCard,
         smt:MinorArcana ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
@@ -2291,6 +2297,7 @@ smtg:card-pierpont-morgan-21 a odi:DeckCard,
     smt:hasSuit smtg:pentacles .
 
 smtg:card-pierpont-morgan-22 a odi:DeckCard,
+        smt:CourtCard,
         smt:MinorArcana ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
@@ -2301,6 +2308,7 @@ smtg:card-pierpont-morgan-22 a odi:DeckCard,
     smt:hasSuit smtg:swords .
 
 smtg:card-pierpont-morgan-23 a odi:DeckCard,
+        smt:CourtCard,
         smt:MinorArcana ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
@@ -2311,7 +2319,8 @@ smtg:card-pierpont-morgan-23 a odi:DeckCard,
     smt:hasSuit smtg:swords .
 
 smtg:card-pierpont-morgan-24 a odi:DeckCard,
-        smt:MinorArcana ;
+        smt:MinorArcana,
+        smt:NumberedCard ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
     odi:hasCurrentLocation smtg:the-morgan-library-museum ;
@@ -2322,7 +2331,8 @@ smtg:card-pierpont-morgan-24 a odi:DeckCard,
     smt:hasSuit smtg:cups .
 
 smtg:card-pierpont-morgan-25 a odi:DeckCard,
-        smt:MinorArcana ;
+        smt:MinorArcana,
+        smt:NumberedCard ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
     odi:hasCurrentLocation smtg:the-morgan-library-museum ;
@@ -2333,7 +2343,8 @@ smtg:card-pierpont-morgan-25 a odi:DeckCard,
     smt:hasSuit smtg:cups .
 
 smtg:card-pierpont-morgan-26 a odi:DeckCard,
-        smt:MinorArcana ;
+        smt:MinorArcana,
+        smt:NumberedCard ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
     odi:hasCurrentLocation smtg:the-morgan-library-museum ;
@@ -2344,7 +2355,8 @@ smtg:card-pierpont-morgan-26 a odi:DeckCard,
     smt:hasSuit smtg:cups .
 
 smtg:card-pierpont-morgan-27 a odi:DeckCard,
-        smt:MinorArcana ;
+        smt:MinorArcana,
+        smt:NumberedCard ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
     odi:hasCurrentLocation smtg:the-morgan-library-museum ;
@@ -2355,7 +2367,8 @@ smtg:card-pierpont-morgan-27 a odi:DeckCard,
     smt:hasSuit smtg:cups .
 
 smtg:card-pierpont-morgan-28 a odi:DeckCard,
-        smt:MinorArcana ;
+        smt:MinorArcana,
+        smt:NumberedCard ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
     odi:hasCurrentLocation smtg:the-morgan-library-museum ;
@@ -2366,7 +2379,8 @@ smtg:card-pierpont-morgan-28 a odi:DeckCard,
     smt:hasSuit smtg:wands .
 
 smtg:card-pierpont-morgan-29 a odi:DeckCard,
-        smt:MinorArcana ;
+        smt:MinorArcana,
+        smt:NumberedCard ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
     odi:hasCurrentLocation smtg:the-morgan-library-museum ;
@@ -2377,7 +2391,8 @@ smtg:card-pierpont-morgan-29 a odi:DeckCard,
     smt:hasSuit smtg:wands .
 
 smtg:card-pierpont-morgan-30 a odi:DeckCard,
-        smt:MinorArcana ;
+        smt:MinorArcana,
+        smt:NumberedCard ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
     odi:hasCurrentLocation smtg:the-morgan-library-museum ;
@@ -2388,7 +2403,8 @@ smtg:card-pierpont-morgan-30 a odi:DeckCard,
     smt:hasSuit smtg:wands .
 
 smtg:card-pierpont-morgan-31 a odi:DeckCard,
-        smt:MinorArcana ;
+        smt:MinorArcana,
+        smt:NumberedCard ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
     odi:hasCurrentLocation smtg:the-morgan-library-museum ;
@@ -2399,7 +2415,8 @@ smtg:card-pierpont-morgan-31 a odi:DeckCard,
     smt:hasSuit smtg:pentacles .
 
 smtg:card-pierpont-morgan-32 a odi:DeckCard,
-        smt:MinorArcana ;
+        smt:MinorArcana,
+        smt:NumberedCard ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
     odi:hasCurrentLocation smtg:the-morgan-library-museum ;
@@ -2410,7 +2427,8 @@ smtg:card-pierpont-morgan-32 a odi:DeckCard,
     smt:hasSuit smtg:pentacles .
 
 smtg:card-pierpont-morgan-33 a odi:DeckCard,
-        smt:MinorArcana ;
+        smt:MinorArcana,
+        smt:NumberedCard ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
     odi:hasCurrentLocation smtg:the-morgan-library-museum ;
@@ -2421,7 +2439,8 @@ smtg:card-pierpont-morgan-33 a odi:DeckCard,
     smt:hasSuit smtg:pentacles .
 
 smtg:card-pierpont-morgan-34 a odi:DeckCard,
-        smt:MinorArcana ;
+        smt:MinorArcana,
+        smt:NumberedCard ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
     odi:hasCurrentLocation smtg:the-morgan-library-museum ;
@@ -2432,7 +2451,8 @@ smtg:card-pierpont-morgan-34 a odi:DeckCard,
     smt:hasSuit smtg:swords .
 
 smtg:card-pierpont-morgan-35 a odi:DeckCard,
-        smt:MinorArcana ;
+        smt:MinorArcana,
+        smt:NumberedCard ;
     odi:hasAuthor smtg:person-bembo,
         smtg:person-zavattari ;
     odi:hasCurrentLocation smtg:the-morgan-library-museum ;
@@ -2727,7 +2747,8 @@ smtg:card-rider-waite-smith-22 a odi:DeckCard,
     smt:represents smtg:concept-the-world .
 
 smtg:card-rider-waite-smith-23 a odi:DeckCard,
-        smt:MinorArcana ;
+        smt:MinorArcana,
+        smt:NumberedCard ;
     odi:hasAuthor smtg:person-smith,
         smtg:person-waite ;
     odi:hasCurrentLocation smtg:victoria-and-albert-museum ;
@@ -2738,7 +2759,8 @@ smtg:card-rider-waite-smith-23 a odi:DeckCard,
     smt:hasSuit smtg:swords .
 
 smtg:card-rider-waite-smith-24 a odi:DeckCard,
-        smt:MinorArcana ;
+        smt:MinorArcana,
+        smt:NumberedCard ;
     odi:hasAuthor smtg:person-smith,
         smtg:person-waite ;
     odi:hasCurrentLocation smtg:victoria-and-albert-museum ;

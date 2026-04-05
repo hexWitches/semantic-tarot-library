@@ -855,51 +855,234 @@ input[type="search"]::-webkit-search-results-decoration {
     }
 }
 
-/* --- SMT Ontology Section --- */
-.ontology-graph-wrapper {
+
+/* ---- Knowledge Graph Chart ---- */
+.kg-wrapper {
+    background-color: #F9F4EC;
+    border: 1px solid rgba(36, 0, 70, 0.1);
+    border-radius: 20px;
+    padding: 2rem 1.5rem 1.5rem;
+    box-shadow: 0 4px 24px rgba(36, 0, 70, 0.06);
+}
+
+/* Side-by-side layout: chart left, legend right */
+.kg-inner-layout {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+}
+
+/* Strict Grid for Desktop to prevent overlap */
+@media (min-width: 1200px) {
+    .kg-inner-layout {
+        display: grid;
+        grid-template-columns: 510px 1fr;
+        gap: 3.5rem;
+        align-items: center;
+    }
+}
+
+.kg-chart-side {
+    flex: 1 1 460px;
+    max-width: 510px;
+    min-width: 0;
+}
+
+.kg-legend-side {
+    flex: 1 1 360px;
+    min-width: 0;
+    border-left: 1px solid rgba(36, 0, 70, 0.1);
+    padding-left: 3rem;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+}
+
+.kg-chart-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.kg-chart-container {
     width: 100%;
-    max-width: 1000px;
+    max-width: 510px;
     margin: 0 auto;
-    padding: 1rem 0;
-}
-
-.ontology-svg-container {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border-radius: 12px;
-    overflow: hidden;
-    background-color: white;
     position: relative;
-    cursor: grab;
-    user-select: none;
-    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.ontology-svg-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transform-origin: center center;
+.kg-chart-container svg {
     display: block;
-    pointer-events: none;
-    -webkit-user-drag: none;
+    margin: 0 auto;
+    overflow: visible;
 }
 
-.ontology-zoom-hint {
+/* Arc hover & focus transition */
+.kg-arc {
+    transition: fill-opacity 0.2s ease;
+    outline: none; /* Removes default blue focus ring */
+}
+
+.kg-hierarchy-guide {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding: 0.5rem 0;
+    background: transparent;
+    border: none;
+}
+
+.kg-hg-label {
+    font-family: var(--header-font);
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    color: var(--dusty-lavender);
+    opacity: 0.85;
+}
+
+/* Tooltip */
+.kg-tooltip {
     position: absolute;
-    bottom: 12px;
-    right: 16px;
-    font-size: 0.75rem;
+    display: none;
+    z-index: 100;
+    background: var(--dark-amethyst);
     color: var(--floral-white);
-    opacity: 0.6;
-    letter-spacing: 0.5px;
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    max-width: 240px;
+    min-width: 180px;
     pointer-events: none;
+    box-shadow: 0 8px 24px rgba(36, 0, 70, 0.3);
     font-family: var(--text-font);
+    font-size: 0.88rem;
+    line-height: 1.5;
 }
 
-@media (max-width: 768px) {
-    .ontology-svg-container {
-        aspect-ratio: 4 / 3;
+.kg-tt-name {
+    font-family: var(--text-font);
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 0.2rem;
+    color: var(--floral-white);
+    word-break: break-word;
+}
+
+.kg-tt-prefix {
+    color: var(--dusty-lavender);
+    font-size: 0.8rem;
+    font-family: var(--text-font);
+    margin-right: 1px;
+}
+
+.kg-tt-parent {
+    font-size: 0.78rem;
+    color: #C5AEDE;
+    margin-bottom: 0.35rem;
+}
+
+.kg-tt-parent em {
+    font-style: italic;
+    font-weight: normal;
+    color: #D4C0E8;
+}
+
+.kg-tt-stats {
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+}
+
+.kg-tt-pct {
+    color: #C5AEDE;
+    font-size: 0.82rem;
+}
+
+.kg-tt-desc {
+    font-size: 0.8rem;
+    color: #E8DFF5;
+    border-top: 1px solid rgba(255,248,240,0.15);
+    padding-top: 0.4rem;
+    margin-top: 0.3rem;
+    line-height: 1.45;
+}
+
+/* Legend */
+.kg-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+}
+
+.kg-legend-group-label {
+    font-family: var(--header-font);
+    font-size: 0.78rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--dusty-lavender);
+    margin-bottom: 0.75rem;
+}
+
+.kg-legend-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.kg-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--text-font);
+    font-size: 0.95rem;
+    color: var(--dark-amethyst);
+    cursor: default;
+}
+
+.kg-legend-swatch {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    opacity: 0.88;
+}
+
+.kg-legend-label {
+    flex: 1;
+    line-height: 1.2;
+}
+
+.kg-legend-count {
+    font-weight: 600;
+    color: var(--brick-red);
+    font-size: 0.9rem;
+    min-width: 32px;
+    text-align: right;
+}
+
+@media (max-width: 1100px) {
+    .kg-legend-side {
+        border-left: none;
+        border-top: 1px solid rgba(36, 0, 70, 0.1);
+        padding-left: 0;
+        padding-top: 1.5rem;
+    }
+    .kg-legend {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.25rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .kg-legend {
+        grid-template-columns: 1fr;
+    }
+    .kg-wrapper {
+        padding: 1.5rem 1rem 1rem;
     }
 }
 
@@ -3295,4 +3478,60 @@ ABOUT PAGE
 
 .team-card:hover {
     transform: translateY(-5px);
+}
+
+.about-inline-link {
+    color: var(--brick-red);
+    text-underline-offset: 3px;
+}
+
+
+
+/* --- SMT Ontology Section --- */
+.ontology-graph-wrapper {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem 0;
+}
+
+.ontology-svg-container {
+    width: 100%;
+    aspect-ratio: 1834 / 1544;
+    min-height: 600px;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: white;
+    position: relative;
+    cursor: grab;
+    user-select: none;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.ontology-svg-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform-origin: center center;
+    display: block;
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+
+.ontology-zoom-hint {
+    position: absolute;
+    bottom: 12px;
+    right: 16px;
+    font-size: 0.75rem;
+    color: var(--floral-white);
+    opacity: 0.6;
+    letter-spacing: 0.5px;
+    pointer-events: none;
+    font-family: var(--text-font);
+}
+
+@media (max-width: 768px) {
+    .ontology-svg-container {
+        aspect-ratio: 4 / 3;
+    }
 }
