@@ -111,57 +111,7 @@ function initOntologyPanning() {
 }
 
 
-// COLLECTION PAGE //
-
-document.addEventListener('DOMContentLoaded', () => {
-
-    const deckView = document.getElementById('deck-view');
-    const gridView = document.getElementById('grid-view');
-
-    // -------------------------------------------------------
-    // expansion logic is kept in collection.js or main.js but sub-option selection is handled in collection.js
-    const expandableBtns = document.querySelectorAll('.filter-expandable');
-
-    expandableBtns.forEach(btn => {
-        btn.addEventListener('click', function () {
-            console.log("Filter Clicked - Multi-open version active");
-            const group = this.closest('.filter-group');
-            const suboptions = group ? group.querySelector('.filter-suboptions') : null;
-            const isOpen = this.classList.contains('open');
-
-            // Remove accordion behavior: do not close others
-
-            this.classList.toggle('open', !isOpen);
-            if (suboptions) suboptions.classList.toggle('open', !isOpen);
-        });
-    });
-
-});
-
-// dropdown deck
-function dropdownDeck(deckId) {
-    const dropdown = document.getElementById(deckId);
-
-    // Close all other open tendinas
-    const allDropdown = document.querySelectorAll('.dropdown-content');
-    allDropdown.forEach(el => {
-        if (el.id !== deckId) {
-            el.classList.remove('show');
-        }
-    });
-    
-    // Toggle the clicked one
-    if (dropdown.classList.contains('show')) {
-        dropdown.classList.remove('show');
-    } else {
-        dropdown.classList.add('show');
-    }
-}
-
-
-    // -------------------------------------------------------
-    // Discovery section carousel - Infinite Loop Version
-    // -------------------------------------------------------
+// Discovery section carousel - Infinite Loop Version
 window.initCarouselLogic = function() {
     const carousel = document.getElementById("multiCarousel");
     const carouselInner = document.getElementById("carouselInner");
@@ -200,11 +150,10 @@ window.initCarouselLogic = function() {
         const scrollLeft = carouselInner.scrollLeft;
         const currentItemWidth = getScrollAmount();
         
-        // If we've reached the last clone (at the end), jump to the first real item
         if (scrollLeft >= currentItemWidth * (totalItems + 1) - 10) {
             carouselInner.scrollTo({ left: currentItemWidth, behavior: 'auto' });
         }
-        // If we've reached the first clone (at the start), jump to the last real item
+   
         else if (scrollLeft <= 10) {
             carouselInner.scrollTo({ left: currentItemWidth * totalItems, behavior: 'auto' });
         }
@@ -231,20 +180,15 @@ window.initCarouselLogic = function() {
     // Recalibrate on resize
     window.addEventListener('resize', () => {
         const currentItemWidth = getScrollAmount();
-        // Determine which item we are currently on (roughly)
         const currentIndex = Math.round(carouselInner.scrollLeft / currentItemWidth);
-        // Snap to that item with the new width
         carouselInner.scrollTo({ left: currentIndex * currentItemWidth, behavior: 'auto' });
     });
 
-    // Listen for scroll end to handle the seamless jump
     carouselInner.addEventListener("scroll", () => {
-        // Simple debounce or check to see if we landed on a clone
         clearTimeout(window.carouselJumpTimeout);
-        window.carouselJumpTimeout = setTimeout(handleLoop, 600); // Wait for smooth scroll to finish
+        window.carouselJumpTimeout = setTimeout(handleLoop, 600);
     }, { passive: true });
 
-    // Auto-advance loop (Slower: 8 seconds)
     let autoAdvanceInterval;
     let isHovering = false;
 
@@ -286,10 +230,49 @@ window.initCarouselLogic = function() {
 };
 
 
+// COLLECTION PAGE //
+document.addEventListener('DOMContentLoaded', () => {
 
+    const deckView = document.getElementById('deck-view');
+    const gridView = document.getElementById('grid-view');
+
+    // -------------------------------------------------------
+    // expansion logic is kept in collection.js or main.js but sub-option selection is handled in collection.js
+    const expandableBtns = document.querySelectorAll('.filter-expandable');
+
+    expandableBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            console.log("Filter Clicked - Multi-open version active");
+            const group = this.closest('.filter-group');
+            const suboptions = group ? group.querySelector('.filter-suboptions') : null;
+            const isOpen = this.classList.contains('open');
+
+            this.classList.toggle('open', !isOpen);
+            if (suboptions) suboptions.classList.toggle('open', !isOpen);
+        });
+    });
+
+});
+
+// dropdown deck
+function dropdownDeck(deckId) {
+    const dropdown = document.getElementById(deckId);
+
+    const allDropdown = document.querySelectorAll('.dropdown-content');
+    allDropdown.forEach(el => {
+        if (el.id !== deckId) {
+            el.classList.remove('show');
+        }
+    });
+    
+    if (dropdown.classList.contains('show')) {
+        dropdown.classList.remove('show');
+    } else {
+        dropdown.classList.add('show');
+    }
+}
 
 // Metadata toggle in small screens 
-
 document.addEventListener("DOMContentLoaded", function() {
     const toggleBtn = document.getElementById('toggleMetadata');
     const metaGrid = document.getElementById('metadataCollapse');
