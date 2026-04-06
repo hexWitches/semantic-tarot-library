@@ -541,7 +541,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const textColor = isTtLight ? '#240046' : '#FFF8F0';
 
-      const formatName = (name) => name[0].toUpperCase() + name.slice(1).toLowerCase();
+      const formatName = (name) => name;
       const displayName = formatName(d.data.name);
 
       const parentName = d.parent && d.parent.depth > 0
@@ -642,19 +642,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     centre.append('text')
       .attr('class', 'kg-centre-class')
-      .attr('dy', '-0.55em')
+      .attr('dy', '0.35em')
       .attr('font-family', 'Cinzel, serif')
       .attr('font-size', '13px')
       .attr('fill', '#7B6D8D')
       .text('owl:Thing');
-
-    centre.append('text')
-      .attr('class', 'kg-centre-count')
-      .attr('dy', '0.9em')
-      .attr('font-family', 'Spectral, serif')
-      .attr('font-size', '11px')
-      .attr('fill', '#240046')
-      .text(`${totalInstances} instances`);
 
     legend.innerHTML = '';
     legendGroups.forEach(group => {

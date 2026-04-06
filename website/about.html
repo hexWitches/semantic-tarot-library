@@ -99,30 +99,34 @@
         </div>
 
         <main class="about-content text-center mb-5 pb-5">
-            <header class="container-fluid px-4 px-md-0 pt-2 pb-3 mb-3 text-center">
-                <div class="lc-block">
+            <header class="container-fluid px-4 pt-2 pb-3 mb-3 text-center">
+                <div class="lc-block mb-4">
                     <div>
                         <h1 class="display-5 fw-bold page-title">About</h1>
                     </div>
                 </div>
-            </header>
-            <section class="container mt-5 px-4 px-md-5">
-                
-                <!-- the project -->
-                <h2 class="h3 fw-bold mt-5 mb-4">The Project</h2>
-                <div class="row justify-content-center mb-5">
-                    <div class="col-lg-8 about-text-container">
-                        <p class="mb-4">
-                        </p>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10 col-lg-8 about-text-container">
+                        <div>
+                            <p class="mb-0">
+                                The SMT Library is a digital ecosystem designed to preserve and navigate the complex history of Tarot through Linked Open Data (LOD). By aggregating data from different sources and modeling the intricate relationships between cards, decks, creators, and symbolic motifs, the project provides a structured environment for the exploration of the Tarot tradition. Rather than treating Tarot exclusively as a tool for divination, this project approaches tarot cards as <strong>significant cultural artifacts</strong>. <br><br>
+                                A central objective is the development of a semantic environment that moves beyond the simple collection of factual data to facilitate <strong>meaningful connections between entities</strong>. To achieve this, the project adopts Semantic Web principles in both its conceptual design and its technical implementation, functioning not only as a digital repository but as an interface for navigating interconnected knowledge structures.
+                            </p>
+                        </div>
                     </div>
                 </div>
-
+            </header>
+            
+            <section class="container-fluid px-4 mt-5">
+                
+                <!-- the project -->
                 <!-- the smt ontology -->
-                <h2 class="h3 fw-bold mt-5 mb-3">The SMT Ontology</h2>
+                <h2 class="mb-4">The SMT Ontology</h2>
                 <div class="row justify-content-center mb-3">
-                    <div class="col-lg-8 about-text-container">
+                    <div class="col-12 col-md-10 col-lg-8 about-text-container">
                         <p class="mb-4">
-                            At the core of the library lies the <strong>SMT Ontology</strong>, a formal model designed to map the intricate landscape of the tarot domain. By defining the fundamental entities – from decks and individual cards to their creators and symbolic motifs – the ontology provides a rigid yet flexible framework for tarot data. Built on <strong>Semantic Web</strong> and <strong>Linked Open Data (LOD) principles</strong>, it transforms isolated facts into a navigable, machine-readable network, enabling deep exploration across historical traditions and artistic interpretations.
+                            At the core of the library lies the <strong><a href="https://w3id.org/smt-library/ontology" target="_blank">SMT Ontology</a></strong>, a formal model designed to map the intricate landscape of the tarot domain and provide the conceptual foundation for the knowledge graph. By defining fundamental entities – <code>smt:MajorArcana</code>, <code>smt:MinorArcana</code>, <code>smt:Archetype</code>, <code>smt:SymbolicFigure</code>, <code>odi:DeckCard</code>, <code>odi:TarotDeck</code>, <code>odi:Person</code> – the ontology provides a robust yet flexible framework for organizing data. Built on Semantic Web principles, it transforms isolated facts into a machine-readable network that enables deep exploration across historical traditions and artistic interpretations. <br><br>
+                            The <strong><a href="https://w3id.org/smt-library/graph" target="_blank">SMT Graph</a></strong> serves as the operational framework for the web application and facilitates advanced data exploration through a dedicated SPARQL endpoint. The integration of a <strong><a href="sparql_endpoint.html" target="_blank">SPARQL endpoint</a></strong> directly connected to the knowledge graph supports advanced research by allowing users to query the dataset directly from the browser. This configuration enables investigations into entity relationships that may go beyond the functionalities offered by the graphical interface. By exposing the dataset in this manner, the project aligns with the core principles of LOD, ensuring that the structured information remains interoperable and accessible to external systems. In this way, the ontology and knowledge graph function not just as back-end structures, but as openly accessible components of a broader digital library ecosystem.
                         </p>
                     </div>
                 </div>
@@ -137,8 +141,20 @@
                     </div>
                 </div>
 
+                <h2 class="mb-4 mt-5">The Web Application</h2>
+                <div class="row justify-content-center mb-5">
+                    <div class="col-12 col-md-10 col-lg-8 about-text-container">
+                        <p class="mb-4">
+                            The web application provides intuitive access to the underlying data while offering multiple strategies for discovery. By combining search, filtering, and semantic linking, the platform enables both exploratory browsing and structured, research-oriented interaction. <br><br>
+                            A key feature of the interface is the integration of links that reflect the relationships modeled within the knowledge graph, allowing users to move seamlessly across <strong>related entities</strong>. Each resource page includes dedicated sections for related items, such as connections between specific cards and their creators or thematic elements, which are visualized through components that highlight the underlying conceptual network. The <strong><a href="explore.html" target="_blank">Explore page</a></strong> further expands this view by examining the systemic connections between decks and the individuals who brought them to life, utilizing in-depth thematic insights to redirect users toward related topics within the library. <br><br>
+                            The <strong><a href="collection.html" target="_blank">collection</a></strong> is accessible through multiple entry points, allowing users to browse by decks, individual cards, or through contextual materials that situate these objects within their broader cultural and symbolic frameworks. This approach encourages users to move beyond isolated resources to discover the network of relationships that define the domain. <br><br>
+                            To support targeted retrieval, the system employs a client-side engine that features keyword matching, fuzzy matching, and auto-completion suggestions. As users type in the search bar, the interface proposes entities based on keywords linked directly to the dataset. These search functionalities are complemented by specific filters that allow users to refine exploration by specific attributes, supporting the discovery of unexpected relationships within the data.
+                        </p>
+                    </div>
+                </div>
+
                 <!-- the team -->
-                <h2 class="h3 fw-bold mt-5 mb-4">The Team</h2>
+                <h2 class="mb-4 mt-5">The Team</h2>
                 <div class="row justify-content-center d-flex align-items-center gap-4 mt-4">
                     <div class="col-8 col-sm-5 col-md-4 col-lg-3">
                         <a href="https://github.com/mir-pin" target="_blank" class="text-decoration-none d-block">

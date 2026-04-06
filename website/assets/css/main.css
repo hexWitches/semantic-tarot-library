@@ -2986,6 +2986,22 @@ HISTORY PAGE
     text-decoration: underline;
 }
 
+.about-text-container h2 {
+    font-family: var(--header-font);
+    text-align: center;
+    color: var(--dark-amethyst);
+}
+
+.about-text-container a,
+.about-text-container code {
+    color: var(--brick-red);
+    text-decoration: none;
+}
+
+.about-text-container a:hover {
+    border-bottom: 2px solid var(--brick-red);
+}
+
 .copyright-text {
     background-color: rgba(0, 0, 0, 0.2);
 }
@@ -3458,16 +3474,17 @@ HISTORY PAGE
 /*  ------------------------- 
 ABOUT PAGE   
 -------------------------   */
-.about-content h2 {
-    font-family: var(--header-font);
-    color: var(--dark-amethyst);
-    text-transform: capitalize;
-}
-
 .about-text-container {
     color: var(--dark-amethyst);
     font-size: 1.15rem;
     line-height: 1.7;
+    text-align: left;
+}
+
+@media (min-width: 768px) {
+    .about-text-container {
+        text-align: justify;
+    }
 }
 
 .team-card {
@@ -3484,8 +3501,6 @@ ABOUT PAGE
     color: var(--brick-red);
     text-underline-offset: 3px;
 }
-
-
 
 /* --- SMT Ontology Section --- */
 .ontology-graph-wrapper {
