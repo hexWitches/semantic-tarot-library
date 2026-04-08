@@ -14,7 +14,7 @@
 @prefix wd: <https://www.wikidata.org/entity/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://w3id.org/smt-library/graph/> a void:Dataset ;
+smtg: a void:Dataset ;
     dcterms:conformsTo <https://w3id.org/smt-library/ontology> ;
     dcterms:created "2026-03-03"^^xsd:date ;
     dcterms:creator "Miriana Pinto",
@@ -335,7 +335,7 @@ smtg:card-brambilla-29 a odi:DeckCard,
         smt:MinorArcana ;
     odi:hasAuthor smtg:person-bembo ;
     odi:hasCurrentLocation smtg:pinacoteca-di-brera ;
-    odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/TarocchiBrambilla/29.jpg> ;
+    odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/TarocchiBrambilla/30.jpg> ;
     odi:hasName "Valletto di Denari" ;
     odi:isContainedIn smtg:deck-brambilla ;
     smt:hasSuit smtg:pentacles .
@@ -345,7 +345,7 @@ smtg:card-brambilla-30 a odi:DeckCard,
         smt:MinorArcana ;
     odi:hasAuthor smtg:person-bembo ;
     odi:hasCurrentLocation smtg:pinacoteca-di-brera ;
-    odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/TarocchiBrambilla/30.jpg> ;
+    odi:hasImage <https://github.com/hexWitches/semantic-tarot-library/blob/cb5c062db4f207748586a12c9e55dae07f01e4c6/website/assets/images/collection/TarocchiBrambilla/29.jpg> ;
     odi:hasName "Cavaliere di Denari" ;
     odi:isContainedIn smtg:deck-brambilla ;
     smt:hasSuit smtg:pentacles .
