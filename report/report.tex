@@ -1,0 +1,108 @@
+\documentclass[11pt]{article}
+\usepackage{acl2014}
+\usepackage{times}
+\usepackage{url}
+\usepackage{latexsym}
+
+\setlength\titlebox{5cm}
+\title{
+  \LARGE The SMT Library \\[0.4em]
+  \large Towards a Semantic Framework for Modeling Tarot Tradition
+}
+
+\author{
+  Miriana Pinto \\
+    {\small\tt miriana.pinto@studio.unibo.it} \\\And
+  Sara Roggiani \\
+    {\small\tt sara.roggiani2@studio.unibo.it} \\
+ }
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+The \textbf{SeMantic Tarot Library} is a semantic digital library designed to collect Tarot decks and organize information about related cultural entities through Linked Open Data (LOD).
+
+The project aggregates data from multiple sources and models relationships among Tarot cards, decks, creators, and symbolic motifs, creating a structured environment that supports the exploration and interpretation of the Tarot tradition.
+
+A central objective of the project is to develop a semantic environment that goes beyond the simple aggregation of factual data. Rather than treating Tarot exclusively as instruments of divination, this project approaches them as \textbf{cultural artifacts}, highlighting the symbolic, artistic, and historical dimensions of their production and circulation. The system is designed to facilitate meaningful relationships between entities, allowing users to explore connections between creators, iconography, and decks in different periods and traditions. 
+
+Within this framework, the website functions not only as a digital repository, but also as an interface for navigating interconnected knowledge structures.
+
+\section{Background and State of the Art}
+The digital preservation of Tarot heritage is characterized by fragmented repositories and iconographic catalogs that prioritize static visual representation over relational data. The current landscape can be divided into three tiers, each with significant limitations.
+First, institutional repositories (e.g. the \textem{ Victoria and Albert Museum} or \textem{ Gallica}) provide high fidelity digitization and rich metadata but lack cross-collection interoperability, making it difficult to trace the transmission and influence of decks.
+Second, specialized thematic websites (e.g. \textem{ Tarot Heritage} or the \textem{ Museo dei Tarocchi}), often developed by enthusiasts or independent scholars, offer significant historical depth but lack machine-readable data structures, limiting integration with broader digital ecosystems.
+Finally, general-purpose platforms such as Wikipedia provide accessible, semi-structured information, but lack formal semantic modeling and domain-specific granularity (e.g., suit systems, trump hierarchies, iconographic lineages) required for advanced analysis.
+
+In addition, several institutions, such as the \textem{ Pinacoteca di Brera}, still lack comprehensive digital databases for their tarot collections, resulting in “dark data” that remains inaccessible and disconnected from the global scholarly ecosystem.
+
+This \textbf{lack of semantic infrastructure} limits the exploration of the complex networks of artistic influence, symbolic transmission, and historical relationships within the Tarot domain. Thus, the SMT Library intends to address these gaps by combining institutional data, domain expertise, and LOD within an ontology-driven framework.
+
+\section{Workflow}
+The development of the SMT Library followed a structured workflow to transform heterogeneous cultural data into a coherent knowledge graph. Starting from curated datasets of decks, cards, and related historical actors, the process progressed through ontology-based modeling and culminated in a knowledge graph that supports semantic querying and dynamic content generation.
+
+\subsection{Data Collection and Authority Mapping}
+The first phase involved selecting data sources, including \textem{ Gallica}, \textem{ Yale library}, the \textem{ Morgan Library and Museum}, the \textem{ Victoria and Albert Museum}, the \textem{ House of White Tarot Museum and Research Library}, and the \textem{ Catalogo dei Beni Culturali}. For this prototype, six tarot decks were curated and organized into structured CSV files.
+
+\textbf{Metadata} was collected for the \textbf{three core entities} (decks, cards, and persons), including descriptive and relational attributes such as authorship, provenance and structural features of the cards. A reconciliation process then linked entities to international \textbf{authority files} (e.g., VIAF and Wikidata), ensuring disambiguation, global uniqueness, and interoperability.
+
+In parallel, a \textbf{repository of images} was curated manually or via Python scripts using IIIF endpoints when available. Images were standardized for consistency and high resolution to support iconographic analysis.
+
+The dataset was extended with \textbf{three additional CSV files}: one modeling deck lineages (linking decks to shared traditions), one for archetypes (cross-deck conceptual entities aggregating Major Arcana meanings), and one for symbolic figures identified through visual analysis. The latter was intentionally limited to a small set of recurring elements to demonstrate semantic connections rather than provide an exhaustive classification.
+
+\subsection{Conceptual Model and Ontology Design}
+The second phase focused on the semantic formalization of the Tarot domain. The \textbf{ODI ontology} (\textem{ Ontologia dei Destini incrociati di Italo Calvino}) was adopted as a starting framework, but it lacked the granularity required to model key Tarot features such as Major and Minor Arcana, suit systems, and complex symbolism.
+
+To address this, an ontology extension – the \textbf{SMT Ontology} – was developed, introducing new domain-specific classes and properties while reusing established vocabularies (schema.org, DCTerms, FOAF, SKOS) to ensure interoperability. 
+Core entities include \texttt{ smt:MajorArcana}, \texttt{ smt:MinorArcana}, \texttt{ smt:Archetype}, and \texttt{ smt:SymbolicFigure}, alongside reused classes such as \texttt{ odi:DeckCard}, \texttt{ odi:TarotDeck}, and \texttt{ odi:Person}. 
+
+A semantic mapping was then defined between CSV fields and ontology properties, transforming tabular data into structured relationships with explicit meaning.
+
+\subsection{Data Transformation and Knowledge Graph Construction}
+The final phase transformed the structured datasets into a knowledge graph. Based on the defined mappings, a custom Python script was developed to automate the conversion of the CSV data into \textbf{RDF}, generating an interconnected network of triples. During this process, each entity (cards, decks, persons) was assigned a \textbf{unique identifier}, ensuring consistent identification across the graph.
+
+While RDF constitutes the semantic backbone, \textbf{JSON-LD} was selected as the primary serialization format to integrate with the web interface. Although a SPARQL endpoint is available through TriplyDB, the application queries JSON-LD directly to dynamically generate page content. This lightweight approach supports deployment simplicity while preserving the possibility of more advanced querying through SPARQL. The knowledge graph thus acts as the system’s single source of truth, supporting flexible and scalable semantic navigation without hardcoded relationships.
+
+A complementary \textbf{JSON layer} was used to store extended textual content (e.g., descriptions of decks, cards, persons, and exploration pages), enabling easy updates and scalability without modifying the knowledge graph.
+
+\section{Design of the Web Application}
+The web application was designed to provide intuitive access to the semantic data structure underlying the project, it integrates functionalities for information retrieval and enables users to explore the collection through multiple navigation strategies.
+
+By combining search, filtering, semantic linking and access to a SPARQL endpoint, the application enables both exploratory browsing and structured, research-oriented interaction within the Tarot domain.
+
+\subsection{Search and Filters}
+The search functionality represents one of the main access points to the collection. A search bar allows users to retrieve entities within the library through keywords associated with each resource.
+
+The system relies on a client-side engine; as users type a query, the interface proposes suggestions based on \textbf{keywords} linked to entities in the dataset. Fuzzy matching tolerates minor spelling variations or incomplete terms, improving usability and enabling relevant results even when queries are imprecise.
+
+For the current prototype, the keywords are stored in a JSON file rather than directly in the knowledge graph. This decision reflects a distinction between the semantic function of the graph and the technical function of the search interface. Ideally, keywords could be modeled in the knowledge graph, creating semantic relationships between entities, e.g. linking a card to all the meanings depicted by its symbolic figures. This would enable more complex semantic queries and strengthen the conceptual structure of the graph. However, for the prototype, keywords are managed in the JSON file supporting the search engine. 
+
+In addition to keyword-based search, the platform provides filters that allows users to \textbf{refine exploration by specific attributes}. They enable users to narrow down the results by selecting predefined fields associated with the entities in the dataset.
+
+\subsection{Relations and Navigation}
+A key feature of the interface is the integration of links between different resources, reflecting the relationships modeled within the knowledge graph and enabling navigation across \textbf{related entities}.
+
+Each page includes dedicated sections displaying related items, thus enabling users to move from one resource to another while exploring the underlying conceptual network. In particular, a dedicated box connects each card to the symbolic figures it depicts and their meanings, linking them to other cards containing the same symbols. This serves as an additional exploratory tool for interconnected data, allowing users to discover unexpected relationships within the dataset.
+
+The collection itself can be accessed through \textbf{multiple entry points}. Users can browse the library by Tarot decks, by individual cards, or through a dedicated section containing thematic insights and explanatory materials. These sections provide contextual information that helps situate the objects within their broader cultural and symbolic framework. Hence, users move beyond isolated resources and explore the network of relationships that connect them within the broader domain.
+
+\subsection{SPARQL Endpoint}
+To support advanced exploration and research, the platform provides a SPARQL endpoint directly connected to the knowledge graph. The graph was uploaded to TriplyDB, a platform for hosting and querying RDF datasets, where the endpoint was generated and subsequently integrated into the web application.
+
+This configuration allows users to query the dataset directly from the browser and investigate relationships between entities beyond the functionalities offered by the graphical interface. Exposing the dataset through a SPARQL endpoint aligns with the principles of LOD, as it makes the structured data \textbf{interoperable} and \textbf{accessible} to external systems and applications. In this way, the ontology and knowledge graph are not only back-end structures supporting the website, but also openly accessible components of the digital library ecosystem.
+
+\section{Potential Improvements}
+To move beyond a prototype, several improvements are proposed to enhance scalability, collaboration and semantic richness.
+
+While the current JSON-LD and JavaScript-driven architecture is efficient for a limited dataset (approx. 400 items), \textbf{scalability} remains a key challenge. A larger collection would require a shift from client-side querying to a server-side infrastructure, enabling more efficient data retrieval and indexing.
+
+The knowledge graph could be further enriched by increasing its semantic granularity, for example by integrating keywords using standard properties such as \texttt{ schema:keywords} or \texttt{ dc:subject}, preserving the current search functionality. Additionally, extending the graph with bibliographic entities linking decks to relevant texts and sources would transform the SMT Library into a more comprehensive research tool.
+
+The modeling of symbolic figures also presents scalability issues, as manual annotation is time-consuming. Future work could explore \textbf{computer vision techniques} to automatically detect recurring symbols (e.g., crowns, animals, tools), enabling semi-automatic enrichment and more advanced visual-semantic navigation.
+
+From a technical perspective, more extensive use of a triplestore (e.g. the existing TriplyDB endpoint) would support \textbf{complex SPARQL queries} and improve performance beyond the current JSON-LD-based interface.
+
+Finally, a semantic annotation interface could allow experts to propose new relationships or identify iconographic elements, with a validation workflow ensuring data quality while enabling collaborative expansion.
+
+\end{document}
