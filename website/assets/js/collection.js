@@ -780,7 +780,9 @@ function updatePagination() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', loadCollection);
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.location.pathname.includes('collection.html')) loadCollection();
+});
 
 
 
@@ -868,20 +870,12 @@ function getEntityLabel(graph, entityData) {
     // Handle other labels
     return entity.label ||
         entity['rdfs:label'] ||
+        entity.title ||
         entity.card_name ||
         idToFind.split(':').pop().replace(/-/g, ' ');
 }
 
-/**
- * Helper: Converts GitHub blob URLs to raw image URLs
- */
-function getLocalImagePath(imageUrl) {
-    if (!imageUrl) return 'assets/images/placeholder_card.jpg';
-    if (imageUrl.includes('github.com') && imageUrl.includes('/blob/')) {
-        return imageUrl.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
-    }
-    return imageUrl;
-}
+
 
 /**
  * Fills the HTML placeholders with deck metadata
@@ -1140,7 +1134,9 @@ function renderDeckCards(graph, deckId) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', initDeckPage);
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.location.pathname.includes('deck.html')) initDeckPage();
+});
 
 
 // --- CARD PAGE --- //
@@ -1195,50 +1191,9 @@ async function initCardPage() {
     }
 }
 
-/**
- * Helper: Finds an entity in the graph by ID and returns its human-readable label
- */
-function getEntityLabel(graph, entityData) {
-    if (!entityData) return null;
 
-    // If it's an array, take the first one or handle both
-    const data = Array.isArray(entityData) ? entityData[0] : entityData;
 
-    const idToFind = typeof data === 'string' ? data : data['@id'];
-    if (!idToFind) return null;
 
-    const entity = graph.find(obj => obj['@id'] === idToFind);
-
-    if (!entity) {
-        // Safe split: only if idToFind exists and contains ':'
-        return idToFind.includes(':') ? idToFind.split(':').pop().replace(/-/g, ' ') : idToFind;
-    }
-
-    // Priority: Lineage Label > Full Name > Standard Labels
-    if (entity.lineage_label) return entity.lineage_label;
-    if (entity.given_name || entity.family_name) {
-        const first = entity.given_name || "";
-        const last = entity.family_name || "";
-        return `${first} ${last}`.trim();
-    }
-
-    return entity.label ||
-        entity['rdfs:label'] ||
-        entity.title ||
-        entity.card_name ||
-        idToFind.split(':').pop().replace(/-/g, ' ');
-}
-
-/**
- * Helper: Converts GitHub blob URLs to raw image URLs
- */
-function getLocalImagePath(imageUrl) {
-    if (!imageUrl) return 'assets/images/placeholder_card.jpg';
-    if (imageUrl.includes('github.com') && imageUrl.includes('/blob/')) {
-        return imageUrl.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
-    }
-    return imageUrl;
-}
 
 /**
  * Fills the HTML placeholders with card metadata
@@ -1966,7 +1921,9 @@ function closeSymbolismOverlay() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    initCardPage();
+    if (window.location.pathname.includes('card.html')) {
+        initCardPage();
+    }
 
     // Close listeners
     const closeBtn = document.getElementById('closeSymbolism');

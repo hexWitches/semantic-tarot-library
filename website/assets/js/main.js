@@ -415,8 +415,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // CARD OF THE DAY //
 (function () {
-    const GRAPH_PATH = "website/assets/json/smtGraph.jsonld";
-    const TEXTS_PATH = "website/assets/json/texts.json";
+    const isRoot = !window.location.pathname.includes('/website/');
+    const basePath = isRoot ? 'website/' : '';
+    const GRAPH_PATH = `${basePath}assets/json/smtGraph.jsonld`;
+    const TEXTS_PATH = `${basePath}assets/json/texts.json`;
 
     // ----- Constants for Mapping -----
     const MAJOR_NUMBER_MAP = {
@@ -482,7 +484,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function githubUrlToLocal(url) {
         const marker = "website/";
         const idx = url.indexOf(marker);
-        return idx !== -1 ? url.slice(idx) : url;
+        let path = idx !== -1 ? url.slice(idx + marker.length) : url;
+        if (path.startsWith('/')) path = path.slice(1);
+        return `${basePath}${path}`;
     }
 
     function graphIdToCardParam(graphId) {
@@ -532,6 +536,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function loadCardOfTheDay() {
+        if (!document.getElementById("dailyCardImage")) return;
+        
         try {
             const [graphResponse, textsResponse] = await Promise.all([
                 fetch(GRAPH_PATH),
@@ -570,7 +576,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const title = selected.title || "Tarot Card";
             const localImg = githubUrlToLocal(selected.image_url?.["@id"] || "");
             const cardParam = graphIdToCardParam(selected["@id"] || "");
-            const cardLink = `website/card.html?id=${cardParam}`;
+            const cardLink = `${basePath}card.html?id=${cardParam}`;
 
             // Update DOM
             const imgEl   = document.getElementById("dailyCardImage");
@@ -598,7 +604,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     The mundane mirrored. <br>Explore the <span class="highlight">four suits</span> and their meanings.
                                 </h3>
                             </div>
-                            <a href="website/deepening.html?id=suits_page" id="dailyCardDiscoverMore" class="discover-more">
+                            <a href="${basePath}deepening.html?id=suits_page" id="dailyCardDiscoverMore" class="discover-more">
                                 <span class="discover-svg">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
                                         <circle cx="4" cy="8" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="12" cy="8" r="1.5"/>
@@ -628,7 +634,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     evolutionCards.forEach(evo => {
                         const evoImg = githubUrlToLocal(evo.image_url?.["@id"] || "");
                         const evoParam = graphIdToCardParam(evo["@id"] || "");
-                        const evoUrl = `website/card.html?id=${evoParam}`;
+                        const evoUrl = `${basePath}card.html?id=${evoParam}`;
                         evoHtml += `
                             <div class="mini-card-thumb">
                                 <a href="${evoUrl}">
@@ -639,7 +645,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                     const archetypeParam = archetypeId ? graphIdToCardParam(archetypeId) : "";
-                    const archetypeLink = archetypeParam ? `website/deepening.html?id=${archetypeParam}` : cardLink;
+                    const archetypeLink = archetypeParam ? `${basePath}deepening.html?id=${archetypeParam}` : cardLink;
 
                     rightColHtml = `
                         <div class="evolution-frame compact-evolution mt-0 mx-0">

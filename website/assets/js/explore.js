@@ -283,7 +283,9 @@ function createTopicCard(title, subtitle, linkUrl) {
     return linkWrapper;
 }
 
-document.addEventListener('DOMContentLoaded', initExplorePage);
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.location.pathname.includes('explore.html')) initExplorePage();
+});
 
 
 // DEEPENING //
@@ -293,6 +295,7 @@ document.addEventListener('DOMContentLoaded', initExplorePage);
  */
 
 document.addEventListener('DOMContentLoaded', async () => {
+    if (!window.location.pathname.includes('deepening.html')) return;
     const urlParams = new URLSearchParams(window.location.search);
     const topicId = urlParams.get('id');
 
@@ -655,6 +658,7 @@ function renderImageSection(container, src, alt, caption = null) {
 
 // PERSON //
 document.addEventListener('DOMContentLoaded', async () => {
+    if (!window.location.pathname.includes('person.html')) return;
     const urlParams = new URLSearchParams(window.location.search);
     const personId = urlParams.get('id'); // e.g., 'person-waite'
 
@@ -695,7 +699,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-function getLocalImagePath(imageUrl) {
+function getLocalPersonImagePath(imageUrl) {
     if (!imageUrl) return 'assets/images/explore/people/portrait-placeholder.jpg';
     if (imageUrl.includes('github.com') && imageUrl.includes('/blob/')) {
         return imageUrl.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
@@ -812,7 +816,7 @@ function fillPersonMetadata(person, extraTexts, graph) {
     const imgEl = document.getElementById('person-portrait');
     if (imgEl) {
         const rawUrl = person.person_portrait_url ? (person.person_portrait_url['@id'] || person.person_portrait_url) : null;
-        imgEl.src = getLocalImagePath(rawUrl);
+        imgEl.src = getLocalPersonImagePath(rawUrl);
         imgEl.alt = fullName;
     }
 
