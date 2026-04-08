@@ -1,3 +1,5 @@
+// --- COLLECTION PAGE --- //
+
 // data conversion and utility functions
 function romanToInt(roman) {
     if (!roman || typeof roman !== 'string') return 0;
@@ -275,13 +277,7 @@ function renderSearchView() {
             const portraitUrl = person.person_portrait_url?.['@id'] || person.person_portrait_url || null;
             let imgUrl = getLocalImagePath(typeof portraitUrl === 'string' ? portraitUrl : null, 'person');
             
-            const nameId = cleanId.split(/[:\/]/).pop().replace('person-', '');
-            const specificPlaceholder = `assets/images/explore/people/${nameId}-placeholder.jpg`;
             const generalPlaceholder = 'assets/images/explore/people/portrait-placeholder.jpg';
-            
-            if (imgUrl.endsWith('portrait-placeholder.jpg')) {
-                imgUrl = specificPlaceholder;
-            }
             
             personsHTML += `
                 <a href="person.html?id=${cleanId}" class="person-circle-item text-center text-decoration-none" style="width: 120px;">
@@ -543,7 +539,7 @@ function updateActiveFilterUI() {
     }
 }
 
-// UI rendering functions -> generate the html content
+// UI rendering functions
 function renderGridView() {
     const gridContainer = document.querySelector('.cards-grid');
     if (!gridContainer) return;
@@ -785,3 +781,1198 @@ function updatePagination() {
 }
 
 document.addEventListener('DOMContentLoaded', loadCollection);
+
+
+
+
+// --- DECK PAGE --- //
+async function initDeckPage() {
+    // Get the Deck ID from the URL (e.g., deck.html?id=deck-sola-busca)
+    const urlParams = new URLSearchParams(window.location.search);
+    const deckId = urlParams.get('id');
+
+    if (!deckId) {
+        console.error("Deck ID missing in URL.");
+        return;
+    }
+
+    try {
+        // Fetch both data sources simultaneously
+        const [kgResponse, textsResponse] = await Promise.all([
+            fetch('assets/json/smtGraph.jsonld'),
+            fetch('assets/json/texts.json')
+        ]);
+
+        const kgData = await kgResponse.json();
+        const textsData = await textsResponse.json();
+        const graph = kgData['@graph'];
+
+        // Find the Deck in the Knowledge Graph
+        const deckData = graph.find(obj => {
+            const itemId = obj['@id'];
+            return itemId === `smtg:${deckId}` || itemId === deckId;
+        });
+
+        if (deckData) {
+            // Match the description from texts.json (handling underscores/hyphens)
+            const normalizedId = deckId.replace(/-/g, '_');
+
+            // Access decks in JSON
+            const allDecks = textsData.decks || {};
+            const extraTextsKey = Object.keys(allDecks).find(key => key.trim() === normalizedId);
+            const extraTexts = allDecks[extraTextsKey];
+
+            console.log("Deck description found:", extraTexts);
+            console.log("Deck data successfully found:", deckData);
+            fillDeckMetadata(deckData, graph, extraTexts);
+        } else {
+            console.warn("Deck not found in the Knowledge Graph.");
+        }
+
+        renderDeckCards(graph, deckId);
+
+    } catch (error) {
+        console.error("Error loading the deck page:", error);
+    }
+}
+
+
+/**
+ * Helper: Finds an entity in the graph by ID and returns its human-readable label
+ */
+function getEntityLabel(graph, entityData) {
+    if (!entityData) return null;
+
+    // If it's an array (like your author_id), take the first one or handle both
+    const data = Array.isArray(entityData) ? entityData[0] : entityData;
+
+    const idToFind = typeof data === 'string' ? data : data['@id'];
+    if (!idToFind) return null;
+
+    const entity = graph.find(obj => obj['@id'] === idToFind);
+
+    if (!entity) {
+        // Safe split: only if idToFind exists and contains ':'
+        return idToFind.includes(':') ? idToFind.split(':').pop().replace(/-/g, ' ') : idToFind;
+    }
+
+    // Priority: Lineage Label > Full Name > Standard Labels
+    if (entity.lineage_label) return entity.lineage_label;
+    // 2 Check for Person's given and family name
+    if (entity.given_name || entity.family_name) {
+        const first = entity.given_name || "";
+        const last = entity.family_name || "";
+        return `${first} ${last}`.trim();
+    }
+
+    // Handle other labels
+    return entity.label ||
+        entity['rdfs:label'] ||
+        entity.card_name ||
+        idToFind.split(':').pop().replace(/-/g, ' ');
+}
+
+/**
+ * Helper: Converts GitHub blob URLs to raw image URLs
+ */
+function getLocalImagePath(imageUrl) {
+    if (!imageUrl) return 'assets/images/placeholder_card.jpg';
+    if (imageUrl.includes('github.com') && imageUrl.includes('/blob/')) {
+        return imageUrl.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
+    }
+    return imageUrl;
+}
+
+/**
+ * Fills the HTML placeholders with deck metadata
+ */
+function fillDeckMetadata(deck, graph, extraTexts) {
+    // 1. Titles and Description
+    const title = deck.title || "Unknown Tarot Deck";
+    document.getElementById('deck_title').innerHTML = `${title.toUpperCase()}`;
+    document.getElementById('meta_deck_title').innerText = title;
+
+    // 2. Description (Only from texts.json)
+    const descriptionEl = document.getElementById('deck_description');
+
+    if (extraTexts && extraTexts.long_description) {
+        // Inserisce la descrizione lunga supportando i tag HTML (em, br, ecc.)
+        descriptionEl.innerHTML = extraTexts.long_description;
+    } else {
+        // Messaggio di default se il mazzo non è ancora presente in texts.json
+        descriptionEl.innerText = "Detailed description coming soon for this deck.";
+    }
+
+    /**
+     * Internal Helper to handle Multiple Links (Authors/Illustrators)
+     */
+    const setMetaLink = (elementId, entityData) => {
+        const el = document.getElementById(elementId);
+        if (!el) return;
+
+        // Clear the container (the <a> tag or its parent)
+        el.innerHTML = "";
+
+        // If there are no data
+        if (!entityData || (Array.isArray(entityData) && entityData.length === 0)) {
+            el.innerText = "-";
+            return;
+        }
+
+        // Convert to array if it's a single object to use the same logic
+        const dataArray = Array.isArray(entityData) ? entityData : [entityData];
+        let itemsAdded = 0;
+
+        dataArray.forEach((data, index) => {
+            const label = getEntityLabel(graph, data);
+
+            // if null, return nothing
+            if (!label || label === "-") {
+                return;
+            }
+
+            const fullId = data['@id'] || data;
+            const cleanId = typeof fullId === 'string' ? fullId.replace('smtg:', '') : '';
+            const isEntity = typeof data === 'object' && data['@id'];
+
+            // Check if it's a location or a simple literal - if so, NO LINK
+            if (elementId === 'location_created' || !isEntity) {
+                const span = document.createElement('span');
+                span.innerText = label;
+                el.appendChild(span);
+            } else {
+                // Decide URL based on ID
+                const link = document.createElement('a');
+                link.innerText = label;
+
+                if (elementId === 'deck_lineage_id') {
+                    link.href = `deck.html?id=${cleanId}`;
+                } else {
+                    link.href = `person.html?id=${cleanId}`;
+                }
+
+                el.appendChild(link);
+            }
+
+            // Add a comma and space between names, but not after the last one
+            if (index < dataArray.length - 1) {
+                const nextLabel = getEntityLabel(graph, dataArray[index + 1]);
+                if (nextLabel && nextLabel !== "-") {
+                    el.appendChild(document.createTextNode(", "));
+                }
+            }
+        });
+    };
+
+
+    // 3. Populate Linked Metadata
+    // Note: Use full URL key for locationCreated if mapped that way in JSON-LD
+    setMetaLink('location_created', deck.location_created);
+    setMetaLink('author_id', deck.author_id || deck.hasAuthor);
+    setMetaLink('illustrator_id', deck.illustrator_id);
+    setMetaLink('publisher', deck.publisher);
+    setMetaLink('deck_lineage_id', deck.deck_lineage_id);
+
+    // 4. Populate Simple Text Metadata
+    const setMetaText = (id, value) => {
+        const el = document.getElementById(id);
+        if (el) el.innerText = value || "-";
+    };
+
+    // Handle multiple alternative titles
+    const altTitleEl = document.getElementById('alternative_title');
+    if (altTitleEl && deck.alternative_title) {
+        if (Array.isArray(deck.alternative_title)) {
+            altTitleEl.innerText = deck.alternative_title.join(', ');
+        } else {
+            altTitleEl.innerText = deck.alternative_title;
+        }
+    } else if (altTitleEl) {
+        altTitleEl.innerText = "-";
+    }
+
+    setMetaText('publication_year', deck.publication_year);
+    setMetaText('current_card_count', deck.current_card_count);
+    setMetaText('original_card_count', deck.original_card_count);
+
+    // Set Digital Source URL
+    const sourceUrlEl = document.getElementById('source_url');
+    if (sourceUrlEl) {
+        if (deck.source_url) {
+            let url = deck.source_url;
+            if (typeof url === 'object' && url['@id']) {
+                url = url['@id'];
+            } else if (Array.isArray(url)) {
+                url = url[0]['@id'] || url[0];
+            }
+            sourceUrlEl.href = url;
+            sourceUrlEl.target = '_blank';
+            sourceUrlEl.innerText = 'View original';
+            sourceUrlEl.style.textDecoration = '';
+            sourceUrlEl.style.pointerEvents = 'auto';
+        } else {
+            sourceUrlEl.removeAttribute('href');
+            sourceUrlEl.innerText = '-';
+            sourceUrlEl.style.textDecoration = 'none';
+            sourceUrlEl.style.color = 'inherit';
+            sourceUrlEl.style.pointerEvents = 'none';
+        }
+    }
+}
+
+/**
+ * Filters the graph for cards in this deck and injects them into the carousel
+ */
+function renderDeckCards(graph, deckId) {
+    const carouselInner = document.getElementById('carouselInner');
+    if (!carouselInner) return;
+
+    carouselInner.innerHTML = ""; // Clear template
+
+    // Filter cards where 'isContainedIn' matches our deckId
+    const deckCards = graph.filter(obj => {
+        const container = obj.isContainedIn || obj.contained_in_deck_id;
+        if (!container) return false;
+
+        const containerData = Array.isArray(container) ? container[0] : container;
+        const targetId = typeof containerData === 'string' ? containerData : containerData['@id'];
+
+        return targetId === `smtg:${deckId}` || targetId === deckId;
+    });
+
+    if (deckCards.length === 0) {
+        carouselInner.innerHTML = "<p class='text-center w-100'>No cards found for this deck.</p>";
+        return;
+    }
+
+    // Sort cards numerically if possible (optional)
+    // const sortedCards = deckCards.sort((a, b) => (a.isNumber || 0) - (b.isNumber || 0));
+    // Sorting logic for Major Arcana (by number) and Minor Arcana (by suit then rank)
+    // Helper to parse expected Roman Numerals like "II", "X", etc.
+    const romanToInt = (s) => {
+        if (!s) return 0;
+        const romanMap = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };
+        let total = 0, current = 0, prev = 0;
+        for (let i = s.length - 1; i >= 0; i--) {
+            current = romanMap[s[i].toUpperCase()];
+            if (!current) return parseInt(s, 10) || 0; // fallback to Arabic numbers
+            if (current < prev) total -= current;
+            else total += current;
+            prev = current;
+        }
+        return total;
+    };
+
+    // Helper for Minor Arcana ranks (Ace, 2-10, Page/Knave, Knight, Queen, King)
+    const getMinorRank = (card) => {
+        // First try to parse the number if it's standard 1-10
+        const num = parseInt(card.card_number, 10);
+        if (!isNaN(num)) return num;
+
+        // Next, fallback to checking titles for court cards or Aces
+        const title = (card.title || "").toLowerCase();
+        if (title.includes('ace')) return 1;
+        if (title.includes('page') || title.includes('knave')) return 11;
+        if (title.includes('knight')) return 12;
+        if (title.includes('queen')) return 13;
+        if (title.includes('king')) return 14;
+
+        return 0; // Catch-all
+    };
+
+    const sortedCards = deckCards.sort((a, b) => {
+        const typeA = Array.isArray(a['@type']) ? a['@type'] : [a['@type']];
+        const typeB = Array.isArray(b['@type']) ? b['@type'] : [b['@type']];
+
+        const isMajorA = typeA.includes('smt:MajorArcana');
+        const isMajorB = typeB.includes('smt:MajorArcana');
+
+        // 1. Prioritize Major Arcana over Minor Arcana
+        if (isMajorA && !isMajorB) return -1;
+        if (!isMajorA && isMajorB) return 1;
+
+        // 2. Both are Major Arcana: sort by their Roman Numeral
+        if (isMajorA && isMajorB) {
+            return romanToInt(a.card_number) - romanToInt(b.card_number);
+        }
+
+        // 3. Both are Minor Arcana: Sort alphabetically by suit
+        const getSuitId = (card) => card.suit_id ? (card.suit_id['@id'] || card.suit_id) : '';
+        const suitA = getSuitId(a);
+        const suitB = getSuitId(b);
+
+        if (suitA !== suitB) {
+            return suitA.localeCompare(suitB);
+        }
+
+        // 4. Same Suit: Sort by inherent rank (1 to 14)
+        return getMinorRank(a) - getMinorRank(b);
+    });
+
+    // Generate HTML for each carousel item
+    sortedCards.forEach((card, index) => {
+        const fullId = card['@id'];
+        const cleanCardId = fullId.replace('smtg:', '');
+
+        const rawUrl = card.image_url ? card.image_url['@id'] : null;
+        const imagePath = getLocalImagePath(rawUrl);
+
+        const itemHtml = `
+            <div class="multi-carousel-item" data-index="${index}">
+                <a href="card.html?id=${cleanCardId}" class="img-container deck-img-container" style="display: block; text-decoration: none; color: inherit;">
+                    <img src="${imagePath}" alt="${card.title || 'Tarot Card'}" class="deck-card-img" style="display: block; margin: 0 auto;" onerror="this.src='assets/images/placeholder_card.jpg';" />
+                    <div class="card-overlay">
+                        <span class="card-number-overlay">${card.card_number || ""}</span>
+                        <h3 class="card-title-overlay">${card.title || ""}</h3>
+                    </div>
+                </a>
+            </div>
+        `;
+        carouselInner.insertAdjacentHTML('beforeend', itemHtml);
+    });
+
+    // Re-initialize carousel controls (arrows/scroll) after items are added to DOM
+    // if (typeof initCarouselLogic === "function") {
+    //     initCarouselLogic();
+    // }
+    if (window.initCarouselLogic) {
+        window.initCarouselLogic();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', initDeckPage);
+
+
+// --- CARD PAGE --- //
+async function initCardPage() {
+    // Get the Card ID from the URL (e.g., card.html?id=card-modrone-38)
+    const urlParams = new URLSearchParams(window.location.search);
+    const cardId = urlParams.get('id');
+
+    if (!cardId) {
+        console.error("Card ID missing in URL.");
+        return;
+    }
+
+    try {
+        // Fetch both data sources simultaneously
+        const [kgResponse, textsResponse] = await Promise.all([
+            fetch('assets/json/smtGraph.jsonld'),
+            fetch('assets/json/texts.json')
+        ]);
+
+        const kgData = await kgResponse.json();
+        const textsData = await textsResponse.json();
+        const graph = kgData['@graph'];
+
+        // Find the Card in the Knowledge Graph
+        const cardData = graph.find(obj => {
+            const itemId = obj['@id'];
+            return itemId === `smtg:${cardId}` || itemId === cardId;
+        });
+
+        if (cardData) {
+            // Match the description from texts.json (handling underscores/hyphens)
+            const normalizedId = cardId.replace(/-/g, '_');
+
+            // Access cards in JSON (fallback to flat structure if needed)
+            const allCards = textsData.cards || {};
+            const extraTextsKey = Object.keys(allCards).find(key => key.trim() === normalizedId);
+            const extraTexts = allCards[extraTextsKey];
+
+            console.log("Card description found:", extraTexts);
+            console.log("Card data successfully found:", cardData);
+
+            fillCardMetadata(cardData, graph, extraTexts);
+            updateNavigation(cardData, graph);
+            generateRelatedTopics(cardData, graph, textsData);
+        } else {
+            console.warn("Card not found in the Knowledge Graph.");
+        }
+
+    } catch (error) {
+        console.error("Error loading the card page:", error);
+    }
+}
+
+/**
+ * Helper: Finds an entity in the graph by ID and returns its human-readable label
+ */
+function getEntityLabel(graph, entityData) {
+    if (!entityData) return null;
+
+    // If it's an array, take the first one or handle both
+    const data = Array.isArray(entityData) ? entityData[0] : entityData;
+
+    const idToFind = typeof data === 'string' ? data : data['@id'];
+    if (!idToFind) return null;
+
+    const entity = graph.find(obj => obj['@id'] === idToFind);
+
+    if (!entity) {
+        // Safe split: only if idToFind exists and contains ':'
+        return idToFind.includes(':') ? idToFind.split(':').pop().replace(/-/g, ' ') : idToFind;
+    }
+
+    // Priority: Lineage Label > Full Name > Standard Labels
+    if (entity.lineage_label) return entity.lineage_label;
+    if (entity.given_name || entity.family_name) {
+        const first = entity.given_name || "";
+        const last = entity.family_name || "";
+        return `${first} ${last}`.trim();
+    }
+
+    return entity.label ||
+        entity['rdfs:label'] ||
+        entity.title ||
+        entity.card_name ||
+        idToFind.split(':').pop().replace(/-/g, ' ');
+}
+
+/**
+ * Helper: Converts GitHub blob URLs to raw image URLs
+ */
+function getLocalImagePath(imageUrl) {
+    if (!imageUrl) return 'assets/images/placeholder_card.jpg';
+    if (imageUrl.includes('github.com') && imageUrl.includes('/blob/')) {
+        return imageUrl.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
+    }
+    return imageUrl;
+}
+
+/**
+ * Fills the HTML placeholders with card metadata
+ */
+function fillCardMetadata(card, graph, extraTexts) {
+    // 1. Titles and Numbers
+    const title = card.title || card.card_name || "Unknown Card";
+    document.getElementById('card_name').innerText = title;
+
+    const cardNumberEl = document.getElementById('card_number');
+    if (cardNumberEl) {
+        cardNumberEl.innerText = card.card_number || "-";
+    }
+
+    // 2. Image
+    const imgEl = document.getElementById('image_url');
+    if (imgEl) {
+        const rawUrl = card.image_url ? (card.image_url['@id'] || card.image_url) : null;
+        imgEl.src = getLocalImagePath(rawUrl);
+        imgEl.alt = title;
+    }
+
+    // 3. Description (Only from texts.json)
+    const descriptionBox = document.querySelector('.description-box p');
+    if (descriptionBox) {
+        if (extraTexts && extraTexts.description) {
+            descriptionBox.innerHTML = extraTexts.description;
+        } else if (card.description) {
+            descriptionBox.innerText = card.description;
+        } else {
+            descriptionBox.innerText = "Detailed description coming soon for this card.";
+        }
+    }
+
+    // 4. Update the highlight span in the evolution frame
+    const highlightSpan = document.querySelector('.evolution-heading .highlight');
+    if (highlightSpan) {
+        highlightSpan.innerText = title;
+    }
+
+    // Helper for generating Metadata Links
+    const setMetaLink = (elementId, entityData, pagePath) => {
+        const el = document.getElementById(elementId);
+        if (!el) return;
+
+        el.innerHTML = "";
+
+        if (!entityData || (Array.isArray(entityData) && entityData.length === 0)) {
+            el.innerText = "-";
+            return;
+        }
+
+        const dataArray = Array.isArray(entityData) ? entityData : [entityData];
+
+        dataArray.forEach((data, index) => {
+            const label = getEntityLabel(graph, data);
+            if (!label || label === "-") return;
+
+            const fullId = data['@id'] || data;
+            const cleanId = fullId.replace('smtg:', '');
+
+            // If a pagePath is provided, generate a link
+            if (pagePath) {
+                const link = document.createElement('a');
+                link.innerText = label;
+                link.href = `${pagePath}.html?id=${cleanId}`;
+                el.appendChild(link);
+            } else {
+                const span = document.createElement('span');
+                span.innerText = label;
+                span.style.textTransform = "capitalize";
+                el.appendChild(span);
+            }
+
+            if (index < dataArray.length - 1) {
+                el.appendChild(document.createTextNode(", "));
+            }
+        });
+    };
+
+    // 5. Populate Linked Metadata
+    setMetaLink('author_id', card.author_id, 'person');
+
+    // Check if location should be linked or just text
+    setMetaLink('current_location', card.current_location, null);
+    setMetaLink('contained_in_deck_id', card.contained_in_deck_id || card.isContainedIn, 'deck');
+    setMetaLink('suit_id', card.suit_id, null);
+
+    // Update Breadcrumbs
+    const deckLabel = getEntityLabel(graph, card.contained_in_deck_id || card.isContainedIn);
+    const breadcrumbDeck = document.getElementById('breadcrumb_deck');
+    if (breadcrumbDeck && deckLabel) {
+        breadcrumbDeck.innerText = deckLabel;
+        const deckId = (card.contained_in_deck_id || card.isContainedIn)['@id'] || card.contained_in_deck_id;
+        breadcrumbDeck.href = `deck.html?id=${deckId.replace('smtg:', '')}`;
+    }
+
+    const breadcrumbCard = document.getElementById('breadcrumb_card');
+    if (breadcrumbCard) {
+        breadcrumbCard.innerText = title;
+    }
+
+    // 6. Arcana Types Logic
+    const arcanaTypeEl = document.getElementById('arcana_type');
+    const minorArcanaTypeEl = document.getElementById('minor_arcana_type');
+
+    const types = Array.isArray(card['@type']) ? card['@type'] : [card['@type']];
+
+    if (arcanaTypeEl) {
+        if (types.includes('smt:MajorArcana')) arcanaTypeEl.innerText = "Major Arcana";
+        else if (types.includes('smt:MinorArcana')) arcanaTypeEl.innerText = "Minor Arcana";
+        else arcanaTypeEl.innerText = "-";
+    }
+
+    if (minorArcanaTypeEl) {
+        if (types.includes('smt:CourtCard')) minorArcanaTypeEl.innerText = "Court Card";
+        else if (types.includes('smt:NumberedCard')) minorArcanaTypeEl.innerText = "Numbered Card";
+        else minorArcanaTypeEl.innerText = "-";
+    }
+
+    // 7. Evolution Frame (Archetypes & Suits)
+    const evolutionFrame = document.querySelector('.evolution-frame');
+    if (evolutionFrame) {
+
+        // --- Render Helpers ---
+        const renderThumbs = (relatedCardsList) => {
+            const previewContainer = document.querySelector('.archetype-comparison-preview');
+            if (!previewContainer) return;
+
+            previewContainer.innerHTML = ''; // Clear hardcoded previews
+
+            // Take up to 3 related cards
+            const displayCards = relatedCardsList.slice(0, 3);
+
+            displayCards.forEach(relCard => {
+                let label = relCard.title || "Tarot Card";
+                const deckRef = relCard.contained_in_deck_id || relCard.isContainedIn;
+
+                if (deckRef) {
+                    const deckId = deckRef['@id'] || deckRef;
+                    const deckObj = graph.find(d => d['@id'] === deckId);
+                    if (deckObj) {
+                        const deckTitle = deckObj.title || deckObj.label;
+                        const year = deckObj.publication_year ? ` (${deckObj.publication_year})` : '';
+                        if (deckTitle) label = `${deckTitle}${year}`;
+                    }
+                }
+
+                const imgUrl = relCard.image_url ? (relCard.image_url['@id'] || relCard.image_url) : null;
+                const cleanRelId = relCard['@id'].replace('smtg:', '');
+
+                const thumbHtml = `
+                    <div class="mini-card-thumb">
+                        <a href="card.html?id=${cleanRelId}" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center;">
+                            <img src="${getLocalImagePath(imgUrl)}" alt="${label}" onerror="this.src='assets/images/placeholder_card.jpg';">
+                            <span>${label}</span>
+                        </a>
+                    </div>
+                `;
+                previewContainer.insertAdjacentHTML('beforeend', thumbHtml);
+            });
+
+            if (displayCards.length === 0) {
+                evolutionFrame.style.display = 'none';
+            }
+        };
+
+        const updateDiscoverLink = (url) => {
+            const discoverBtn = document.querySelector('.discover-more');
+            if (discoverBtn) discoverBtn.href = url;
+        };
+        // ----------------------
+
+        if (types.includes('smt:MajorArcana') && card.archetype_id) {
+            evolutionFrame.style.display = 'flex';
+
+            // Reset heading text
+            const heading = document.querySelector('.evolution-heading');
+            if (heading) {
+                heading.innerHTML = `One archetype, infinite interpretations. Discover the many faces of <span class="highlight">${title}</span>.`;
+            }
+
+            const archetypeId = Array.isArray(card.archetype_id) ? (card.archetype_id[0]['@id'] || card.archetype_id[0]) : (card.archetype_id['@id'] || card.archetype_id);
+
+            const relatedCards = graph.filter(obj => {
+                if (obj['@id'] === card['@id']) return false;
+                const arch = obj.archetype_id;
+                if (!arch) return false;
+                const archId = Array.isArray(arch) ? (arch[0]['@id'] || arch[0]) : (arch['@id'] || arch);
+                return archId === archetypeId;
+            });
+
+            renderThumbs(relatedCards);
+            const cleanArchId = archetypeId.replace('smtg:', '');
+            updateDiscoverLink(`deepening.html?id=${cleanArchId}`);
+
+        } else if (types.includes('smt:MinorArcana') && card.suit_id) {
+            evolutionFrame.style.display = 'flex';
+
+            const suitLabel = getEntityLabel(graph, card.suit_id);
+            const suitIdRaw = Array.isArray(card.suit_id) ? (card.suit_id[0]['@id'] || card.suit_id[0]) : (card.suit_id['@id'] || card.suit_id);
+
+            // Change heading text for minor arcana
+            const heading = document.querySelector('.evolution-heading');
+            if (heading) {
+                const capitalizedSuit = suitLabel ? suitLabel.charAt(0).toUpperCase() + suitLabel.slice(1) : "";
+                heading.innerHTML = `One suit, infinite visions. Uncover the hidden meaning of the Suit of <span class="highlight">${capitalizedSuit}</span>.`;
+            }
+
+            const relatedCards = graph.filter(obj => {
+                if (obj['@id'] === card['@id']) return false;
+                const s = obj.suit_id;
+                if (!s) return false;
+                const sId = Array.isArray(s) ? (s[0]['@id'] || s[0]) : (s['@id'] || s);
+                return sId === suitIdRaw;
+            });
+
+            // Randomize and take 3
+            const shuffledCards = relatedCards.sort(() => 0.5 - Math.random());
+            renderThumbs(shuffledCards);
+            updateDiscoverLink('deepening.html?id=suits_page');
+
+        } else {
+            // Hide for anything lacking an archetype or suit
+            evolutionFrame.style.display = 'none';
+        }
+    }
+}
+
+/**
+ * Helper: Updates Previous & Next Card Navigation Arrows
+ */
+function updateNavigation(currentCard, graph) {
+    const deckRef = currentCard.contained_in_deck_id || currentCard.isContainedIn;
+    if (!deckRef) return;
+    const deckId = deckRef['@id'] || deckRef;
+
+    // 1. Filter cards from the same deck
+    const deckCards = graph.filter(obj => {
+        if (!obj['@type']) return false;
+        const types = Array.isArray(obj['@type']) ? obj['@type'] : [obj['@type']];
+        const isCard = types.some(t => ['smt:MajorArcana', 'smt:MinorArcana', 'smt:NumberedCard', 'smt:CourtCard'].includes(t));
+        if (!isCard) return false;
+
+        const cDeckRef = obj.contained_in_deck_id || obj.isContainedIn;
+        if (!cDeckRef) return false;
+        const cDeckId = cDeckRef['@id'] || cDeckRef;
+        return cDeckId === deckId;
+    });
+
+    // 2. Sorting Helpers
+    const parseNumber = (numStr) => {
+        if (!numStr) return 0; // Default undefined numbers (like the Fool) to 0
+        const s = numStr.toString().trim().toUpperCase();
+        if (/^\d+$/.test(s)) return parseInt(s, 10);
+
+        // Roman Numeral parser
+        const romanMap = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };
+        let num = 0;
+        for (let i = 0; i < s.length; i++) {
+            const curr = romanMap[s[i]];
+            if (!curr) continue;
+            const next = romanMap[s[i + 1]];
+            if (next && curr < next) {
+                num += (next - curr);
+                i++;
+            } else {
+                num += curr;
+            }
+        }
+        return num || 0;
+    };
+
+    const getRankValue = (cardObj) => {
+        if (cardObj.card_number) return parseNumber(cardObj.card_number);
+
+        let baseVal = 20;
+        const label = (cardObj.label || cardObj.title || cardObj.card_name || getEntityLabel(graph, cardObj) || "").toLowerCase();
+
+        if (label.includes("page") || label.includes("fante")) return 11;
+        if (label.includes("knight") || label.includes("cavalliere") || label.includes("cavaliere")) return 12;
+        if (label.includes("queen") || label.includes("regina")) return 13;
+        if (label.includes("king") || label.includes("re")) return 14;
+
+        return baseVal;
+    };
+
+    // 3. Sort Cards
+    deckCards.sort((a, b) => {
+        const typesA = Array.isArray(a['@type']) ? a['@type'] : [a['@type']];
+        const typesB = Array.isArray(b['@type']) ? b['@type'] : [b['@type']];
+
+        const isMajorA = typesA.includes('smt:MajorArcana');
+        const isMajorB = typesB.includes('smt:MajorArcana');
+
+        if (isMajorA && !isMajorB) return -1;
+        if (!isMajorA && isMajorB) return 1;
+
+        if (isMajorA && isMajorB) {
+            return parseNumber(a.card_number) - parseNumber(b.card_number);
+        }
+
+        // Both Minor Arcana
+        const suitA = getEntityLabel(graph, a.suit_id) || "";
+        const suitB = getEntityLabel(graph, b.suit_id) || "";
+
+        if (suitA.toLowerCase() < suitB.toLowerCase()) return -1;
+        if (suitA.toLowerCase() > suitB.toLowerCase()) return 1;
+
+        return getRankValue(a) - getRankValue(b);
+    });
+
+    // 4. Update UI Arrows
+    const currentIndex = deckCards.findIndex(c => c['@id'] === currentCard['@id']);
+    if (currentIndex === -1) return;
+
+    const setArrow = (idPrefix, targetIndex) => {
+        const desktopEl = document.getElementById(`${idPrefix}_card_desktop`);
+        const mobileEl = document.getElementById(`${idPrefix}_card_mobile`);
+        const elList = [desktopEl, mobileEl];
+
+        if (targetIndex >= 0 && targetIndex < deckCards.length) {
+            const targetId = deckCards[targetIndex]['@id'].replace('smtg:', '');
+            elList.forEach(el => {
+                if (el) {
+                    el.href = `card.html?id=${targetId}`;
+                    el.classList.remove('disabled');
+                    el.style.opacity = '1';
+                    el.style.pointerEvents = 'auto';
+                }
+            });
+        } else {
+            elList.forEach(el => {
+                if (el) {
+                    el.href = '#';
+                    el.classList.add('disabled');
+                    el.style.opacity = '0.3';
+                    el.style.pointerEvents = 'none';
+                }
+            });
+        }
+    };
+
+    setArrow('prev', currentIndex - 1);
+    setArrow('next', currentIndex + 1);
+}
+
+/**
+ * Populates the Related Topics Section Dynamically
+ */
+function generateRelatedTopics(card, graph, textsData) {
+    const topicsCarousel = document.getElementById('topicsCarousel');
+    if (!topicsCarousel) return;
+
+    topicsCarousel.innerHTML = ''; // clear placeholders
+
+    const types = Array.isArray(card['@type']) ? card['@type'] : [card['@type']];
+    const isMajor = types.includes('smt:MajorArcana');
+    const isMinor = types.includes('smt:MinorArcana') || types.includes('smt:CourtCard') || types.includes('smt:NumberedCard');
+
+    // Helper to create a card
+    const createTopicCard = (title, subtitle, linkUrl) => {
+        const linkWrapper = document.createElement('a');
+        linkWrapper.href = linkUrl;
+        linkWrapper.style.textDecoration = 'none';
+        linkWrapper.style.color = 'inherit';
+        linkWrapper.style.display = 'block';
+
+        const cardDiv = document.createElement('div');
+        cardDiv.className = 'topic-card';
+
+        const innerDiv = document.createElement('div');
+        innerDiv.className = 'topic-card-inner';
+
+        const h4 = document.createElement('h4');
+        h4.innerText = title;
+
+        const p = document.createElement('p');
+        p.innerText = subtitle;
+
+        innerDiv.appendChild(h4);
+        innerDiv.appendChild(p);
+        cardDiv.appendChild(innerDiv);
+        linkWrapper.appendChild(cardDiv);
+
+        topicsCarousel.appendChild(linkWrapper);
+    };
+
+    let deckObj = null;
+    const deckRef = card.contained_in_deck_id || card.isContainedIn;
+    if (deckRef) {
+        const deckId = deckRef['@id'] || deckRef;
+        deckObj = graph.find(d => d['@id'] === deckId);
+    }
+
+    // --- Add topics related to the DECK itself ---
+    if (deckObj && textsData && textsData.decks) {
+        const deckIdRaw = deckObj['@id'].replace('smtg:', '');
+        const normalizedDeckId = deckIdRaw.replace(/-/g, '_');
+        const deckTextData = textsData.decks[normalizedDeckId];
+
+        if (deckTextData && deckTextData.related_topics) {
+            deckTextData.related_topics.forEach(topicId => {
+                const topic = textsData.explore && textsData.explore[topicId];
+                if (topic) {
+                    createTopicCard(
+                        topic.title || "Related Topic",
+                        'Discover the history of this deck',
+                        `deepening.html?id=${topicId}`
+                    );
+                }
+            });
+        }
+    }
+
+    if (isMajor) {
+        // Archetypes
+        if (card.archetype_id) {
+            const archIdRaw = Array.isArray(card.archetype_id) ? card.archetype_id[0] : card.archetype_id;
+            const archId = (archIdRaw['@id'] || archIdRaw).replace('smtg:', '');
+            let label = getEntityLabel(graph, card.archetype_id);
+            if (!label || label === '-') label = 'Archetype';
+            createTopicCard(label, 'Dig deeper into the meaning', `deepening.html?id=${archId}`);
+        }
+
+        // Symbols
+        const symbolsWrapper = document.createElement('div'); // Using div instead of <a> for local script trigger
+        symbolsWrapper.style.cursor = 'pointer';
+
+        const cardDiv = document.createElement('div');
+        cardDiv.className = 'topic-card';
+
+        const innerDiv = document.createElement('div');
+        innerDiv.className = 'topic-card-inner';
+
+        const h4 = document.createElement('h4');
+        h4.innerText = 'Symbols';
+
+        const p = document.createElement('p');
+        p.innerText = 'Explore the hidden symbols';
+
+        innerDiv.appendChild(h4);
+        innerDiv.appendChild(p);
+        cardDiv.appendChild(innerDiv);
+        symbolsWrapper.appendChild(cardDiv);
+
+        symbolsWrapper.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSymbolismOverlay(card, graph);
+        });
+
+        topicsCarousel.appendChild(symbolsWrapper);
+    }
+
+    // Persons connected (author, illustrator, publisher)
+    const personProps = ['author_id', 'illustrator_id', 'publisher'];
+    const personMap = new Map();
+
+    personProps.forEach(prop => {
+        const propData = card[prop] || (deckObj && deckObj[prop]);
+        if (propData) {
+            const persons = Array.isArray(propData) ? propData : [propData];
+            persons.forEach(personData => {
+                const label = getEntityLabel(graph, personData);
+                const isEntity = typeof personData === 'object' && personData['@id'];
+
+                if (label && label !== "-" && isEntity) {
+                    const fullId = personData['@id'];
+                    const cleanId = fullId.replace('smtg:', '');
+
+                    let roleStr = "Author";
+                    if (prop === 'illustrator_id') roleStr = "Illustrator";
+                    if (prop === 'publisher') roleStr = "Publisher";
+
+                    if (personMap.has(cleanId)) {
+                        const existing = personMap.get(cleanId);
+                        if (!existing.roles.includes(roleStr)) {
+                            existing.roles.push(roleStr);
+                        }
+                    } else {
+                        personMap.set(cleanId, {
+                            label: label,
+                            roles: [roleStr]
+                        });
+                    }
+                }
+            });
+        }
+    });
+
+    personMap.forEach((data, cleanId) => {
+        const rolesCombined = data.roles.join(" & ");
+        createTopicCard(data.label, `Discover the ${rolesCombined}`, `person.html?id=${cleanId}`);
+    });
+
+    // Deck
+    if (deckObj) {
+        const deckLabel = getEntityLabel(graph, deckObj) || 'Deck';
+        const deckId = deckObj['@id'].replace('smtg:', '');
+        createTopicCard(deckLabel, 'Explore the full deck', `deck.html?id=${deckId}`);
+    }
+
+    // Suits (if minor arcana)
+    if (isMinor) {
+        if (card.suit_id) {
+            const suitIdRaw = Array.isArray(card.suit_id) ? card.suit_id[0] : card.suit_id;
+            const suitId = (suitIdRaw['@id'] || suitIdRaw).replace('smtg:', '');
+            let suitLabel = getEntityLabel(graph, card.suit_id);
+            if (!suitLabel || suitLabel === "-") suitLabel = 'Suit';
+
+            const capitalizedSuit = suitLabel.charAt(0).toUpperCase() + suitLabel.slice(1);
+            createTopicCard(capitalizedSuit, 'Discover the Suit', `deepening.html?id=${suitId}`);
+        }
+    }
+}
+
+
+/**
+ * Shows the Symbolism Overlay with a two-column master-detail view
+ */
+function showSymbolismOverlay(card, graph) {
+    const backdrop = document.getElementById('symbolism-backdrop');
+    const overlay = document.getElementById('symbolism-overlay');
+    const symbolListCol = document.getElementById('symbol-list-col');
+    const relatedCardsGrid = document.getElementById('symbol-related-cards');
+
+    if (!backdrop || !overlay || !symbolListCol || !relatedCardsGrid) return;
+
+    symbolListCol.innerHTML = '';
+    relatedCardsGrid.innerHTML = '';
+
+    const figureIds = card.symbolic_figure_id || [];
+
+    if (figureIds.length === 0) {
+        symbolListCol.innerHTML = `<p class="symbol-empty-msg">We haven't mapped this card’s symbols yet. In the meantime, try filtering by 'Scepter', 'Dog', 'Eagle', 'Pillars' or 'Water' to see how our semantic search works!</p>`;
+        document.getElementById('symbol-details-col').style.display = 'none';
+        overlay.classList.add('single-column'); // Optional CSS helper
+    } else {
+        document.getElementById('symbol-details-col').style.display = 'block';
+        overlay.classList.remove('single-column');
+        
+        const idList = Array.isArray(figureIds) ? figureIds : [figureIds];
+
+        idList.forEach((id, index) => {
+            const figureId = typeof id === 'string' ? id : id['@id'];
+            const figure = graph.find(obj => obj['@id'] === figureId);
+            const label = figure ? (figure.label || figure['rdfs:label'] || figureId.split(':').pop().replace(/_/g, ' ')) : 'Unknown Symbol';
+
+            const symbolItem = document.createElement('div');
+            symbolItem.className = 'symbol-item';
+            symbolItem.dataset.id = figureId;
+
+            const mainLabel = document.createElement('strong');
+            mainLabel.className = 'symbol-main-label';
+            mainLabel.innerText = label;
+            symbolItem.appendChild(mainLabel);
+
+            // Related Figures (sub-line)
+            if (figure && figure.related_to_id) {
+                let relatedIds = [];
+                if (Array.isArray(figure.related_to_id)) {
+                    relatedIds = figure.related_to_id;
+                } else if (typeof figure.related_to_id === 'string') {
+                    relatedIds = figure.related_to_id.split(',').map(s => s.trim());
+                } else {
+                    relatedIds = [figure.related_to_id];
+                }
+
+                const relatedLabels = relatedIds.map(relId => {
+                    const rId = (typeof relId === 'string' ? relId : relId['@id']).replace('smtg:', '');
+                    const lookupId1 = `smtg:${rId.replace(/_/g, '-')}`;
+                    const lookupId2 = `smtg:${rId.replace(/-/g, '_')}`;
+                    const relFigure = graph.find(obj => obj['@id'] === lookupId1 || obj['@id'] === lookupId2 || obj['@id'] === rId);
+                    return relFigure ? (relFigure.label || relFigure['rdfs:label']) : rId.replace(/_/g, ' ').replace(/-/g, ' ');
+                }).filter(l => l);
+
+                if (relatedLabels.length > 0) {
+                    const relatedList = document.createElement('p');
+                    relatedList.className = 'symbol-related-list';
+                    relatedList.innerText = relatedLabels.join(', ');
+                    symbolItem.appendChild(relatedList);
+                }
+            }
+
+            // Click Handler
+            symbolItem.addEventListener('click', () => {
+                // Clear active states
+                document.querySelectorAll('.symbol-item').forEach(el => el.classList.remove('active'));
+                symbolItem.classList.add('active');
+                
+                // Show details (description + cards)
+                renderSymbolDetails(figureId, figure, graph, symbolItem);
+            });
+
+            symbolListCol.appendChild(symbolItem);
+
+            // Auto-select first symbol
+            if (index === 0) {
+                symbolItem.click();
+            }
+        });
+    }
+
+    backdrop.style.display = 'block';
+    overlay.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Renders the description under the symbol and updates the right column with related cards
+ */
+function renderSymbolDetails(symbolId, symbolObj, graph, parentElement) {
+    // 1. Handle Description in Left Column
+    document.querySelectorAll('.symbol-description').forEach(el => el.remove());
+    
+    if (symbolObj && symbolObj['dcterms:description']) {
+        const descContent = typeof symbolObj['dcterms:description'] === 'object' 
+            ? (symbolObj['dcterms:description']['@value'] || symbolObj['dcterms:description'].label) 
+            : symbolObj['dcterms:description'];
+            
+        if (descContent) {
+            const descEl = document.createElement('div');
+            descEl.className = 'symbol-description';
+            descEl.innerText = descContent;
+            parentElement.appendChild(descEl);
+        }
+    }
+
+    // 2. Handle Related Cards in Right Column
+    const relatedCardsGrid = document.getElementById('symbol-related-cards');
+    relatedCardsGrid.innerHTML = '';
+
+    // A. Render Primary Symbol Section
+    const primaryCards = findCardsBySymbol(symbolId, graph);
+    const primaryLabel = symbolObj ? (symbolObj.label || symbolId.replace('smtg:', '').replace(/_/g, ' ')) : "this symbol";
+    renderCardSection(relatedCardsGrid, `Also found in`, primaryCards);
+
+    // B. Render Related Symbols Sections
+    if (symbolObj && symbolObj.related_to_id) {
+        let relatedIds = [];
+        if (Array.isArray(symbolObj.related_to_id)) {
+            relatedIds = symbolObj.related_to_id;
+        } else if (typeof symbolObj.related_to_id === 'string') {
+            relatedIds = symbolObj.related_to_id.split(',').map(s => s.trim());
+        } else {
+            relatedIds = [symbolObj.related_to_id];
+        }
+
+        relatedIds.forEach(relId => {
+            const rId = (typeof relId === 'string' ? relId : relId['@id']).replace('smtg:', '');
+            const lookupId1 = `smtg:${rId.replace(/_/g, '-')}`;
+            const lookupId2 = `smtg:${rId.replace(/-/g, '_')}`;
+            const relFigure = graph.find(obj => obj['@id'] === lookupId1 || obj['@id'] === lookupId2 || obj['@id'] === rId);
+            
+            const relLabel = relFigure ? (relFigure.label || relFigure['rdfs:label']) : rId.replace(/_/g, ' ').replace(/-/g, ' ');
+            const relCards = findCardsBySymbol(relFigure ? relFigure['@id'] : lookupId1, graph);
+            
+            if (relCards.length > 0) {
+                renderCardSection(relatedCardsGrid, `Related Symbol: ${relLabel}`, relCards, true);
+            }
+        });
+    }
+}
+
+/**
+ * Global search for any DeckCard that contains a specific symbol
+ */
+function findCardsBySymbol(symbolId, graph) {
+    if (!symbolId) return [];
+    return graph.filter(obj => {
+        if (!obj['@type']) return false;
+        const types = Array.isArray(obj['@type']) ? obj['@type'] : [obj['@type']];
+        if (!types.some(t => t.includes('DeckCard'))) return false;
+
+        const cardSymbols = obj.symbolic_figure_id;
+        if (!cardSymbols) return false;
+
+        const symbolList = Array.isArray(cardSymbols) ? cardSymbols : [cardSymbols];
+        return symbolList.some(s => {
+            const sId = typeof s === 'string' ? s : s['@id'];
+            return sId === symbolId;
+        });
+    });
+}
+
+/**
+ * Appends a titled section of card thumbnails to the container
+ */
+function renderCardSection(container, title, cards, isSubSection = false) {
+    if (!cards || cards.length === 0) return;
+
+    // Create Section Header
+    const sectionHeader = document.createElement('h5');
+    sectionHeader.className = isSubSection ? 'symbol-subsection-title mt-4' : 'symbol-section-subtitle mb-4';
+    sectionHeader.innerText = title;
+    container.appendChild(sectionHeader);
+
+    const grid = document.createElement('div');
+    grid.className = 'symbol-related-cards-grid px-2 mb-4';
+    
+    cards.forEach(card => {
+        const cardTitle = card.title || card.label || "Tarot Card";
+        const imgUrl = card.image_url ? (card.image_url['@id'] || card.image_url) : null;
+        const cleanId = card['@id'].replace('smtg:', '');
+
+        const cardLink = document.createElement('a');
+        cardLink.className = 'mini-card-cross-ref';
+        cardLink.href = `card.html?id=${cleanId}`;
+        cardLink.innerHTML = `
+            <img src="${getLocalImagePath(imgUrl)}" alt="${cardTitle}" onerror="this.src='assets/images/placeholder_card.jpg';">
+            <span>${cardTitle}</span>
+        `;
+        grid.appendChild(cardLink);
+    });
+
+    container.appendChild(grid);
+}
+
+function closeSymbolismOverlay() {
+    const backdrop = document.getElementById('symbolism-backdrop');
+    const overlay = document.getElementById('symbolism-overlay');
+    if (backdrop) backdrop.style.display = 'none';
+    if (overlay) overlay.style.display = 'none';
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initCardPage();
+
+    // Close listeners
+    const closeBtn = document.getElementById('closeSymbolism');
+    const backdrop = document.getElementById('symbolism-backdrop');
+
+    if (closeBtn) closeBtn.addEventListener('click', closeSymbolismOverlay);
+    if (backdrop) backdrop.addEventListener('click', closeSymbolismOverlay);
+});
+

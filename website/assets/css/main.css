@@ -922,7 +922,8 @@ input[type="search"]::-webkit-search-results-decoration {
 /* Arc hover & focus transition */
 .kg-arc {
     transition: fill-opacity 0.2s ease;
-    outline: none; /* Removes default blue focus ring */
+    outline: none;
+    /* Removes default blue focus ring */
 }
 
 .kg-hierarchy-guide {
@@ -1002,7 +1003,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .kg-tt-desc {
     font-size: 0.8rem;
     color: #E8DFF5;
-    border-top: 1px solid rgba(255,248,240,0.15);
+    border-top: 1px solid rgba(255, 248, 240, 0.15);
     padding-top: 0.4rem;
     margin-top: 0.3rem;
     line-height: 1.45;
@@ -1070,6 +1071,7 @@ input[type="search"]::-webkit-search-results-decoration {
         padding-left: 0;
         padding-top: 1.5rem;
     }
+
     .kg-legend {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -1081,6 +1083,7 @@ input[type="search"]::-webkit-search-results-decoration {
     .kg-legend {
         grid-template-columns: 1fr;
     }
+
     .kg-wrapper {
         padding: 1.5rem 1rem 1rem;
     }
@@ -2972,7 +2975,8 @@ HISTORY PAGE
     }
 }
 
-.history-text-container h2 {
+.history-text-container h2,
+.history-text-container h3 {
     font-family: var(--header-font);
     text-align: center;
 }
@@ -2985,6 +2989,7 @@ HISTORY PAGE
 .history-text-container a:hover {
     text-decoration: underline;
 }
+
 
 .about-text-container h2 {
     font-family: var(--header-font);
