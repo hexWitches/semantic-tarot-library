@@ -31,7 +31,7 @@ function sortCards(cards) {
     return cards.sort((a, b) => {
         const typeA = Array.isArray(a['@type']) ? a['@type'] : [a['@type']];
         const typeB = Array.isArray(b['@type']) ? b['@type'] : [b['@type']];
-        
+
         const isMajorA = typeA.some(t => t.includes('MajorArcana'));
         const isMajorB = typeB.some(t => t.includes('MajorArcana'));
 
@@ -47,7 +47,7 @@ function sortCards(cards) {
         const suitB = b.suit_id?.['@id'] || '';
         if (suitA < suitB) return -1;
         if (suitA > suitB) return 1;
-        
+
         return getCardValue(a) - getCardValue(b);
     });
 }
@@ -59,7 +59,7 @@ let allDecks = [];
 let allCards = [];
 let allPersons = [];
 let filteredCards = [];
-let textsData = null; 
+let textsData = null;
 let currentPage = 1;
 let isGridView = false;
 
@@ -87,7 +87,9 @@ async function loadCollection() {
     // Initialize view from URL first (prevents CORS blockage from hiding search)
     const urlParams = new URLSearchParams(window.location.search);
     const searchParam = urlParams.get('search');
-    
+    const filterParam = urlParams.get('filter');
+    const valueParam = urlParams.get('value');
+
     if (searchParam) {
         currentSearch = searchParam;
         isGridView = true;
@@ -96,6 +98,9 @@ async function loadCollection() {
         const searchDisplay = document.getElementById('search-query-display');
         if (searchBanner) searchBanner.style.display = 'block';
         if (searchDisplay) searchDisplay.innerText = currentSearch;
+    } else if (filterParam && valueParam && activeFilters[filterParam]) {
+        activeFilters[filterParam].push(valueParam);
+        isGridView = true;
     }
 
     try {
@@ -103,25 +108,25 @@ async function loadCollection() {
             fetch('assets/json/smtGraph.jsonld'),
             fetch('assets/json/texts.json')
         ]);
-        
+
         if (!graphRes.ok || !textsRes.ok) throw new Error('Failed to load data');
-        
+
         const data = await graphRes.json();
         textsData = await textsRes.json();
         const graph = data['@graph'];
 
         // Filter for decks, cards, and persons
-        const decks = graph.filter(item => 
-            item['@type'] === 'odi:TarotDeck' || 
+        const decks = graph.filter(item =>
+            item['@type'] === 'odi:TarotDeck' ||
             (Array.isArray(item['@type']) && item['@type'].includes('odi:TarotDeck'))
         );
-        allCards = graph.filter(item => 
-            item['@type'] === 'odi:DeckCard' || 
+        allCards = graph.filter(item =>
+            item['@type'] === 'odi:DeckCard' ||
             (Array.isArray(item['@type']) && item['@type'].includes('odi:DeckCard')) ||
             (Array.isArray(item['@type']) && item['@type'].some(t => t.includes('Arcana')))
         );
-        allPersons = graph.filter(item => 
-            item['@type'] === 'odi:Person' || 
+        allPersons = graph.filter(item =>
+            item['@type'] === 'odi:Person' ||
             (Array.isArray(item['@type']) && item['@type'].includes('odi:Person'))
         );
 
@@ -130,7 +135,7 @@ async function loadCollection() {
             const deckYear = parseInt(deck.publication_year) || 0;
             const originObj = deck['https://schema.org/locationCreated'] || deck['location_created'];
             const originId = originObj?.['@id'] || '';
-            
+
             const cityToNation = {
                 'smtg:milan': 'italy',
                 'smtg:venice': 'italy',
@@ -146,14 +151,14 @@ async function loadCollection() {
                 const deckId = typeof containedIn === 'string' ? containedIn : containedIn['@id'];
                 const match = deckId === deck['@id'];
                 if (match) {
-                    card.deck_year = deckYear; 
-                    card.origin = originId; 
+                    card.deck_year = deckYear;
+                    card.origin = originId;
                     card.nation = nation;
-                    card.lineage_id = lineageId; 
+                    card.lineage_id = lineageId;
                 }
                 return match;
             });
-            
+
             deckCards = sortCards(deckCards);
             return { ...deck, cards: deckCards };
         });
@@ -173,7 +178,7 @@ function renderContent() {
     const gridView = document.getElementById('grid-view');
     const searchView = document.getElementById('search-view');
     const searchBanner = document.getElementById('search-results-banner');
-    
+
     if (!deckView || !gridView || !searchView || !searchBanner) return;
 
     // Hide everything first
@@ -203,7 +208,7 @@ function hasActiveFilters() {
 
 const SEARCH_PER_PAGE = 12;
 
-window.goToPage = function(page) {
+window.goToPage = function (page) {
     currentPage = page;
     renderContent();
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -276,9 +281,9 @@ function renderSearchView() {
             const name = person.title || (person.given_name + " " + person.family_name);
             const portraitUrl = person.person_portrait_url?.['@id'] || person.person_portrait_url || null;
             let imgUrl = getLocalImagePath(typeof portraitUrl === 'string' ? portraitUrl : null, 'person');
-            
+
             const generalPlaceholder = 'assets/images/explore/people/portrait-placeholder.jpg';
-            
+
             personsHTML += `
                 <a href="person.html?id=${cleanId}" class="person-circle-item text-center text-decoration-none" style="width: 120px;">
                     <div class="person-img-circle mx-auto mb-2">
@@ -304,7 +309,7 @@ function renderSearchView() {
             const cardName = card.title || 'Tarot Card';
             const cardNumber = card.card_number || '';
             const cleanId = card['@id'].replace('smtg:', '');
-            
+
             cardsHTML += `
                 <div class="grid-card-wrapper">
                     <a href="card.html?id=${cleanId}" class="img-container deck-img-container" style="display:block;text-decoration:none;color:inherit;">
@@ -362,7 +367,7 @@ function applyFilter(filterType, subfilter) {
     } else {
         isGridView = false;
     }
-    
+
     currentPage = 1;
     applyFiltering();
 }
@@ -371,7 +376,7 @@ function applyFiltering() {
     // filter decks and persons based on currentSearch
     if (currentSearch) {
         const query = currentSearch.toLowerCase();
-        
+
         // match decks
         matchingDecks = allDecks.filter(deck => {
             const title = (deck.title || "").toLowerCase();
@@ -388,7 +393,7 @@ function applyFiltering() {
             const fullName = `${givenName} ${familyName}`.trim();
             const fullNameLower = fullName.toLowerCase();
             const idName = (nodeToName(id) || "").toLowerCase();
-            
+
             return fullNameLower.includes(query) || idName.includes(query);
         });
 
@@ -411,7 +416,7 @@ function applyFiltering() {
 
         filteredCards = filteredCards.filter(card => {
             const types = Array.isArray(card['@type']) ? card['@type'] : [card['@type']];
-            
+
             return values.some(val => {
                 if (type === 'arcana-type') {
                     const targetType = val === 'major-arcana' ? 'MajorArcana' : 'MinorArcana';
@@ -470,7 +475,7 @@ function resetFilters() {
     isGridView = false;
     currentPage = 1;
     filteredCards = [];
-    
+
     // clear search param from URL without refreshing
     const url = new URL(window.location);
     url.searchParams.delete('search');
@@ -513,7 +518,7 @@ function updateActiveFilterUI() {
         const group = btn.closest('.filter-group');
         const type = group?.querySelector('.filter-btn')?.dataset.filter;
         const val = btn.dataset.subfilter;
-        
+
         let isActive = false;
         if (type && activeFilters[type]) {
             isActive = activeFilters[type].includes(val);
@@ -545,7 +550,7 @@ function renderGridView() {
     if (!gridContainer) return;
 
     gridContainer.innerHTML = '';
-    
+
     const startIndex = (currentPage - 1) * CARDS_PER_GRID_PAGE;
     const endIndex = startIndex + CARDS_PER_GRID_PAGE;
     const cardsToShow = filteredCards.slice(startIndex, endIndex);
@@ -561,7 +566,7 @@ function renderGridView() {
         const cardNumber = card.card_number || '';
         const fullId = card['@id'] || '';
         const cleanCardId = fullId.replace('smtg:', '');
-        
+
         const cardHTML = `
             <div class="grid-card-wrapper">
                 <a href="card.html?id=${cleanCardId}" class="img-container deck-img-container" style="display:block;text-decoration:none;color:inherit;">
@@ -610,7 +615,7 @@ function renderDecks() {
         const cleanId = (deck['@id'] || '').replace('smtg:', '');
         const deckTitle = deck.title || deck.title || 'Untitled Deck';
         const description = deck['dcterms:description']?.['@value'] || 'No description available.';
-        
+
         let coverImg = 'assets/images/placeholder.jpg';
         if (deck.cards && deck.cards.length > 0) {
             const fool = deck.cards.find(c => {
@@ -662,7 +667,7 @@ function renderDecks() {
                 </div>
             </div>
         `;
-        
+
         const paginationContainer = container.querySelector('.pagination-container');
         if (paginationContainer) {
             paginationContainer.insertAdjacentHTML('beforebegin', deckHTML);
@@ -693,7 +698,7 @@ function renderCardThumbnails(cards) {
 }
 
 function initScrollers() {
-    const SCROLL_STEP = 220; 
+    const SCROLL_STEP = 220;
     document.querySelectorAll('.card-scroller-wrapper').forEach(wrapper => {
         const prevArrow = wrapper.querySelector('.scroller-prev');
         const nextArrow = wrapper.querySelector('.scroller-next');
@@ -940,7 +945,7 @@ function fillDeckMetadata(deck, graph, extraTexts) {
                 link.innerText = label;
 
                 if (elementId === 'deck_lineage_id') {
-                    link.href = `deck.html?id=${cleanId}`;
+                    link.href = `collection.html?filter=lineage&value=${cleanId}`;
                 } else {
                     link.href = `person.html?id=${cleanId}`;
                 }
@@ -1745,7 +1750,7 @@ function showSymbolismOverlay(card, graph) {
     } else {
         document.getElementById('symbol-details-col').style.display = 'block';
         overlay.classList.remove('single-column');
-        
+
         const idList = Array.isArray(figureIds) ? figureIds : [figureIds];
 
         idList.forEach((id, index) => {
@@ -1794,7 +1799,7 @@ function showSymbolismOverlay(card, graph) {
                 // Clear active states
                 document.querySelectorAll('.symbol-item').forEach(el => el.classList.remove('active'));
                 symbolItem.classList.add('active');
-                
+
                 // Show details (description + cards)
                 renderSymbolDetails(figureId, figure, graph, symbolItem);
             });
@@ -1819,12 +1824,12 @@ function showSymbolismOverlay(card, graph) {
 function renderSymbolDetails(symbolId, symbolObj, graph, parentElement) {
     // 1. Handle Description in Left Column
     document.querySelectorAll('.symbol-description').forEach(el => el.remove());
-    
+
     if (symbolObj && symbolObj['dcterms:description']) {
-        const descContent = typeof symbolObj['dcterms:description'] === 'object' 
-            ? (symbolObj['dcterms:description']['@value'] || symbolObj['dcterms:description'].label) 
+        const descContent = typeof symbolObj['dcterms:description'] === 'object'
+            ? (symbolObj['dcterms:description']['@value'] || symbolObj['dcterms:description'].label)
             : symbolObj['dcterms:description'];
-            
+
         if (descContent) {
             const descEl = document.createElement('div');
             descEl.className = 'symbol-description';
@@ -1858,10 +1863,10 @@ function renderSymbolDetails(symbolId, symbolObj, graph, parentElement) {
             const lookupId1 = `smtg:${rId.replace(/_/g, '-')}`;
             const lookupId2 = `smtg:${rId.replace(/-/g, '_')}`;
             const relFigure = graph.find(obj => obj['@id'] === lookupId1 || obj['@id'] === lookupId2 || obj['@id'] === rId);
-            
+
             const relLabel = relFigure ? (relFigure.label || relFigure['rdfs:label']) : rId.replace(/_/g, ' ').replace(/-/g, ' ');
             const relCards = findCardsBySymbol(relFigure ? relFigure['@id'] : lookupId1, graph);
-            
+
             if (relCards.length > 0) {
                 renderCardSection(relatedCardsGrid, `Related Symbol: ${relLabel}`, relCards, true);
             }
@@ -1904,7 +1909,7 @@ function renderCardSection(container, title, cards, isSubSection = false) {
 
     const grid = document.createElement('div');
     grid.className = 'symbol-related-cards-grid px-2 mb-4';
-    
+
     cards.forEach(card => {
         const cardTitle = card.title || card.label || "Tarot Card";
         const imgUrl = card.image_url ? (card.image_url['@id'] || card.image_url) : null;
