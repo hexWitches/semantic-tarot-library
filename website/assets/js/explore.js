@@ -609,11 +609,6 @@ function getLocalImagePath(imgId, type = 'card') {
     if (!imgId || typeof imgId !== 'string') {
         return 'assets/images/placeholder_card.jpg';
     }
-    if (imgId.includes('github.com') && imgId.includes('/blob/')) {
-        return imgId
-            .replace('github.com', 'raw.githubusercontent.com')
-            .replace('/blob/', '/');
-    }
     return imgId;
 }
 
@@ -701,9 +696,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 function getLocalPersonImagePath(imageUrl) {
     if (!imageUrl) return 'assets/images/explore/people/portrait-placeholder.jpg';
-    if (imageUrl.includes('github.com') && imageUrl.includes('/blob/')) {
-        return imageUrl.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
-    }
     return imageUrl;
 }
 

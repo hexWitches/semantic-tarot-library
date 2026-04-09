@@ -311,18 +311,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return null;
     }
 
-    // Convert GitHub URLs
+    // Get image URL or placeholder
     function getImageUrl(imgId, type = 'card') {
         if (!imgId || typeof imgId !== 'string') {
             if (type === 'person') {
                 return `${basePath}assets/images/explore/people/portrait-placeholder.jpg`;
             }
             return `${basePath}assets/images/placeholder_card.jpg`;
-        }
-        if (imgId.includes('github.com') && imgId.includes('/blob/')) {
-            return imgId
-                .replace('github.com', 'raw.githubusercontent.com')
-                .replace('/blob/', '/');
         }
         return imgId;
     }
@@ -424,7 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const MAJOR_NUMBER_MAP = {
         0: "the_fool", 1: "the_juggler", 2: "the_popess", 3: "the_empress",
         4: "the_emperor", 5: "the_pope", 6: "the_lovers", 7: "the_chariot",
-        8: "justice", 9: "the_hermit", 10: "wheel_of_fortune", 11: "strenght",
+        8: "justice", 9: "the_hermit", 10: "wheel_of_fortune", 11: "strength",
         12: "the_hanged_man", 13: "death", 14: "temperance", 15: "the_devil",
         16: "the_tower", 17: "the_star", 18: "the_moon", 19: "the_sun",
         20: "judgement", 21: "the_world"
@@ -504,7 +499,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isMajor && numVal !== null) {
             let key = MAJOR_NUMBER_MAP[numVal];
             if (deckId.includes("rider-waite-smith")) {
-                if (numVal === 8) key = "strenght";
+                if (numVal === 8) key = "strength";
                 else if (numVal === 11) key = "justice";
             }
             if (key) return cotdTexts.major_arcana?.[key];

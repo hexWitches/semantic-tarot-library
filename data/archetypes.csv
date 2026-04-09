@@ -10,7 +10,7 @@ concept_chariot,The Chariot,"Il Carro, Le Chariot",7,"Represents control, willpo
 concept_justice,Justice,"Giustizia, Justice",8,"Represents justice, fairness, and truth."
 concept_hermit,The Hermit,"L'Eremita, Le Hermit",9,"Represents soul-searching, introspection, and being alone."
 concept_wheel_of_fortune,Wheel of Fortune,"La Ruota della Fortuna, La Roue de Fortune",10,"Represents good luck, karma, and life cycles."
-concept_strenght,Strenght,"Fortitude, La Forza, La Fortezza, Force",11,"Represents courage, persuasion, and influence."
+concept_strength,Strength,"Fortitude, La Forza, La Fortezza, Force",11,"Represents courage, persuasion, and influence."
 concept_the_hanged_man,The Hanged Man,"Le Pendu, L'Appeso",12,"Represents pause, surrender, and letting go."
 concept_death,Death,"La Mort, La Morte",13,"Represents endings, change, and transition."
 concept_temperance,Temperance,"Tempérance, La Temperanza",14,"Represents balance, moderation, and patience."
@@ -21,8 +21,3 @@ concept_the_moon,The Moon,"La Lune, La Luna",18,"Represents illusion, fear, and 
 concept_the_sun,The Sun,"Le Soleil, Il Sole",19,"Represents positivity, warmth, and success."
 concept_judgment,Judgement,"The Last Judgment, Le Jugement, Il Giudizio",20,"Represents rebirth, inner calling, and absolution."
 concept_the_world,The World,"Le Monde, Il Mondo",21,"Represents completion, integration, and accomplishment."
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,

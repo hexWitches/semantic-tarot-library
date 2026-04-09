@@ -582,18 +582,13 @@ function renderGridView() {
     });
 }
 
-// convert GitHub blob URLs to raw image URLs (same as deck.js)
+// get image URL or placeholder
 function getLocalImagePath(imgId, type = 'card') {
     if (!imgId || typeof imgId !== 'string') {
         if (type === 'person') {
             return 'assets/images/explore/people/portrait-placeholder.jpg';
         }
         return 'assets/images/placeholder_card.jpg';
-    }
-    if (imgId.includes('github.com') && imgId.includes('/blob/')) {
-        return imgId
-            .replace('github.com', 'raw.githubusercontent.com')
-            .replace('/blob/', '/');
     }
     return imgId;
 }

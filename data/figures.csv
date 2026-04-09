@@ -1,7 +1,7 @@
 symbolic_figure_id,label,broader_archetype_id,related_to_id,description
 fig_dog_fool,Dog,concept_fool,fig_dog_moon,Animal instinct or the call of the material world.
 fig_staff_fool,Staff,concept_fool,,Support for the journey and a symbol of direction.
-fig_infinity_symbol,The Infinity Symbol,"concept_juggler, concept_strenght, concept_the_world",,Infinite possibilities and the eternal nature of the spirit.
+fig_infinity_symbol,The Infinity Symbol,"concept_juggler, concept_strength, concept_the_world",,Infinite possibilities and the eternal nature of the spirit.
 fig_magician_table,The Artisan's Table,concept_juggler,,The physical world where manifestation occurs.
 fig_pomegranate,Pomegranate,"concept_popess, concept_empress",,"Fertility, the underworld, and the seeds of knowledge."
 fig_crescent_moon,Crescent Moon,concept_popess,,"Intuition, mystery, and the illumination of the hidden psyche."
@@ -15,7 +15,7 @@ fig_scepter_emperor,Emperor's Scepter,concept_emperor,"fig_scepter_empress, fig_
 fig_scepter_pope,Pope's Scepter,concept_pope,"fig_scepter_emperor, fig_scepter_empress, fig_scepter_popess","Traditional doctrine, religious leadership, and the bridge to the sacred."
 fig_pillar_temple,The Sacred Gateway,concept_pope,"fig_pillar_throne, fig_pillar_jb, fig_towers_moon, fig_pillar_law",Free-standing columns framing a central religious figure. They represent the structural laws of the Church and the boundary between the congregation and the divine.
 fig_angel_cupid,Angel,concept_lovers,fig_winged_angel,Divine intervention and the higher self overseeing choices.
-fig_lion_tamed,Lion,concept_strenght,fig_winged_lion,Raw passion and animal nature calmed by spiritual grace.
+fig_lion_tamed,Lion,concept_strength,fig_winged_lion,Raw passion and animal nature calmed by spiritual grace.
 fig_winged_bull,Winged Bull,concept_wheel_of_fortune,,Representing the fixed sign Taurus and the element Earth.
 fig_winged_lion,Winged Lion,concept_wheel_of_fortune,fig_lion_tamed,Representing the fixed sign Leo and the element Fire.
 fig_winged_eagle,Winged Eagle,"concept_wheel_of_fortune, concept_the_world","fig_eagle_shield, fig_eagle_hat",Representing the fixed sign Scorpio and the element Water.
