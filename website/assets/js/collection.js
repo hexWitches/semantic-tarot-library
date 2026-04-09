@@ -1299,11 +1299,13 @@ function fillCardMetadata(card, graph, extraTexts) {
     // 6. Arcana Types Logic
     const arcanaTypeEl = document.getElementById('arcana_type');
     const minorArcanaTypeEl = document.getElementById('minor_arcana_type');
+    const suitIdEl = document.getElementById('suit_id');
 
     const types = Array.isArray(card['@type']) ? card['@type'] : [card['@type']];
+    const isMajorArcana = types.includes('smt:MajorArcana');
 
     if (arcanaTypeEl) {
-        if (types.includes('smt:MajorArcana')) arcanaTypeEl.innerText = "Major Arcana";
+        if (isMajorArcana) arcanaTypeEl.innerText = "Major Arcana";
         else if (types.includes('smt:MinorArcana')) arcanaTypeEl.innerText = "Minor Arcana";
         else arcanaTypeEl.innerText = "-";
     }
@@ -1312,6 +1314,15 @@ function fillCardMetadata(card, graph, extraTexts) {
         if (types.includes('smt:CourtCard')) minorArcanaTypeEl.innerText = "Court Card";
         else if (types.includes('smt:NumberedCard')) minorArcanaTypeEl.innerText = "Numbered Card";
         else minorArcanaTypeEl.innerText = "-";
+    }
+
+    // Hide Suit and Minor Arcana Type container rows if the card is a Major Arcana
+    if (isMajorArcana) {
+        if (suitIdEl && suitIdEl.closest('.meta-row')) suitIdEl.closest('.meta-row').style.display = 'none';
+        if (minorArcanaTypeEl && minorArcanaTypeEl.closest('.meta-row')) minorArcanaTypeEl.closest('.meta-row').style.display = 'none';
+    } else {
+        if (suitIdEl && suitIdEl.closest('.meta-row')) suitIdEl.closest('.meta-row').style.display = 'flex';
+        if (minorArcanaTypeEl && minorArcanaTypeEl.closest('.meta-row')) minorArcanaTypeEl.closest('.meta-row').style.display = 'flex';
     }
 
     // 7. Evolution Frame (Archetypes & Suits)

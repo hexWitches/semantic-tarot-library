@@ -827,8 +827,9 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 @media (max-width: 768px) {
-    .discovery-card {
-        height: 350px;
+    .discovery-carousel-wrapper {
+        height: 50vh;
+        min-height: 350px;
     }
 
     .carousel-exploration-title {
@@ -837,20 +838,21 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 @media (max-width: 576px) {
-    .discovery-card {
-        height: 300px;
+    .discovery-carousel-wrapper {
+        height: 40vh;
+        min-height: 300px;
     }
 
-    .discovery-title {
+    .carousel-exploration-title {
         font-size: 1.5rem;
         letter-spacing: 3px;
     }
 
-    .carousel-prev {
+    .discovery-carousel-wrapper .nav-circle-btn.carousel-prev {
         left: 10px;
     }
 
-    .carousel-next {
+    .discovery-carousel-wrapper .nav-circle-btn.carousel-next {
         right: 10px;
     }
 }
@@ -1367,6 +1369,12 @@ COLLECTION PAGE
     margin-bottom: 0px;
 }
 
+@media (max-width: 768px) {
+    .deck-info p {
+        display: none;
+    }
+}
+
 .deck-item-wrapper {
     margin-bottom: 45px;
     position: relative;
@@ -1504,6 +1512,13 @@ COLLECTION PAGE
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 25px;
     padding-top: 20px;
+}
+
+@media (max-width: 576px) {
+    .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
 }
 
 .grid-card-wrapper {
@@ -1792,6 +1807,13 @@ input[type="search"] {
     #search-view .cards-grid {
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    #search-view .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
     }
 }
 
@@ -2883,6 +2905,21 @@ ITEM PAGE: deck
     height: auto;
     aspect-ratio: 1 / 1;
     background-color: var(--chocolate-plum);
+}
+
+@media (max-width: 576px) {
+    .explore-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem; /* Reduce gap slightly to maximize card space on small screens */
+    }
+    
+    .explore-grid .topic-card-inner h4 {
+        font-size: 1rem; /* Scale down title slightly so it fits in the narrower box */
+    }
+    
+    .explore-grid .topic-card-inner p {
+        font-size: 0.8rem;
+    }
 }
 
 
