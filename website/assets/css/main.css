@@ -3092,6 +3092,47 @@ HISTORY PAGE
     text-decoration: underline;
 }
 
+/* Enable Flexbox on topic text container + control layout of images */
+.topic-text-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* Force text blocks and headings to span the full width (100%)
+   so texts do not sit next to images */
+.topic-text-container> :not(.topic-image-block) {
+    width: 100%;
+    flex: 0 0 100%;
+}
+
+/* Target the image wrapper figures and make them 48% width to sit two-per-line evenly spaced */
+.topic-text-container>.topic-image-block {
+    width: 48%;
+    flex: 0 0 48%;
+    /* This overrides the Bootstrap 'my-5' setting from your JS for a tighter grid */
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
+}
+
+.topic-text-container>.topic-image-block img {
+    max-width: 70%;
+    /* Adjust this percentage to make the images smaller or larger */
+}
+
+/* For small screens (mobile), stack the images back to 100% width */
+@media (max-width: 768px) {
+    .topic-text-container>.topic-image-block {
+        width: 100%;
+        flex: 0 0 100%;
+    }
+
+    .topic-text-container>.topic-image-block img {
+        max-width: 50%;
+    }
+}
+
+
 /* ARCHETYPE GRID LAYOUT */
 #archetype-portrait-container {
     width: 100%;
