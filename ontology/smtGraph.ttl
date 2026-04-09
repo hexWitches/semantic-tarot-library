@@ -14,7 +14,7 @@
 @prefix wd: <https://www.wikidata.org/entity/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-smtg: a void:Dataset ;
+<https://w3id.org/smt-library/graph/> a void:Dataset ;
     dcterms:conformsTo <https://w3id.org/smt-library/ontology> ;
     dcterms:created "2026-03-03"^^xsd:date ;
     dcterms:creator "Miriana Pinto",

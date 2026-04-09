@@ -125,7 +125,7 @@
                 <div class="row justify-content-center mb-3">
                     <div class="col-12 col-md-10 col-lg-8 about-text-container">
                         <p class="mb-4">
-                            At the core of the library lies the <strong><a href="https://w3id.org/smt-library/ontology" target="_blank">SMT Ontology</a></strong>, a formal model designed to map the intricate landscape of the tarot domain and provide the conceptual foundation for the knowledge graph. By defining fundamental entities – <code>smt:MajorArcana</code>, <code>smt:MinorArcana</code>, <code>smt:Archetype</code>, <code>smt:SymbolicFigure</code>, <code>odi:DeckCard</code>, <code>odi:TarotDeck</code>, <code>odi:Person</code> – the ontology provides a robust yet flexible framework for organizing data. Built on Semantic Web principles, it transforms isolated facts into a machine-readable network that enables deep exploration across historical traditions and artistic interpretations. <br><br>
+                            At the core of the library lies the <strong><a href="https://w3id.org/smt-library/ontology" target="_blank">SMT Ontology</a></strong>, a formal model designed to map the intricate landscape of the tarot domain and provide the conceptual foundation for the knowledge graph. The ontology imports the <strong><a href="https://odi-documentation.github.io/materials/" target="_blank">ODI ontology</a></strong> as the starting framework, re-using core entities such as <code>odi:DeckCard</code>, <code>odi:TarotDeck</code>, <code>odi:Person</code>. Thus, the SMT ontology functions as an extension, it defines fundamental entities – <code>smt:MajorArcana</code>, <code>smt:MinorArcana</code>, <code>smt:Archetype</code>, <code>smt:SymbolicFigure</code>  – and provides a robust yet flexible structure for organizing data. Built on Semantic Web principles, it transforms isolated facts into a machine-readable network that enables deep exploration across historical traditions and artistic interpretations. <br><br>
                             The <strong><a href="https://w3id.org/smt-library/graph" target="_blank">SMT Graph</a></strong> serves as the operational framework for the web application and facilitates advanced data exploration through a dedicated SPARQL endpoint. The integration of a <strong><a href="sparql_endpoint.html" target="_blank">SPARQL endpoint</a></strong> directly connected to the knowledge graph supports advanced research by allowing users to query the dataset directly from the browser. This configuration enables investigations into entity relationships that may go beyond the functionalities offered by the graphical interface. By exposing the dataset in this manner, the project aligns with the core principles of LOD, ensuring that the structured information remains interoperable and accessible to external systems. In this way, the ontology and knowledge graph function not just as back-end structures, but as openly accessible components of a broader digital library ecosystem.
                         </p>
                     </div>
@@ -149,6 +149,25 @@
                             A key feature of the interface is the integration of links that reflect the relationships modeled within the knowledge graph, allowing users to move seamlessly across <strong>related entities</strong>. Each resource page includes dedicated sections for related items, such as connections between specific cards and their creators or thematic elements, which are visualized through components that highlight the underlying conceptual network. The <strong><a href="explore.html" target="_blank">Explore page</a></strong> further expands this view by examining the systemic connections between decks and the individuals who brought them to life, utilizing in-depth thematic insights to redirect users toward related topics within the library. <br><br>
                             The <strong><a href="collection.html" target="_blank">collection</a></strong> is accessible through multiple entry points, allowing users to browse by decks, individual cards, or through contextual materials that situate these objects within their broader cultural and symbolic frameworks. This approach encourages users to move beyond isolated resources to discover the network of relationships that define the domain. <br><br>
                             To support targeted retrieval, the system employs a client-side engine that features keyword matching, fuzzy matching, and auto-completion suggestions. As users type in the search bar, the interface proposes entities based on keywords linked directly to the dataset. These search functionalities are complemented by specific filters that allow users to refine exploration by specific attributes, supporting the discovery of unexpected relationships within the data.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- bibliography -->
+                <h2 class="mb-4 mt-5">Bibliography and Sitography</h2>
+                <div class="row justify-content-center mb-5">
+                    <div class="col-12 col-md-10 col-lg-8 about-text-container">
+                        <p class="mb-4">
+                            The description of the cards, decks and archetypes and the thematic insights and explanatory materials take inspiration from the following sources.
+                            <ul class="list-unstyled">
+                                <li><i>Le pèlerinage des bateleurs: Histoire, légendes et commentaires sur les 22 arcanes majeurs du tarot de Marseille</i>, Jean-Claude Flornoy, 2007</li>
+                                <li><i>The Visconti-Sforza Tarot: Traveling through Medieval Myths to the Art of the Renaissance</i>, Midirath Arianrhod and Max Kahl, 2023</li>
+                                <li><a href="https://www.vam.ac.uk/articles/tarot-cards?srsltid=AfmBOoqK0MoqB9n-4ItufNHqUTujg5qEU5ttkWXZDSq_0bptSZZpi72n" target="_blank">A History of tarot cards</a></li>
+                                <li><a href="https://www.metmuseum.org/it/perspectives/tarot-2" target="_blank">Before Fortune-Telling: The History and Structure of Tarot Cards</a></li>
+                                <li><a href="https://it.wikipedia.org/wiki/Mazzi_Visconti-Sforza" target="_blank">Mazzi Visconti-Sforza</a></li>
+                                <li><a href="https://www.conceptualfinearts.com/cfa/2020/12/31/tarot-cards/" target="_blank">Tarot cards: the pocket-sized Renaissance</a></li>
+                                <li><a href="https://www.tarothistory.com/the-evolution-of-tarot-from-origins-to-today/" target="_blank">The Origin of Tarot Cards</a></li>
+                            </ul>
                         </p>
                     </div>
                 </div>
