@@ -3592,7 +3592,7 @@ smtg:person-bianca-visconti a odi:Person ;
     schema:Nationality "Italian" ;
     schema:birthDate "1425" ;
     schema:deathDate "1468" ;
-    schema:image <https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/bianca-maria-visconti.jpg> .
+    schema:image <https://hexwitches.github.io/semantic-tarot-library/website/assets/images/explore/people/bianca-maria-visconti.jpg> .
 
 smtg:fig-crescent-moon a smt:SymbolicFigure ;
     dcterms:description "Intuition, mystery, and the illumination of the hidden psyche."@en ;
@@ -3679,7 +3679,7 @@ smtg:person-filippo-visconti a odi:Person ;
     schema:Nationality "Italian" ;
     schema:birthDate "1392" ;
     schema:deathDate "1447" ;
-    schema:image <https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/filippo-maria-visconti.jpg> .
+    schema:image <https://hexwitches.github.io/semantic-tarot-library/website/assets/images/explore/people/filippo-maria-visconti.jpg> .
 
 smtg:venice a schema:Place ;
     rdfs:label "Venice" .
@@ -3764,7 +3764,7 @@ smtg:person-francesco-sforza a odi:Person ;
     schema:Nationality "Italian" ;
     schema:birthDate "1401" ;
     schema:deathDate "1466" ;
-    schema:image <https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/francesco-sforza.jpg> .
+    schema:image <https://hexwitches.github.io/semantic-tarot-library/website/assets/images/explore/people/francesco-sforza.jpg> .
 
 smtg:concept-hermit a smt:Archetype ;
     dcterms:description "Represents soul-searching, introspection, and being alone."@en ;
@@ -4071,7 +4071,7 @@ smtg:person-waite a odi:Person ;
     schema:Nationality "American" ;
     schema:birthDate "1857" ;
     schema:deathDate "1942" ;
-    schema:image <https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/arthur-waite.jpeg> .
+    schema:image <https://hexwitches.github.io/semantic-tarot-library/website/assets/images/explore/people/arthur-waite.jpeg> .
 
 smtg:victoria-and-albert-museum a odi:Place ;
     rdfs:label "Victoria and Albert Museum" ;
@@ -4086,7 +4086,7 @@ smtg:person-smith a odi:Person ;
     schema:Nationality "British" ;
     schema:birthDate "1878" ;
     schema:deathDate "1951" ;
-    schema:image <https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/pamela-smith.jpg> .
+    schema:image <https://hexwitches.github.io/semantic-tarot-library/website/assets/images/explore/people/pamela-smith.jpg> .
 
 smtg:person-zavattari a odi:Person ;
     rdfs:comment "15th Century (Active 1414-1453)" ;

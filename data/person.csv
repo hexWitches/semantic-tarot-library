@@ -1,11 +1,11 @@
 person_id,given_name,family_name,nationality,birth_year,dates_display,death_year,wiki_authority,viaf_authority,person_portrait_url
-person_waite,Arthur Edward,Waite,American,1857,,1942,Q553124,95214216,https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/arthur-waite.jpeg
-person_smith,Pamela,Colman Smith,British,1878,,1951,Q515745,44549388,https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/pamela-smith.jpg
+person_waite,Arthur Edward,Waite,American,1857,,1942,Q553124,95214216,https://hexwitches.github.io/semantic-tarot-library/website/assets/images/explore/people/arthur-waite.jpeg
+person_smith,Pamela,Colman Smith,British,1878,,1951,Q515745,44549388,https://hexwitches.github.io/semantic-tarot-library/website/assets/images/explore/people/pamela-smith.jpg
 person_noblet,Jean,Noblet,French,16XX,17th century,16XX,Q3173729,304926488,
 person_bembo,Bonifacio,Bembo,Italian,1420,,1480,Q2486190,29417685,
-person_filippo_visconti,Filippo Maria,Visconti,Italian,1392,,1447,Q289285,89524548,https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/filippo-maria-visconti.jpg
-person_bianca_visconti,Bianca Maria,Visconti,Italian,1425,,1468,Q1232642,46608333,https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/bianca-maria-visconti.jpg
-person_francesco_sforza,Francesco,Sforza,Italian,1401,,1466,Q310536,89211304,https://github.com/hexWitches/semantic-tarot-library/blob/f29bee155caa4c341d2a78e052c2a1849e9907f9/website/assets/images/explore/people/francesco-sforza.jpg
+person_filippo_visconti,Filippo Maria,Visconti,Italian,1392,,1447,Q289285,89524548,https://hexwitches.github.io/semantic-tarot-library/website/assets/images/explore/people/filippo-maria-visconti.jpg
+person_bianca_visconti,Bianca Maria,Visconti,Italian,1425,,1468,Q1232642,46608333,https://hexwitches.github.io/semantic-tarot-library/website/assets/images/explore/people/bianca-maria-visconti.jpg
+person_francesco_sforza,Francesco,Sforza,Italian,1401,,1466,Q310536,89211304,https://hexwitches.github.io/semantic-tarot-library/website/assets/images/explore/people/francesco-sforza.jpg
 person_cicognara,Antonio,Cicognara,Italian,1480,,1500,Q2857238,62769413,
 person_zavattari,Francesco,Zavattari,Italian,14XX,15th Century (Active 1414-1453),14XX,Q3080890,95694984,
 "person_di_maestro_antonio ","Nicola ",di maestro Antonio,Italian,1450~,Mid-15th Century,1511/..,Q3339920,95725158 ,
